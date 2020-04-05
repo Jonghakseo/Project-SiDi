@@ -50,16 +50,16 @@ public class InitSelectPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //레이아웃을 보여주는 부분. 첫 방문인지 아닌지는 이 코드 전에 배치해서 불필요한 레이아웃 생성 시간을 아끼자.
-        setContentView(R.layout.activity_init_select_page);
+
 
         visitCheckShared = getSharedPreferences("visitCheck", MODE_PRIVATE);
         //체크할 쉐어드 가져옴
 
         int selectedCategory = visitCheckShared.getInt("selected", SELECT_NONE);
-        Log.d("@@@", String.valueOf(selectedCategory));
+        Log.d("@_SelectedCategoryNumber_@", String.valueOf(selectedCategory));
 
-        if (selectedCategory == SELECT_NONE) {
+        if (selectedCategory != SELECT_NONE) {
+            /** != 는 테스트 목적으로 체크와 상관없이 현재페이지 노출시에 사용**/
             //visit 쉐어드에서 저장된 카테고리 값 가져옴. 값이 없다면 0(SELECT_NONE) 반환)
 
         } else {
@@ -67,8 +67,12 @@ public class InitSelectPage extends AppCompatActivity {
             Intent intent = new Intent(InitSelectPage.this, MainPageTab.class);
             intent.putExtra("selectedCategory", selectedCategory);
             startActivity(intent);
+            finish();
 
         }
+
+        //레이아웃을 보여주는 부분. 첫 방문인지 아닌지는 이 코드 전에 배치해서 불필요한 레이아웃 생성 시간을 아끼자.
+        setContentView(R.layout.activity_init_select_page);
 
 
     }
@@ -110,6 +114,7 @@ public class InitSelectPage extends AppCompatActivity {
                 Intent intent = new Intent(InitSelectPage.this, MainPageTab.class);
                 intent.putExtra("selectedCategory", totalSelect);
                 startActivity(intent);
+                finish();
             }
         });//메인 페이지로 가는 버튼
 
@@ -197,6 +202,8 @@ public class InitSelectPage extends AppCompatActivity {
 //        Toast.makeText(InitSelectPage.this, String.valueOf(totalSelect), Toast.LENGTH_SHORT).show();
 //        선택값에 대한 테스트 코드
 
+        int filterColor = Color.GRAY;//필터 컬러 설정
+
         if (totalSelect == SELECT_NONE) {
             //미선택
             nextButton.setEnabled(false);
@@ -212,41 +219,41 @@ public class InitSelectPage extends AppCompatActivity {
             nextButton.setEnabled(true);
             //버튼 활성화
             if (totalSelect == SELECT_ALL) {
-                allIMG.setColorFilter(Color.BLUE, PorterDuff.Mode.OVERLAY);//색상으로 덮는 필터 적용
-                deskIMG.setColorFilter(Color.BLUE, PorterDuff.Mode.OVERLAY);
-                chairIMG.setColorFilter(Color.BLUE, PorterDuff.Mode.OVERLAY);
-                tableIMG.setColorFilter(Color.BLUE, PorterDuff.Mode.OVERLAY);
-                sofaIMG.setColorFilter(Color.BLUE, PorterDuff.Mode.OVERLAY);
-                lightIMG.setColorFilter(Color.BLUE, PorterDuff.Mode.OVERLAY);
+                allIMG.setColorFilter(filterColor, PorterDuff.Mode.OVERLAY);//색상으로 덮는 필터 적용
+                deskIMG.setColorFilter(filterColor, PorterDuff.Mode.OVERLAY);
+                chairIMG.setColorFilter(filterColor, PorterDuff.Mode.OVERLAY);
+                tableIMG.setColorFilter(filterColor, PorterDuff.Mode.OVERLAY);
+                sofaIMG.setColorFilter(filterColor, PorterDuff.Mode.OVERLAY);
+                lightIMG.setColorFilter(filterColor, PorterDuff.Mode.OVERLAY);
             } else {
                 allIMG.clearColorFilter();
-                if ((int)(totalSelect / SELECT_DESK) % 10 == 1) {
+                if (totalSelect / SELECT_DESK % 10 == 1) {
                     //책상만 선택, 혹은 책상도 선택
-                    deskIMG.setColorFilter(Color.BLUE, PorterDuff.Mode.OVERLAY);
+                    deskIMG.setColorFilter(filterColor, PorterDuff.Mode.OVERLAY);
                 } else {
                     deskIMG.clearColorFilter();
                 }
                 if (totalSelect / SELECT_CHAIR %10 == 1) {
                     //의자만 선택, 혹은 의자도 선택
-                    chairIMG.setColorFilter(Color.BLUE, PorterDuff.Mode.OVERLAY);
+                    chairIMG.setColorFilter(filterColor, PorterDuff.Mode.OVERLAY);
                 } else {
                     chairIMG.clearColorFilter();
                 }
                 if (totalSelect / SELECT_TABLE %10 == 1) {
                     //테이블만 선택, 혹은 테이블도 선택
-                    tableIMG.setColorFilter(Color.BLUE, PorterDuff.Mode.OVERLAY);
+                    tableIMG.setColorFilter(filterColor, PorterDuff.Mode.OVERLAY);
                 } else {
                     tableIMG.clearColorFilter();
                 }
                 if (totalSelect / SELECT_SOFA  %10 == 1) {
                     //소파만 선택, 혹은 소파도 선택
-                    sofaIMG.setColorFilter(Color.BLUE, PorterDuff.Mode.OVERLAY);
+                    sofaIMG.setColorFilter(filterColor, PorterDuff.Mode.OVERLAY);
                 } else {
                     sofaIMG.clearColorFilter();
                 }
                 if (totalSelect / SELECT_LIGHT  %10 == 1) {
                     //전등만 선택, 혹은 전등도 선택
-                    lightIMG.setColorFilter(Color.BLUE, PorterDuff.Mode.OVERLAY);
+                    lightIMG.setColorFilter(filterColor, PorterDuff.Mode.OVERLAY);
                 } else {
                     lightIMG.clearColorFilter();
                 }
