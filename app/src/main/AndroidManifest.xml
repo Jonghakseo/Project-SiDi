@@ -22,7 +22,7 @@
         <activity android:name=".main.MyPageTab" />
         <activity android:name=".main.SearchingTab" />
         <activity android:name=".main.MainPageTab" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".InitSelectPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

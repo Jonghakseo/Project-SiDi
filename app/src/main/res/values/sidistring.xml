@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="INIT_CATEGORY_SELECT_MSG">첫 방문을 환영합니다!\n관심있는 가구의 카테고리를 선택해 주세요\n(중복선택 가능)</string>
+</resources>
