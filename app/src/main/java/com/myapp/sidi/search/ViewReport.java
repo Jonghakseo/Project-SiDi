@@ -1,14 +1,16 @@
-package com.myapp.sidi;
+package com.myapp.sidi.search;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class MainPageTab extends AppCompatActivity {
+import com.myapp.sidi.R;
+
+public class ViewReport extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_page_tab);
+        setContentView(R.layout.activity_view_report);
     }
 }
