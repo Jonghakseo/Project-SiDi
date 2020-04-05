@@ -17,7 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
+<!-- text 내용 res/mystring 에 있는 값 참조-->
     <Button
         android:id="@+id/init_next_button"
         android:layout_width="wrap_content"
@@ -53,6 +53,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center"
                     android:orientation="vertical"
                     android:paddingTop="5dp"
                     android:paddingRight="10dp"
@@ -60,9 +61,9 @@
 
                     <ImageView
                         android:id="@+id/init_select_all_img"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        tools:srcCompat="@tools:sample/avatars" />
+                        android:layout_width="125dp"
+                        android:layout_height="125dp"
+                        app:srcCompat="@mipmap/ic_launcher_round" />
 
                     <TextView
                         android:id="@+id/init_select_all_text"
@@ -74,6 +75,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center"
                     android:orientation="vertical"
                     android:paddingLeft="10dp"
                     android:paddingTop="5dp"
@@ -81,9 +83,9 @@
 
                     <ImageView
                         android:id="@+id/init_select_desk_img"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        tools:srcCompat="@tools:sample/avatars" />
+                        android:layout_width="125dp"
+                        android:layout_height="125dp"
+                        app:srcCompat="@mipmap/ic_launcher_round" />
 
                     <TextView
                         android:id="@+id/init_select_desk_text"
@@ -102,6 +104,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center"
                     android:orientation="vertical"
                     android:paddingTop="5dp"
                     android:paddingRight="10dp"
@@ -109,9 +112,9 @@
 
                     <ImageView
                         android:id="@+id/init_select_chair_img"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        tools:srcCompat="@tools:sample/avatars" />
+                        android:layout_width="125dp"
+                        android:layout_height="125dp"
+                        app:srcCompat="@mipmap/ic_launcher_round" />
 
                     <TextView
                         android:id="@+id/init_select_chair_text"
@@ -123,6 +126,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center"
                     android:orientation="vertical"
                     android:paddingLeft="10dp"
                     android:paddingTop="5dp"
@@ -130,9 +134,9 @@
 
                     <ImageView
                         android:id="@+id/init_select_table_img"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        tools:srcCompat="@tools:sample/avatars" />
+                        android:layout_width="125dp"
+                        android:layout_height="125dp"
+                        app:srcCompat="@mipmap/ic_launcher_round" />
 
                     <TextView
                         android:id="@+id/init_select_table_text"
@@ -150,6 +154,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center"
                     android:orientation="vertical"
                     android:paddingTop="5dp"
                     android:paddingRight="10dp"
@@ -157,9 +162,9 @@
 
                     <ImageView
                         android:id="@+id/init_select_sofa_img"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        tools:srcCompat="@tools:sample/avatars" />
+                        android:layout_width="125dp"
+                        android:layout_height="125dp"
+                        app:srcCompat="@mipmap/ic_launcher_round" />
 
                     <TextView
                         android:id="@+id/init_select_sofa_text"
@@ -171,6 +176,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center"
                     android:orientation="vertical"
                     android:paddingLeft="10dp"
                     android:paddingTop="5dp"
@@ -178,10 +184,9 @@
 
                     <ImageView
                         android:id="@+id/init_select_light_img"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        tools:srcCompat="@tools:sample/avatars" />
-
+                        android:layout_width="125dp"
+                        android:layout_height="125dp"
+                        app:srcCompat="@mipmap/ic_launcher_round" />
                     <TextView
                         android:id="@+id/init_select_light_text"
                         android:layout_width="wrap_content"
