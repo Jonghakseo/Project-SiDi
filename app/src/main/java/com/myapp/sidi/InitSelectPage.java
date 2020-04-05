@@ -2,6 +2,7 @@ package com.myapp.sidi;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 public class InitSelectPage extends AppCompatActivity {
@@ -21,16 +22,38 @@ public class InitSelectPage extends AppCompatActivity {
  *  추후에 로딩화면을 배치한다면, 이 액티비티 이전에 배치해도 된다. 다만 매니페스트 수정이 있어야 함.
 **/
 
+    SharedPreferences visitCheckShared;//방문여부와 기존 카테고리 선택 데이터 확인에 사용할 쉐어드 선언
+    SharedPreferences.Editor editor;//사용할 에디터 선언
+
+    final int SELECT_TABLE = 777777;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //레이아웃을 보여주는 부분. 첫 방문인지 아닌지는 이 코드 전에 배치해서 불필요한 레이아웃 생성 시간을 아끼도록 한다.
-        //
-        setContentView(R.layout.activity_init_select_page);
+        visitCheckShared = getSharedPreferences("visitCheck",MODE_PRIVATE);//체크할 쉐어드 가져옴
+        if (visitCheckShared.getInt("selected",0)!=0){
+            //visit 쉐어드에서 저장된 카테고리 값 가져옴. 값이 없다면 0 반환)
+
+            //레이아웃을 보여주는 부분. 첫 방문인지 아닌지는 이 코드 전에 배치해서 불필요한 레이아웃 생성 시간을 아끼자.
+            setContentView(R.layout.activity_init_select_page);
+
+
+        }else {
+            //방문 기록이 존재한다면 기존 선택했던 카테고리 정보와 함께 다음 액티비티인 MainPageTab 으로 보낸다.
+
+        }
+
+
+
 
     }
+
+//    editor = visitCheckShared.edit();//에디터 선언
+//    editor.putBoolean("isFirstVisit",false);//이제 첫 방문이 아니니까 false 로 저장
+//    editor.apply();//에디터 변경사항 적용(commit 역할)
+
+    //이 코드들은 선택 완료 후 다음 페이지로 넘어갈 때 필요. 확실히 골라야 방문으로 인정.
 
 }
