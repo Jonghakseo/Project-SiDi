@@ -51,9 +51,8 @@ public class InitSelectPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         visitCheckShared = getSharedPreferences("visitCheck", MODE_PRIVATE);
-        //체크할 쉐어드 가져옴
+        //체크할 쉐어드를 가져옴
 
         int selectedCategory = visitCheckShared.getInt("selected", SELECT_NONE);
         Log.d("@_SelectedCategoryNumber_@", String.valueOf(selectedCategory));
@@ -71,7 +70,7 @@ public class InitSelectPage extends AppCompatActivity {
 
         }
 
-        //레이아웃을 보여주는 부분. 첫 방문인지 아닌지는 이 코드 전에 배치해서 불필요한 레이아웃 생성 시간을 아끼자.
+        //레이아웃을 보여주는 부분. 첫 방문인지 아닌지는 이 코드 전에 배치해서 불필요한 레이아웃 생성 시간을 아끼자..
         setContentView(R.layout.activity_init_select_page);
 
 
@@ -198,6 +197,11 @@ public class InitSelectPage extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
     private void onSelectChange() {
 //        Toast.makeText(InitSelectPage.this, String.valueOf(totalSelect), Toast.LENGTH_SHORT).show();
 //        선택값에 대한 테스트 코드
@@ -258,8 +262,6 @@ public class InitSelectPage extends AppCompatActivity {
                     lightIMG.clearColorFilter();
                 }
             }
-
         }
-
     }
 }
