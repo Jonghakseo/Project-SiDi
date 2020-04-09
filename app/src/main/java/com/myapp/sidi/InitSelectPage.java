@@ -40,6 +40,7 @@ public class InitSelectPage extends AppCompatActivity {
     String choice_1,choice_2,choice_3,choice_4,choice_5;
     String deleteKey="deleteKey";
     SelectFurnitureHelper selectFurnitureHelper;
+    public static int REVISE_CODE=0;
 
 
 
@@ -55,6 +56,73 @@ public class InitSelectPage extends AppCompatActivity {
         cb_lamp = findViewById(R.id.cb_lamp);
         cb_all = findViewById(R.id.cb_all);
         btn_next = findViewById(R.id.btn_next);
+
+        //1. 메인 화면에서 수정버튼을 클릭시
+        //2. 현재 선택된 카테고리 값들을 받아와서
+        //3, 체크박스에 체크해주는 코드
+        Intent intent = getIntent();
+        if (REVISE_CODE==1){
+            String existChoice,existChoice2,existChoice3,existChoice4,existChoice5;
+            String str_size = intent.getExtras().getString("size");
+            if (str_size.equals("1")){
+                existChoice = intent.getExtras().getString("existChoice_1");
+                existDataCheck(existChoice);
+                Log.e("choice",existChoice);
+            }else if (str_size.equals("2")){
+                existChoice = intent.getExtras().getString("existChoice_1");
+                existChoice2 = intent.getExtras().getString("existChoice_2");
+                existDataCheck(existChoice);
+                existDataCheck(existChoice2);
+                Log.e("choice",existChoice);
+                Log.e("choice",existChoice2);
+
+            }else if (str_size.equals("3")){
+                existChoice = intent.getExtras().getString("existChoice_1");
+                existChoice2 = intent.getExtras().getString("existChoice_2");
+                existChoice3 = intent.getExtras().getString("existChoice_3");
+                existDataCheck(existChoice);
+                existDataCheck(existChoice2);
+                existDataCheck(existChoice3);
+                Log.e("choice",existChoice);
+                Log.e("choice",existChoice2);
+                Log.e("choice",existChoice3);
+            }else if (str_size.equals("4")){
+                existChoice = intent.getExtras().getString("existChoice_1");
+                existChoice2 = intent.getExtras().getString("existChoice_2");
+                existChoice3 = intent.getExtras().getString("existChoice_3");
+                existChoice4 = intent.getExtras().getString("existChoice_4");
+                existDataCheck(existChoice);
+                existDataCheck(existChoice2);
+                existDataCheck(existChoice3);
+                existDataCheck(existChoice4);
+
+                Log.e("choice",existChoice);
+                Log.e("choice",existChoice2);
+                Log.e("choice",existChoice3);
+                Log.e("choice",existChoice4);
+
+            }else if (str_size.equals("5")){
+                existChoice = intent.getExtras().getString("existChoice_1");
+                existChoice2 = intent.getExtras().getString("existChoice_2");
+                existChoice3 = intent.getExtras().getString("existChoice_3");
+                existChoice4 = intent.getExtras().getString("existChoice_4");
+                existChoice5 = intent.getExtras().getString("existChoice_5");
+                existDataCheck(existChoice);
+                existDataCheck(existChoice2);
+                existDataCheck(existChoice3);
+                existDataCheck(existChoice4);
+                existDataCheck(existChoice5);
+                cb_all.setChecked(true);
+                Log.e("choice",existChoice);
+                Log.e("choice",existChoice2);
+                Log.e("choice",existChoice3);
+                Log.e("choice",existChoice4);
+                Log.e("choice",existChoice5);
+            }
+
+            REVISE_CODE=0;
+        }
+
 
 
         //전체 선택시 나머지 체크박스 비활성화
@@ -120,11 +188,6 @@ public class InitSelectPage extends AppCompatActivity {
                 }else {
 
                 }
-//                if(cb_all.isChecked()){
-//                    choiceArr.add("#전체선택");
-//                }else {
-//
-//                }
 
                 //데이터 값 확인용
 //                for(int i=0; i<choiceArr.size(); i++){
@@ -197,6 +260,27 @@ public class InitSelectPage extends AppCompatActivity {
 
 
 
+    }
+
+    private void existDataCheck(String tag){
+        switch (tag){
+            case "#책상":
+                cb_desk.setChecked(true);
+                break;
+            case "#의자":
+                cb_chair.setChecked(true);
+                break;
+            case "#테이블":
+                cb_table.setChecked(true);
+                break;
+            case "#소파":
+                cb_sofa.setChecked(true);
+                break;
+            case "#전등/등":
+                cb_lamp.setChecked(true);
+                break;
+
+        }
     }
 
     @Override
