@@ -12,7 +12,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".search.ViewReport"></activity>
+        <activity android:name=".InitSelectPage">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".search.ViewReport" />
         <activity android:name=".search.ViewDetail" />
         <activity android:name=".mypage.MySketch" />
         <activity android:name=".mypage.RecentDesign" />
@@ -22,13 +29,6 @@
         <activity android:name=".main.MyPageTab" />
         <activity android:name=".main.SearchingTab" />
         <activity android:name=".main.MainPageTab" />
-        <activity android:name=".InitSelectPage">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>
