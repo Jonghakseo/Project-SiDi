@@ -2,18 +2,20 @@ package com.myapp.sidi;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.CheckBox;
 
+import com.myapp.sidi.ContractAndHelper.SelectFurnitureContract;
+import com.myapp.sidi.ContractAndHelper.SelectFurnitureHelper;
 import com.myapp.sidi.main.MainPageTab;
+
+import java.util.ArrayList;
 
 public class InitSelectPage extends AppCompatActivity {
     /**
@@ -32,236 +34,174 @@ public class InitSelectPage extends AppCompatActivity {
      * 추후에 로딩화면을 배치한다면, 이 액티비티 이전에 배치해도 된다. 다만 매니페스트 수정이 있어야 함.
      **/
 
-    SharedPreferences visitCheckShared;//방문여부와 기존 카테고리 선택 데이터 확인에 사용할 쉐어드 선언
-    SharedPreferences.Editor editor;//사용할 에디터 선언
+    CheckBox cb_desk,cb_chair,cb_table,cb_sofa,cb_lamp,cb_all;
+    Button btn_next;
+    String choice_1,choice_2,choice_3,choice_4,choice_5;
+    String deleteKey="deleteKey";
+    SelectFurnitureHelper selectFurnitureHelper;
 
-    final int SELECT_ALL = 11111;
-    final int SELECT_DESK = 10000;
-    final int SELECT_CHAIR = 1000;
-    final int SELECT_TABLE = 100;
-    final int SELECT_SOFA = 10;
-    final int SELECT_LIGHT = 1;
-    final int SELECT_NONE = 0;
-
-    int totalSelect = 0;
-    //선택된 카테고리 값을 저장할 int 선언
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        visitCheckShared = getSharedPreferences("visitCheck", MODE_PRIVATE);
-        //체크할 쉐어드를 가져옴
-
-        int selectedCategory = visitCheckShared.getInt("selected", SELECT_NONE);
-        Log.d("@_SelectedCategoryNumber_@", String.valueOf(selectedCategory));
-
-        if (selectedCategory != SELECT_NONE) {
-            /** != 는 테스트 목적으로 체크와 상관없이 현재페이지 노출시에 사용**/
-            //visit 쉐어드에서 저장된 카테고리 값 가져옴. 값이 없다면 0(SELECT_NONE) 반환)
-
-        } else {
-            //방문 기록이 존재한다면 기존 선택했던 카테고리 정보와 함께 다음 액티비티인 MainPageTab 으로 보낸다.
-            Intent intent = new Intent(InitSelectPage.this, MainPageTab.class);
-            intent.putExtra("selectedCategory", selectedCategory);
-            startActivity(intent);
-            finish();
-
-        }
-
-        //레이아웃을 보여주는 부분. 첫 방문인지 아닌지는 이 코드 전에 배치해서 불필요한 레이아웃 생성 시간을 아끼자..
         setContentView(R.layout.activity_init_select_page);
 
+        cb_desk = findViewById(R.id.cb_desk);
+        cb_chair = findViewById(R.id.cb_chair);
+        cb_table = findViewById(R.id.cb_table);
+        cb_sofa = findViewById(R.id.cb_sofa);
+        cb_lamp = findViewById(R.id.cb_lamp);
+        cb_all = findViewById(R.id.cb_all);
+        btn_next = findViewById(R.id.btn_next);
 
-    }
 
-
-    //이 코드들은 선택 완료 후 다음 페이지로 넘어갈 때 필요. 확실히 골라야 방문으로 인정.
-
-    ImageView allIMG;
-    ImageView deskIMG;
-    ImageView chairIMG;
-    ImageView tableIMG;
-    ImageView sofaIMG;
-    ImageView lightIMG;
-    //각 선택 가능한 이미지뷰 선언
-    Button nextButton;
-    //메인 페이지로 넘어가는 버튼 선언
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        allIMG = findViewById(R.id.init_select_all_img);
-        deskIMG = findViewById(R.id.init_select_desk_img);
-        chairIMG = findViewById(R.id.init_select_chair_img);
-        tableIMG = findViewById(R.id.init_select_table_img);
-        sofaIMG = findViewById(R.id.init_select_sofa_img);
-        lightIMG = findViewById(R.id.init_select_light_img);
-        //각 선택 가능한 이미지뷰 선언
-        nextButton = findViewById(R.id.init_next_button);
-        //메인 페이지로 넘어가는 버튼 선언
-
-        nextButton.setOnClickListener(new View.OnClickListener() {
+        //전체 선택시 나머지 체크박스 비활성화
+        cb_all.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                editor = visitCheckShared.edit();//에디터 선언
-                editor.putInt("selected", totalSelect);//이제 첫 방문이 아님. 선택한 값 저장.
-                editor.apply();//에디터 변경사항 적용(commit 역할)
+            public void onClick(View view) {
+                if(cb_all.isChecked()){
+                    cb_desk.setChecked(false);
+                    cb_chair.setChecked(false);
+                    cb_table.setChecked(false);
+                    cb_sofa.setChecked(false);
+                    cb_lamp.setChecked(false);
+
+                    cb_desk.setEnabled(false);
+                    cb_chair.setEnabled(false);
+                    cb_table.setEnabled(false);
+                    cb_sofa.setEnabled(false);
+                    cb_lamp.setEnabled(false);
+                }else {
+                    cb_desk.setEnabled(true);
+                    cb_chair.setEnabled(true);
+                    cb_table.setEnabled(true);
+                    cb_sofa.setEnabled(true);
+                    cb_lamp.setEnabled(true);
+                }
+            }
+        });
+
+
+        btn_next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectFurnitureHelper = new SelectFurnitureHelper(getApplicationContext());
+                SQLiteDatabase sqLiteDatabase = selectFurnitureHelper.getWritableDatabase();
+                ContentValues contentValues = new ContentValues();
+                ArrayList choiceArr = new ArrayList();
+
+                //1. 이전에 선택하였던 가구 카테고리를 지우는 부분
+                String DELETE_PREVIOUS_DATA= SelectFurnitureContract.TableEntry.DELETE_KEY+" LIKE ?";
+                String[] WHERE = {"deleteKey"};
+                int DELETED_ROWS = sqLiteDatabase.delete(SelectFurnitureContract.TableEntry.TABLE_NAME,DELETE_PREVIOUS_DATA,WHERE);
+                Log.e("deletedRow", String.valueOf(DELETED_ROWS));
+
+                //1.체크박스를 선택한 값들을 어레이에 담는다.
+                //2.어레이에 담긴 값들을 꺼내서 sqLite에 저장시킨다.
+                if(cb_desk.isChecked()){
+                    choiceArr.add("#책상");
+                }else{
+
+                }
+                if(cb_chair.isChecked()){
+                    choiceArr.add("#의자");
+                }else {
+
+                }
+                if(cb_table.isChecked()){
+                    choiceArr.add("#테이블");
+                }else {
+
+                }
+                if(cb_sofa.isChecked()){
+                    choiceArr.add("#소파");
+                }else {
+
+                }
+                if(cb_lamp.isChecked()){
+                    choiceArr.add("#전등/등");
+                }else {
+
+                }
+                if(cb_all.isChecked()){
+                    choiceArr.add("#전체선택");
+                }else {
+
+                }
+
+                //데이터 값 확인용
+//                for(int i=0; i<choiceArr.size(); i++){
+//                    Log.e("test",choiceArr.get(i).toString());
+//                }
+
+                int count = choiceArr.size();
+                switch (count){
+                    case 1:
+                        choice_1=choiceArr.get(0).toString();
+                        choice_2="";
+                        choice_3="";
+                        choice_4="";
+                        choice_5="";
+                        break;
+                    case 2:
+                        choice_1=choiceArr.get(0).toString();
+                        choice_2=choiceArr.get(1).toString();
+                        choice_3="";
+                        choice_4="";
+                        choice_5="";
+                        break;
+                    case 3:
+                        choice_1=choiceArr.get(0).toString();
+                        choice_2=choiceArr.get(1).toString();
+                        choice_3=choiceArr.get(2).toString();
+                        choice_4="";
+                        choice_5="";
+                        break;
+                    case 4:
+                        choice_1=choiceArr.get(0).toString();
+                        choice_2=choiceArr.get(1).toString();
+                        choice_3=choiceArr.get(2).toString();
+                        choice_4=choiceArr.get(3).toString();
+                        choice_5="";
+                        break;
+                    case 5:
+                        choice_1=choiceArr.get(0).toString();
+                        choice_2=choiceArr.get(1).toString();
+                        choice_3=choiceArr.get(2).toString();
+                        choice_4=choiceArr.get(3).toString();
+                        choice_5=choiceArr.get(4).toString();
+                        break;
+                    default:
+                        break;
+                }
+
+
+                contentValues.put(SelectFurnitureContract.TableEntry.DELETE_KEY,deleteKey);
+                contentValues.put(SelectFurnitureContract.TableEntry.COLUMN_CHOICE_1,choice_1);
+                contentValues.put(SelectFurnitureContract.TableEntry.COLUMN_CHOICE_2,choice_2);
+                contentValues.put(SelectFurnitureContract.TableEntry.COLUMN_CHOICE_3,choice_3);
+                contentValues.put(SelectFurnitureContract.TableEntry.COLUMN_CHOICE_4,choice_4);
+                contentValues.put(SelectFurnitureContract.TableEntry.COLUMN_CHOICE_5,choice_5);
+
+                //1. 추가된 row의 id(PRIMARY KEY)값을 반환한다.
+                long rowId = sqLiteDatabase.insert(SelectFurnitureContract.TableEntry.TABLE_NAME,null,contentValues);
+                Log.e("rowId", String.valueOf(rowId));
 
                 Intent intent = new Intent(InitSelectPage.this, MainPageTab.class);
-                intent.putExtra("selectedCategory", totalSelect);
                 startActivity(intent);
-                finish();
-            }
-        });//메인 페이지로 가는 버튼
 
-        allIMG.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (totalSelect < SELECT_ALL) {
-                    //현재 선택사항이 전체선택이 아니라면 전체선택 실시.
-                    totalSelect = SELECT_ALL;
-                } else {
-                    //이미 전체선택중
-                    totalSelect = SELECT_NONE;
-                }
-                onSelectChange();//선택에 변경이 있었음
             }
-        });//전체선택 이미지뷰
+        });
 
-        deskIMG.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (totalSelect / SELECT_DESK  %10 != 1) {
-                    //책상 미선택 되어있던 상태
-                    totalSelect += SELECT_DESK;//책상 선택시켜줌
-                } else {
-                    //이미 선택중
-                    totalSelect -= SELECT_DESK;//책상 빼줌
-                }
-                onSelectChange();
-            }
-        });//책상 선택 이미지뷰
 
-        chairIMG.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (totalSelect / SELECT_CHAIR  %10 != 1) {
-                    //의자 미선택 되어있던 상태
-                    totalSelect += SELECT_CHAIR;//의자 선택시켜줌
-                } else {
-                    //이미 선택중
-                    totalSelect -= SELECT_CHAIR;//의자 빼줌
-                }
-                onSelectChange();
-            }
-        });//의자 선택 이미지뷰
 
-        tableIMG.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (totalSelect / SELECT_TABLE  %10 != 1) {
-                    totalSelect += SELECT_TABLE;
-                } else {
-                    totalSelect -= SELECT_TABLE;
-                }
-                onSelectChange();
-            }
-        });//테이블 선택 이미지뷰
-
-        sofaIMG.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (totalSelect / SELECT_SOFA %10 != 1) {
-                    totalSelect += SELECT_SOFA;
-                } else {
-                    totalSelect -= SELECT_SOFA;
-                }
-                onSelectChange();
-            }
-        });//소파 선택 이미지뷰
-
-        lightIMG.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (totalSelect / SELECT_LIGHT %10 != 1) {
-                    totalSelect += SELECT_LIGHT;
-                } else {
-                    totalSelect -= SELECT_LIGHT;
-                }
-                onSelectChange();
-            }
-        });//전등 선택 이미지뷰
 
     }
 
     @Override
     protected void onDestroy() {
+        selectFurnitureHelper.close();
         super.onDestroy();
-    }
-
-    private void onSelectChange() {
-//        Toast.makeText(InitSelectPage.this, String.valueOf(totalSelect), Toast.LENGTH_SHORT).show();
-//        선택값에 대한 테스트 코드
-
-        int filterColor = Color.GRAY;//필터 컬러 설정
-
-        if (totalSelect == SELECT_NONE) {
-            //미선택
-            nextButton.setEnabled(false);
-            //버튼 비활성화
-            allIMG.clearColorFilter();
-            deskIMG.clearColorFilter();
-            chairIMG.clearColorFilter();
-            tableIMG.clearColorFilter();
-            sofaIMG.clearColorFilter();
-            lightIMG.clearColorFilter();
-            //모든 필터 제거함
-        } else {
-            nextButton.setEnabled(true);
-            //버튼 활성화
-            if (totalSelect == SELECT_ALL) {
-                allIMG.setColorFilter(filterColor, PorterDuff.Mode.OVERLAY);//색상으로 덮는 필터 적용
-                deskIMG.setColorFilter(filterColor, PorterDuff.Mode.OVERLAY);
-                chairIMG.setColorFilter(filterColor, PorterDuff.Mode.OVERLAY);
-                tableIMG.setColorFilter(filterColor, PorterDuff.Mode.OVERLAY);
-                sofaIMG.setColorFilter(filterColor, PorterDuff.Mode.OVERLAY);
-                lightIMG.setColorFilter(filterColor, PorterDuff.Mode.OVERLAY);
-            } else {
-                allIMG.clearColorFilter();
-                if (totalSelect / SELECT_DESK % 10 == 1) {
-                    //책상만 선택, 혹은 책상도 선택
-                    deskIMG.setColorFilter(filterColor, PorterDuff.Mode.OVERLAY);
-                } else {
-                    deskIMG.clearColorFilter();
-                }
-                if (totalSelect / SELECT_CHAIR %10 == 1) {
-                    //의자만 선택, 혹은 의자도 선택
-                    chairIMG.setColorFilter(filterColor, PorterDuff.Mode.OVERLAY);
-                } else {
-                    chairIMG.clearColorFilter();
-                }
-                if (totalSelect / SELECT_TABLE %10 == 1) {
-                    //테이블만 선택, 혹은 테이블도 선택
-                    tableIMG.setColorFilter(filterColor, PorterDuff.Mode.OVERLAY);
-                } else {
-                    tableIMG.clearColorFilter();
-                }
-                if (totalSelect / SELECT_SOFA  %10 == 1) {
-                    //소파만 선택, 혹은 소파도 선택
-                    sofaIMG.setColorFilter(filterColor, PorterDuff.Mode.OVERLAY);
-                } else {
-                    sofaIMG.clearColorFilter();
-                }
-                if (totalSelect / SELECT_LIGHT  %10 == 1) {
-                    //전등만 선택, 혹은 전등도 선택
-                    lightIMG.setColorFilter(filterColor, PorterDuff.Mode.OVERLAY);
-                } else {
-                    lightIMG.clearColorFilter();
-                }
-            }
-        }
     }
 }
