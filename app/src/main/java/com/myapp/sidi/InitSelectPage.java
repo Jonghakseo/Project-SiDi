@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.Toast;
 
 import com.myapp.sidi.ContractAndHelper.SelectFurnitureContract;
 import com.myapp.sidi.ContractAndHelper.SelectFurnitureHelper;
@@ -61,23 +62,18 @@ public class InitSelectPage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(cb_all.isChecked()){
+                    cb_desk.setChecked(true);
+                    cb_chair.setChecked(true);
+                    cb_table.setChecked(true);
+                    cb_sofa.setChecked(true);
+                    cb_lamp.setChecked(true);
+
+                }else {
                     cb_desk.setChecked(false);
                     cb_chair.setChecked(false);
                     cb_table.setChecked(false);
                     cb_sofa.setChecked(false);
                     cb_lamp.setChecked(false);
-
-                    cb_desk.setEnabled(false);
-                    cb_chair.setEnabled(false);
-                    cb_table.setEnabled(false);
-                    cb_sofa.setEnabled(false);
-                    cb_lamp.setEnabled(false);
-                }else {
-                    cb_desk.setEnabled(true);
-                    cb_chair.setEnabled(true);
-                    cb_table.setEnabled(true);
-                    cb_sofa.setEnabled(true);
-                    cb_lamp.setEnabled(true);
                 }
             }
         });
@@ -124,11 +120,11 @@ public class InitSelectPage extends AppCompatActivity {
                 }else {
 
                 }
-                if(cb_all.isChecked()){
-                    choiceArr.add("#전체선택");
-                }else {
-
-                }
+//                if(cb_all.isChecked()){
+//                    choiceArr.add("#전체선택");
+//                }else {
+//
+//                }
 
                 //데이터 값 확인용
 //                for(int i=0; i<choiceArr.size(); i++){
@@ -188,9 +184,13 @@ public class InitSelectPage extends AppCompatActivity {
                 long rowId = sqLiteDatabase.insert(SelectFurnitureContract.TableEntry.TABLE_NAME,null,contentValues);
                 Log.e("rowId", String.valueOf(rowId));
 
+                if (choiceArr.size()!=0){
                 Intent intent = new Intent(InitSelectPage.this, MainPageTab.class);
                 startActivity(intent);
-
+                finish();
+                }else {
+                    Toast.makeText(InitSelectPage.this,"카테고리를 선택해주세요",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
