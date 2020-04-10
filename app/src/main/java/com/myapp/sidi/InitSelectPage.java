@@ -67,14 +67,13 @@ public class InitSelectPage extends AppCompatActivity {
             if (str_size.equals("1")){
                 existChoice = intent.getExtras().getString("existChoice_1");
                 existDataCheck(existChoice);
-                Log.e("choice",existChoice);
+
             }else if (str_size.equals("2")){
                 existChoice = intent.getExtras().getString("existChoice_1");
                 existChoice2 = intent.getExtras().getString("existChoice_2");
                 existDataCheck(existChoice);
                 existDataCheck(existChoice2);
-                Log.e("choice",existChoice);
-                Log.e("choice",existChoice2);
+
 
             }else if (str_size.equals("3")){
                 existChoice = intent.getExtras().getString("existChoice_1");
@@ -83,9 +82,7 @@ public class InitSelectPage extends AppCompatActivity {
                 existDataCheck(existChoice);
                 existDataCheck(existChoice2);
                 existDataCheck(existChoice3);
-                Log.e("choice",existChoice);
-                Log.e("choice",existChoice2);
-                Log.e("choice",existChoice3);
+
             }else if (str_size.equals("4")){
                 existChoice = intent.getExtras().getString("existChoice_1");
                 existChoice2 = intent.getExtras().getString("existChoice_2");
@@ -96,10 +93,6 @@ public class InitSelectPage extends AppCompatActivity {
                 existDataCheck(existChoice3);
                 existDataCheck(existChoice4);
 
-                Log.e("choice",existChoice);
-                Log.e("choice",existChoice2);
-                Log.e("choice",existChoice3);
-                Log.e("choice",existChoice4);
 
             }else if (str_size.equals("5")){
                 existChoice = intent.getExtras().getString("existChoice_1");
@@ -113,13 +106,7 @@ public class InitSelectPage extends AppCompatActivity {
                 existDataCheck(existChoice4);
                 existDataCheck(existChoice5);
                 cb_all.setChecked(true);
-                Log.e("choice",existChoice);
-                Log.e("choice",existChoice2);
-                Log.e("choice",existChoice3);
-                Log.e("choice",existChoice4);
-                Log.e("choice",existChoice5);
             }
-
             REVISE_CODE=0;
         }
 
@@ -250,10 +237,16 @@ public class InitSelectPage extends AppCompatActivity {
                 if (choiceArr.size()!=0){
                 Intent intent = new Intent(InitSelectPage.this, MainPageTab.class);
                 startActivity(intent);
+
                 finish();
                 }else {
                     Toast.makeText(InitSelectPage.this,"카테고리를 선택해주세요",Toast.LENGTH_SHORT).show();
                 }
+
+
+
+
+
             }
         });
 

@@ -1,8 +1,10 @@
 package com.myapp.sidi.main;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.ViewUtils;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -15,17 +17,32 @@ import android.widget.LinearLayout;
 
 import com.myapp.sidi.ContractAndHelper.SelectFurnitureContract;
 import com.myapp.sidi.ContractAndHelper.SelectFurnitureHelper;
+import com.myapp.sidi.Adapter.Design_Adapter;
+import com.myapp.sidi.DTO.Design_Data;
+import com.myapp.sidi.DTO.MainPageDesignResult;
 import com.myapp.sidi.InitSelectPage;
+import com.myapp.sidi.Interface.ServerInterface;
 import com.myapp.sidi.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class MainPageTab extends AppCompatActivity {
-    Button btn_choice,btn_choiceRevise;
+    Button btn_choice,btn_choiceRevise,btn_searchPage,btn_year_1;
     LinearLayout linearLayout_1;
     String choice_1,choice_2,choice_3,choice_4,choice_5;
     String existChoice_1,existChoice_2,existChoice_3,existChoice_4,existChoice_5;
+    private ArrayList<Design_Data> re_arrayList;
+    private Design_Adapter designAdapter;
+    private RecyclerView recyclerView;
+    private LinearLayoutManager linearLayoutManager;
+    private ServerInterface serverInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +51,11 @@ public class MainPageTab extends AppCompatActivity {
 //        btn_choice= findViewById(R.id.btn_choice);
 
         btn_choiceRevise = findViewById(R.id.btn_choiceRevise);
+        recyclerView = findViewById(R.id.recyclerView);
+        btn_searchPage = findViewById(R.id.btn_searchPage);
+        btn_year_1= findViewById(R.id.btn_year_1);
+
+
 
 
         SelectFurnitureHelper helper = new SelectFurnitureHelper(getApplicationContext());
@@ -99,6 +121,47 @@ public class MainPageTab extends AppCompatActivity {
 
 
 
+        //1. 서버에 카테고리 1번을 보내기
+        //2. 기본 연도 1960으로 해서 보내기
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(ServerInterface.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        serverInterface = retrofit.create(ServerInterface.class);
+        String year = "1960";
+
+        serverInterface.signUp(choiceArr.get(0).toString(),year)
+                .enqueue(new Callback<MainPageDesignResult>() {
+                    @Override
+                    public void onResponse(Call<MainPageDesignResult> call, Response<MainPageDesignResult> response) {
+                        MainPageDesignResult result = response.body();
+
+                        if(result.getDesign().equals("design1")){
+
+
+                            Log.e("result", result.getDesign());
+                            Log.e("result", result.getUrl());
+                            Log.e("result", result.getTag());
+                            Log.e("result", result.getTag_2());
+                            Log.e("result", result.getTag_3());
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<MainPageDesignResult> call, Throwable t) {
+                        Log.e("networkError",t.toString());
+                    }
+                });
+
+
+
+
+
+
+
+
         btn_choiceRevise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -161,5 +224,53 @@ public class MainPageTab extends AppCompatActivity {
 
             }
         });
+
+        //1.시대의 디자인 보여줄 리사이클러뷰
+
+        linearLayoutManager = new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        re_arrayList = new ArrayList<>();
+        designAdapter = new Design_Adapter(re_arrayList,this);
+        recyclerView.setAdapter(designAdapter);
+
+        final String url = "http://img.designmap.or.kr//IMG_P200/thumbnail/KR/D2330C/3020190001577/M001/thumb_3020190001577.jpg";
+
+        Button btn_add = findViewById(R.id.btn_add);
+        btn_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Design_Data designData = new Design_Data(url,
+                        "#직사각형",
+                        "#삼각형",
+                        "#직각모형",
+                        "#역삼각형");
+
+                re_arrayList.add(designData);
+                designAdapter.notifyDataSetChanged();
+            }
+        });
+
+
+
+        //1. 검색 페이지로 가는 버튼
+
+        btn_searchPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainPageTab.this, SearchingTab.class);
+                startActivity(intent);
+            }
+        });
+
+        //1. 연도 눌렸을 경우
+        btn_year_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+
+
     }
 }
