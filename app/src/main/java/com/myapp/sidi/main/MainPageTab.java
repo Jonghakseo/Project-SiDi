@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.myapp.sidi.ContractAndHelper.SelectFurnitureContract;
 import com.myapp.sidi.ContractAndHelper.SelectFurnitureHelper;
@@ -35,6 +36,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainPageTab extends AppCompatActivity {
     private Button btn_choice,btn_choiceRevise,btn_searchPage;
     private Button btn_year_1,btn_year_2,btn_year_3,btn_year_4,btn_year_5,btn_year_6;
+    private TextView tv_year,tv_category;
     private LinearLayout linearLayout_1;
     private String choice_1,choice_2,choice_3,choice_4,choice_5;
     private String existChoice_1,existChoice_2,existChoice_3,existChoice_4,existChoice_5;
@@ -68,6 +70,8 @@ public class MainPageTab extends AppCompatActivity {
         btn_year_4 = findViewById(R.id.btn_year_4);
         btn_year_5 = findViewById(R.id.btn_year_5);
         btn_year_6 = findViewById(R.id.btn_year_6);
+        tv_year = findViewById(R.id.tv_year);
+        tv_category = findViewById(R.id.tv_category);
 
 
         SelectFurnitureHelper helper = new SelectFurnitureHelper(getApplicationContext());
@@ -142,30 +146,37 @@ public class MainPageTab extends AppCompatActivity {
         //1. 연도 버튼을 누르고 해당 연도 코드에 따라 서버에 보낼 연도 값을 조정한다.
         //2. 기본값은 60년대로 설정
         sendYear = 1960;
+        tv_year.setText("1960");
         if(YEAR_1_CODE==1){
             sendYear=1960;
+            tv_year.setText("1960");
             YEAR_1_CODE=0;
         }
         if(YEAR_2_CODE==1){
             sendYear=1970;
+            tv_year.setText("1970");
             YEAR_2_CODE=0;
         }
         if(YEAR_3_CODE==1){
             sendYear=1980;
+            tv_year.setText("1980");
             YEAR_3_CODE=0;
         }
         if(YEAR_4_CODE==1){
             sendYear=1990;
+            tv_year.setText("1990");
             YEAR_4_CODE=0;
         }
 
         if(YEAR_5_CODE==1){
             sendYear=2000;
+            tv_year.setText("2000");
             YEAR_5_CODE=0;
         }
 
         if(YEAR_6_CODE==1){
             sendYear=2010;
+            tv_year.setText("2010");
             YEAR_6_CODE=0;
         }
 
@@ -195,45 +206,48 @@ public class MainPageTab extends AppCompatActivity {
 
                         String design = result.getDesign1();
                         String url1 = result.getUrl1();
-                        String tag_1_1 = result.getTag_1_1();
-                        String tag_1_2 = result.getTag_1_2();
-                        String tag_1_3 = result.getTag_1_3();
+                        String tag_1_1 = result.getTag1_1();
+                        String tag_1_2 = result.getTag1_2();
+                        String tag_1_3 = result.getTag1_3();
+                        Log.e("tag",tag_1_1);
+                        Log.e("tag",tag_1_2);
+                        Log.e("tag",tag_1_3);
 
                         Design_Data design_data = new Design_Data(design,url1,tag_1_1,tag_1_2,tag_1_3);
                         re_arrayList.add(design_data);
 
                         String design2 = result.getDesign2();
                         String url2 = result.getUrl2();
-                        String tag_2_1 = result.getTag_2_1();
-                        String tag_2_2 = result.getTag_2_2();
-                        String tag_2_3 = result.getTag_2_3();
+                        String tag_2_1 = result.getTag2_1();
+                        String tag_2_2 = result.getTag2_2();
+                        String tag_2_3 = result.getTag2_3();
 
                         Design_Data design_data2 = new Design_Data(design2,url2,tag_2_1,tag_2_2,tag_2_3);
                         re_arrayList.add(design_data2);
 
                         String design3 = result.getDesign3();
                         String url3 = result.getUrl3();
-                        String tag_3_1 = result.getTag_3_1();
-                        String tag_3_2 = result.getTag_3_2();
-                        String tag_3_3 = result.getTag_3_3();
+                        String tag_3_1 = result.getTag3_1();
+                        String tag_3_2 = result.getTag3_2();
+                        String tag_3_3 = result.getTag3_3();
 
                         Design_Data design_data3 = new Design_Data(design3,url3,tag_3_1,tag_3_2,tag_3_3);
                         re_arrayList.add(design_data3);
 
                         String design4 = result.getDesign4();
                         String url4 = result.getUrl4();
-                        String tag_4_1 = result.getTag_4_1();
-                        String tag_4_2 = result.getTag_4_2();
-                        String tag_4_3 = result.getTag_4_3();
+                        String tag_4_1 = result.getTag4_1();
+                        String tag_4_2 = result.getTag4_2();
+                        String tag_4_3 = result.getTag4_3();
 
                         Design_Data design_data4 = new Design_Data(design4,url4,tag_4_1,tag_4_2,tag_4_3);
                         re_arrayList.add(design_data4);
 
                         String design5 = result.getDesign5();
                         String url5 = result.getUrl5();
-                        String tag_5_1 = result.getTag_5_1();
-                        String tag_5_2 = result.getTag_5_2();
-                        String tag_5_3 = result.getTag_5_3();
+                        String tag_5_1 = result.getTag5_1();
+                        String tag_5_2 = result.getTag5_2();
+                        String tag_5_3 = result.getTag5_3();
 
                         Design_Data design_data5 = new Design_Data(design5,url5,tag_5_1,tag_5_2,tag_5_3);
                         re_arrayList.add(design_data5);

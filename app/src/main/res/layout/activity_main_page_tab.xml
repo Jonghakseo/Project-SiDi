@@ -98,7 +98,7 @@
                 android:id="@+id/tv_yearText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="년대 디자인"
+                android:text="년대 대표디자인"
                 android:textSize="30dp"
                 app:layout_constraintLeft_toRightOf="@id/tv_year"
                 app:layout_constraintTop_toTopOf="parent"
@@ -106,12 +106,24 @@
                 android:layout_marginTop="30dp"/>
 
             <TextView
+                android:id="@+id/tv_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="책상"
+                android:textSize="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="30dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_year"/>
+
+
+            <TextView
                 android:id="@+id/tv_explain"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="선택한 카테고리에 해당하는 디자인이에요"
+                android:text="에 해당하는 대표 디자인이에요"
                 android:textSize="15dp"
-                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/tv_category"
                 app:layout_constraintTop_toBottomOf="@id/tv_year"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="5dp"/>
@@ -126,21 +138,38 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_explain"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="5dp"/>
+                android:layout_marginLeft="30dp"/>
+            <TextView
+                android:id="@+id/tv_explain_2sub"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="디자인권"
+                android:textSize="10dp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_explain_2"
+                app:layout_constraintRight_toLeftOf="@id/recyclerView"
+                android:layout_marginTop="50dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TOP3\n형태분류"
+                android:textSize="10dp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/tv_explain_2sub"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/recyclerView"
+                android:layout_marginTop="30dp"/>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_explain_2"
-                android:layout_width="330dp"
-                android:layout_height="100dp"
+                android:layout_width="300dp"
+                android:layout_height="140dp"
+                android:layout_marginLeft="40dp"
                 android:layout_marginTop="10dp"/>
-            <Button
-                android:id="@+id/btn_add"
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:text="테스트"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/recyclerView"/>
+
 
             <TextView
                 android:id="@+id/tv_explain_3"

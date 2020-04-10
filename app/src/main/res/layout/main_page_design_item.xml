@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_height="150dp"
     android:layout_marginLeft="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
         android:id="@+id/iv_url"
         android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:background="@mipmap/ic_launcher"
+        android:layout_height="80dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -19,9 +18,8 @@
         android:layout_height="wrap_content"
         android:visibility="gone"
         android:textSize="10dp"
-        app:layout_constraintBottom_toBottomOf="@id/iv_design"
-        app:layout_constraintLeft_toLeftOf="@id/iv_design"
-        app:layout_constraintRight_toLeftOf="@id/tv_tag_2"
+        app:layout_constraintTop_toBottomOf="@id/iv_url"
+        app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginBottom="20dp"/>
 
 
@@ -31,9 +29,8 @@
         android:layout_height="wrap_content"
         android:text="#직사각형"
         android:textSize="10dp"
-        app:layout_constraintBottom_toBottomOf="@id/iv_design"
-        app:layout_constraintRight_toRightOf="@id/iv_design"
-        app:layout_constraintLeft_toLeftOf="@id/iv_design"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_url"
         android:layout_marginBottom="20dp"/>
 
 
@@ -43,9 +40,8 @@
         android:layout_height="wrap_content"
         android:text="#직사각형"
         android:textSize="10dp"
-        app:layout_constraintBottom_toBottomOf="@id/iv_design"
-        app:layout_constraintRight_toLeftOf="@id/tv_tag_3"
-        app:layout_constraintLeft_toLeftOf="@id/iv_design"/>
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_tag_1"/>
 
 
     <TextView
@@ -54,8 +50,7 @@
         android:layout_height="wrap_content"
         android:text="#직사각형"
         android:textSize="10dp"
-        app:layout_constraintBottom_toBottomOf="@id/iv_design"
-        app:layout_constraintLeft_toRightOf="@id/tv_tag_2"
-        app:layout_constraintRight_toRightOf="@id/iv_design"/>
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_tag_2"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
