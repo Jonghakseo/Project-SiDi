@@ -49,7 +49,8 @@ public class MainPageTab extends AppCompatActivity {
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
     private ServerInterface serverInterface;
-    private String sendYear;
+    private int sendYear;
+    private List choiceArr;
 
 
     @Override
@@ -68,14 +69,8 @@ public class MainPageTab extends AppCompatActivity {
         btn_year_5 = findViewById(R.id.btn_year_5);
         btn_year_6 = findViewById(R.id.btn_year_6);
 
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-
-    SelectFurnitureHelper helper = new SelectFurnitureHelper(getApplicationContext());
+        SelectFurnitureHelper helper = new SelectFurnitureHelper(getApplicationContext());
         SQLiteDatabase sqLiteDatabase = helper.getReadableDatabase();
         String[] readData = {
                 BaseColumns._ID,
@@ -101,7 +96,7 @@ public class MainPageTab extends AppCompatActivity {
                 sortOrder
         );
 
-        final List choiceArr = new ArrayList<>();
+        choiceArr = new ArrayList<>();
         while(cursor.moveToNext()) {
             choice_1 = cursor.getString(cursor.getColumnIndexOrThrow(SelectFurnitureContract.TableEntry.COLUMN_CHOICE_1));
             choice_2 = cursor.getString(cursor.getColumnIndexOrThrow(SelectFurnitureContract.TableEntry.COLUMN_CHOICE_2));
@@ -135,35 +130,42 @@ public class MainPageTab extends AppCompatActivity {
             button.setText(choiceArr.get(i).toString());
             linearLayout_1.addView(button);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
 
 
         //1. 연도 버튼을 누르고 해당 연도 코드에 따라 서버에 보낼 연도 값을 조정한다.
         //2. 기본값은 60년대로 설정
-        sendYear = "1960";
+        sendYear = 1960;
         if(YEAR_1_CODE==1){
-            sendYear="1960";
+            sendYear=1960;
             YEAR_1_CODE=0;
         }
         if(YEAR_2_CODE==1){
-            sendYear="1970";
+            sendYear=1970;
             YEAR_2_CODE=0;
         }
         if(YEAR_3_CODE==1){
-            sendYear="1980";
+            sendYear=1980;
             YEAR_3_CODE=0;
         }
         if(YEAR_4_CODE==1){
-            sendYear="1990";
+            sendYear=1990;
             YEAR_4_CODE=0;
         }
 
         if(YEAR_5_CODE==1){
-            sendYear="2000";
+            sendYear=2000;
             YEAR_5_CODE=0;
         }
 
         if(YEAR_6_CODE==1){
-            sendYear="2010";
+            sendYear=2010;
             YEAR_6_CODE=0;
         }
 
@@ -184,8 +186,8 @@ public class MainPageTab extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         serverInterface = retrofit.create(ServerInterface.class);
-        Log.e("year",sendYear);
-        serverInterface.signUp("desk",1990)
+//        Log.e("year",sendYear);
+        serverInterface.signUp("desk",sendYear)
                 .enqueue(new Callback<MainPageDesignResult>() {
                     @Override
                     public void onResponse(Call<MainPageDesignResult> call, Response<MainPageDesignResult> response) {
@@ -256,8 +258,6 @@ public class MainPageTab extends AppCompatActivity {
 
 
 
-
-
         btn_choiceRevise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -320,27 +320,6 @@ public class MainPageTab extends AppCompatActivity {
 
             }
         });
-
-
-
-        final String url = "http://img.designmap.or.kr//IMG_P200/thumbnail/KR/D2330C/3020190001577/M001/thumb_3020190001577.jpg";
-
-        Button btn_add = findViewById(R.id.btn_add);
-        btn_add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Design_Data designData = new Design_Data(url,
-                        "#직사각형",
-                        "#삼각형",
-                        "#직각모형",
-                        "#역삼각형");
-
-                re_arrayList.add(designData);
-                designAdapter.notifyDataSetChanged();
-            }
-        });
-
-
 
         //1. 검색 페이지로 가는 버튼
 
