@@ -10,7 +10,7 @@ public interface ServerInterface {
 
     String BASE_URL = "http://ec2-13-125-249-181.ap-northeast-2.compute.amazonaws.com/";
 
-    @GET("sidiMainPage_temp.php")
-    Call<MainPageDesignResult> signUp(@Query("tag") String tag,
-                                      @Query("year") String year);
+    @GET("mainResponse.php")
+    Call<MainPageDesignResult> signUp(@Query("cate") String cate,
+                                      @Query("age") int age);
 }

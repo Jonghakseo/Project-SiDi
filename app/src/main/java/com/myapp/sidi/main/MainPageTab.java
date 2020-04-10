@@ -1,7 +1,6 @@
 package com.myapp.sidi.main;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.ViewUtils;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -168,6 +167,14 @@ public class MainPageTab extends AppCompatActivity {
             YEAR_6_CODE=0;
         }
 
+        //1.시대의 디자인 보여줄 리사이클러뷰
+
+        linearLayoutManager = new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        re_arrayList = new ArrayList<>();
+        designAdapter = new Design_Adapter(re_arrayList,this);
+        recyclerView.setAdapter(designAdapter);
+
 
 
         //1. 서버에 카테고리 1번을 보내기
@@ -178,21 +185,62 @@ public class MainPageTab extends AppCompatActivity {
                 .build();
         serverInterface = retrofit.create(ServerInterface.class);
         Log.e("year",sendYear);
-        serverInterface.signUp(choiceArr.get(0).toString(),sendYear)
+        serverInterface.signUp("desk",1990)
                 .enqueue(new Callback<MainPageDesignResult>() {
                     @Override
                     public void onResponse(Call<MainPageDesignResult> call, Response<MainPageDesignResult> response) {
                         MainPageDesignResult result = response.body();
 
-                        Log.e("result", String.valueOf(result));
+                        String design = result.getDesign1();
+                        String url1 = result.getUrl1();
+                        String tag_1_1 = result.getTag_1_1();
+                        String tag_1_2 = result.getTag_1_2();
+                        String tag_1_3 = result.getTag_1_3();
 
-                        if(result.getDesign().equals("design1")){
-                            Log.e("result", result.getDesign());
-                            Log.e("result", result.getUrl());
-                            Log.e("result", result.getTag());
-                            Log.e("result", result.getTag_2());
-                            Log.e("result", result.getTag_3());
-                        }
+                        Design_Data design_data = new Design_Data(design,url1,tag_1_1,tag_1_2,tag_1_3);
+                        re_arrayList.add(design_data);
+
+                        String design2 = result.getDesign2();
+                        String url2 = result.getUrl2();
+                        String tag_2_1 = result.getTag_2_1();
+                        String tag_2_2 = result.getTag_2_2();
+                        String tag_2_3 = result.getTag_2_3();
+
+                        Design_Data design_data2 = new Design_Data(design2,url2,tag_2_1,tag_2_2,tag_2_3);
+                        re_arrayList.add(design_data2);
+
+                        String design3 = result.getDesign3();
+                        String url3 = result.getUrl3();
+                        String tag_3_1 = result.getTag_3_1();
+                        String tag_3_2 = result.getTag_3_2();
+                        String tag_3_3 = result.getTag_3_3();
+
+                        Design_Data design_data3 = new Design_Data(design3,url3,tag_3_1,tag_3_2,tag_3_3);
+                        re_arrayList.add(design_data3);
+
+                        String design4 = result.getDesign4();
+                        String url4 = result.getUrl4();
+                        String tag_4_1 = result.getTag_4_1();
+                        String tag_4_2 = result.getTag_4_2();
+                        String tag_4_3 = result.getTag_4_3();
+
+                        Design_Data design_data4 = new Design_Data(design4,url4,tag_4_1,tag_4_2,tag_4_3);
+                        re_arrayList.add(design_data4);
+
+                        String design5 = result.getDesign5();
+                        String url5 = result.getUrl5();
+                        String tag_5_1 = result.getTag_5_1();
+                        String tag_5_2 = result.getTag_5_2();
+                        String tag_5_3 = result.getTag_5_3();
+
+                        Design_Data design_data5 = new Design_Data(design5,url5,tag_5_1,tag_5_2,tag_5_3);
+                        re_arrayList.add(design_data5);
+
+                        designAdapter.notifyDataSetChanged();
+
+
+
+
 
 
                     }
@@ -273,13 +321,7 @@ public class MainPageTab extends AppCompatActivity {
             }
         });
 
-        //1.시대의 디자인 보여줄 리사이클러뷰
 
-        linearLayoutManager = new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        re_arrayList = new ArrayList<>();
-        designAdapter = new Design_Adapter(re_arrayList,this);
-        recyclerView.setAdapter(designAdapter);
 
         final String url = "http://img.designmap.or.kr//IMG_P200/thumbnail/KR/D2330C/3020190001577/M001/thumb_3020190001577.jpg";
 

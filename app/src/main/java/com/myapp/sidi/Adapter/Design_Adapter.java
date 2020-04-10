@@ -41,12 +41,13 @@ public class Design_Adapter extends RecyclerView.Adapter<Design_Adapter.CustomVi
     @Override
     public void onBindViewHolder(@NonNull Design_Adapter.CustomViewHolder holder, int position) {
         Glide.with(holder.itemView)
-                .load(arrayList.get(position).getDesign()).into(holder.iv_design);
+                .load(arrayList.get(position).getUrl()).into(holder.iv_url);
 
+        holder.tv_designCode.setText(arrayList.get(position).getDesignCode());
         holder.tv_tag_1.setText(arrayList.get(position).getTag_1());
         holder.tv_tag_2.setText(arrayList.get(position).getTag_2());
         holder.tv_tag_3.setText(arrayList.get(position).getTag_3());
-        holder.tv_tag_4.setText(arrayList.get(position).getTag_4());
+
         holder.itemView.setTag(position);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -64,20 +65,20 @@ public class Design_Adapter extends RecyclerView.Adapter<Design_Adapter.CustomVi
     }
 
     public class CustomViewHolder extends RecyclerView.ViewHolder{
-        ImageView iv_design;
+        ImageView iv_url;
+        TextView tv_designCode;
         TextView tv_tag_1;
         TextView tv_tag_2;
         TextView tv_tag_3;
-        TextView tv_tag_4;
 
 
         public CustomViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.iv_design = itemView.findViewById(R.id.iv_design);
+            this.iv_url = itemView.findViewById(R.id.iv_url);
+            this.tv_designCode = itemView.findViewById(R.id.tv_designCode);
             this.tv_tag_1 = itemView.findViewById(R.id.tv_tag_1);
             this.tv_tag_2 = itemView.findViewById(R.id.tv_tag_2);
             this.tv_tag_3 = itemView.findViewById(R.id.tv_tag_3);
-            this.tv_tag_4 = itemView.findViewById(R.id.tv_tag_4);
         }
     }
 }
