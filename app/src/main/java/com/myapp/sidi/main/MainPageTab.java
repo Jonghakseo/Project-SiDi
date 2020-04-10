@@ -34,15 +34,24 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainPageTab extends AppCompatActivity {
-    Button btn_choice,btn_choiceRevise,btn_searchPage,btn_year_1;
-    LinearLayout linearLayout_1;
-    String choice_1,choice_2,choice_3,choice_4,choice_5;
-    String existChoice_1,existChoice_2,existChoice_3,existChoice_4,existChoice_5;
+    private Button btn_choice,btn_choiceRevise,btn_searchPage;
+    private Button btn_year_1,btn_year_2,btn_year_3,btn_year_4,btn_year_5,btn_year_6;
+    private LinearLayout linearLayout_1;
+    private String choice_1,choice_2,choice_3,choice_4,choice_5;
+    private String existChoice_1,existChoice_2,existChoice_3,existChoice_4,existChoice_5;
+    private int YEAR_1_CODE = 0;
+    private int YEAR_2_CODE = 0;
+    private int YEAR_3_CODE = 0;
+    private int YEAR_4_CODE = 0;
+    private int YEAR_5_CODE = 0;
+    private int YEAR_6_CODE = 0;
     private ArrayList<Design_Data> re_arrayList;
     private Design_Adapter designAdapter;
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
     private ServerInterface serverInterface;
+    private String sendYear;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,12 +62,21 @@ public class MainPageTab extends AppCompatActivity {
         btn_choiceRevise = findViewById(R.id.btn_choiceRevise);
         recyclerView = findViewById(R.id.recyclerView);
         btn_searchPage = findViewById(R.id.btn_searchPage);
-        btn_year_1= findViewById(R.id.btn_year_1);
+        btn_year_1 = findViewById(R.id.btn_year_1);
+        btn_year_2 = findViewById(R.id.btn_year_2);
+        btn_year_3 = findViewById(R.id.btn_year_3);
+        btn_year_4 = findViewById(R.id.btn_year_4);
+        btn_year_5 = findViewById(R.id.btn_year_5);
+        btn_year_6 = findViewById(R.id.btn_year_6);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
 
-
-
-        SelectFurnitureHelper helper = new SelectFurnitureHelper(getApplicationContext());
+    SelectFurnitureHelper helper = new SelectFurnitureHelper(getApplicationContext());
         SQLiteDatabase sqLiteDatabase = helper.getReadableDatabase();
         String[] readData = {
                 BaseColumns._ID,
@@ -120,6 +138,37 @@ public class MainPageTab extends AppCompatActivity {
         }
 
 
+        //1. 연도 버튼을 누르고 해당 연도 코드에 따라 서버에 보낼 연도 값을 조정한다.
+        //2. 기본값은 60년대로 설정
+        sendYear = "1960";
+        if(YEAR_1_CODE==1){
+            sendYear="1960";
+            YEAR_1_CODE=0;
+        }
+        if(YEAR_2_CODE==1){
+            sendYear="1970";
+            YEAR_2_CODE=0;
+        }
+        if(YEAR_3_CODE==1){
+            sendYear="1980";
+            YEAR_3_CODE=0;
+        }
+        if(YEAR_4_CODE==1){
+            sendYear="1990";
+            YEAR_4_CODE=0;
+        }
+
+        if(YEAR_5_CODE==1){
+            sendYear="2000";
+            YEAR_5_CODE=0;
+        }
+
+        if(YEAR_6_CODE==1){
+            sendYear="2010";
+            YEAR_6_CODE=0;
+        }
+
+
 
         //1. 서버에 카테고리 1번을 보내기
         //2. 기본 연도 1960으로 해서 보내기
@@ -128,17 +177,16 @@ public class MainPageTab extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         serverInterface = retrofit.create(ServerInterface.class);
-        String year = "1960";
-
-        serverInterface.signUp(choiceArr.get(0).toString(),year)
+        Log.e("year",sendYear);
+        serverInterface.signUp(choiceArr.get(0).toString(),sendYear)
                 .enqueue(new Callback<MainPageDesignResult>() {
                     @Override
                     public void onResponse(Call<MainPageDesignResult> call, Response<MainPageDesignResult> response) {
                         MainPageDesignResult result = response.body();
 
+                        Log.e("result", String.valueOf(result));
+
                         if(result.getDesign().equals("design1")){
-
-
                             Log.e("result", result.getDesign());
                             Log.e("result", result.getUrl());
                             Log.e("result", result.getTag());
@@ -263,14 +311,60 @@ public class MainPageTab extends AppCompatActivity {
         });
 
         //1. 연도 눌렸을 경우
+        //2. 버튼을 누른 코드 값을 주고
+        //3. 서버에 연도 값을 보낼때 해당 코드 값의 연도를 보낸다.
         btn_year_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                YEAR_1_CODE=1;
+                onResume();
+            }
+        });
 
+        btn_year_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                YEAR_2_CODE=1;
+                onResume();
+            }
+        });
+
+        btn_year_3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                YEAR_3_CODE=1;
+                onResume();
+            }
+        });
+
+        btn_year_4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                YEAR_4_CODE=1;
+                onResume();
+            }
+        });
+
+        btn_year_5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                YEAR_5_CODE=1;
+                onResume();
+            }
+        });
+
+        btn_year_6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                YEAR_6_CODE=1;
+                onResume();
             }
         });
 
 
 
+
     }
+
+
 }

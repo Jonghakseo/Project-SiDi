@@ -221,28 +221,37 @@
                 android:id="@+id/btn_year_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="60's"/>
+                android:text="1960's"/>
 
             <Button
+                android:id="@+id/btn_year_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="70's"/>
+                android:text="1970's"/>
 
             <Button
+                android:id="@+id/btn_year_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="80's"/>
+                android:text="1980's"/>
 
             <Button
+                android:id="@+id/btn_year_4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="90's"/>
+                android:text="1990's"/>
 
             <Button
+                android:id="@+id/btn_year_5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="00's"/>
+                android:text="2000's"/>
 
+            <Button
+                android:id="@+id/btn_year_6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2010's"/>
 
         </LinearLayout>
 
