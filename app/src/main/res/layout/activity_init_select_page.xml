@@ -41,7 +41,7 @@
         android:id="@+id/iv_desk"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:background="@drawable/ic_launcher_background"
+        android:background="@drawable/exam1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cb_desk"
         app:layout_constraintRight_toLeftOf="@id/iv_chair"/>
@@ -60,7 +60,7 @@
         android:id="@+id/iv_chair"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:background="@drawable/ic_launcher_background"
+        android:background="@drawable/exam1"
         app:layout_constraintLeft_toRightOf="@id/iv_desk"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cb_chair"/>
@@ -80,7 +80,7 @@
         android:id="@+id/iv_table"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:background="@drawable/ic_launcher_background"
+        android:background="@drawable/exam1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cb_table"
         app:layout_constraintRight_toLeftOf="@id/iv_chair"/>
@@ -99,7 +99,7 @@
         android:id="@+id/iv_sofa"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:background="@drawable/ic_launcher_background"
+        android:background="@drawable/exam1"
         app:layout_constraintLeft_toRightOf="@id/iv_desk"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cb_sofa"/>
@@ -119,7 +119,7 @@
         android:id="@+id/iv_lamp"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:background="@drawable/ic_launcher_background"
+        android:background="@drawable/exam1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cb_lamp"
         app:layout_constraintRight_toLeftOf="@id/iv_chair"/>
