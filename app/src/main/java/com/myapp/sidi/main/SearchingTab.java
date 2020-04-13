@@ -37,7 +37,7 @@ public class SearchingTab extends AppCompatActivity {
     private int DEP_3_CLICK_CODE=0;
     private int DEP_4_CLICK_CODE=0;
     private int DEP_5_CLICK_CODE=0;
-    private int form_count;
+    private int form_count=0;
     private RadioButton rb_furnitureDesk,rb_furnitureChair,rb_furnitureTable,rb_furnitureSofa,rb_furnitureDispatchLamp,rb_furnitureHangLamp;
     private RadioGroup rg_furniture;
     private CheckBox cb_timeAll;
@@ -133,6 +133,22 @@ public class SearchingTab extends AppCompatActivity {
         btn_dep_4.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,70));
         btn_dep_5.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,70));
 
+        //1. 기본적으로  각 depth 접혀있는 상태로 시작
+        if(CATEGORY_CLICK_CODE ==0){
+            Linear_furniture.setVisibility(View.GONE);
+        }
+        if (TIME_CLICK_CODE==0){
+            Linear_time.setVisibility(View.GONE);
+        }
+        if (NATION_CLICK_CODE==0){
+            Linear_nation.setVisibility(View.GONE);
+        }
+
+        //가구 카테고리를 처음으로 선택하기전까진 형태 검색 버튼 숨기기
+        if (FIRST_VISIT_CODE_FURNITURE_FORM==0){
+            btn_FurnitureForm.setVisibility(View.GONE);
+        }
+
     }
 
     @Override
@@ -143,29 +159,52 @@ public class SearchingTab extends AppCompatActivity {
 
 
 
-
-
+            //가구를 선택할 때 마다 발생하는 이벤트를 구현
+            //해당 가구의 형태 검색 내용들 동적으로 만들기
             rg_furniture.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int rbID) {
 
-            //가구를 선택했으니 형태 검색 버튼이 나오도록 하기
-            FIRST_VISIT_CODE_FURNITURE_FORM=1;
+
+
             btn_FurnitureForm.setVisibility(View.VISIBLE);
+
             form_count=0;
 
                 //해당 값들 초기화
-                btn_dep_1.setText(null);
-                btn_dep_2.setText(null);
-                btn_dep_3.setText(null);
-                btn_dep_4.setText(null);
-                btn_dep_5.setText(null);
+                initBtnAndLinear();
+                    //처음으로 가구를 선택했을때 형태 검색 버튼이 나오도록 하기
+                    FIRST_VISIT_CODE_FURNITURE_FORM=1;
+                    //가구를 변경시킬 때 마다 형태 검색 버튼쪽 내용 접기
+                    Linear_furnitureDetailTotal.setVisibility(View.GONE);
+                    Linear_dep_1.setVisibility(View.GONE);
+                    Linear_dep_2.setVisibility(View.GONE);
+                    Linear_dep_3.setVisibility(View.GONE);
+                    Linear_dep_4.setVisibility(View.GONE);
+                    Linear_dep_5.setVisibility(View.GONE);
+                    DEP_1_CLICK_CODE=0;
+                    DEP_2_CLICK_CODE=0;
+                    DEP_3_CLICK_CODE=0;
+                    DEP_4_CLICK_CODE=0;
+                    DEP_5_CLICK_CODE=0;
 
-                Linear_dep_1.removeAllViews();
-                Linear_dep_2.removeAllViews();
-                Linear_dep_3.removeAllViews();
-                Linear_dep_4.removeAllViews();
-                Linear_dep_5.removeAllViews();
+                    //depth 체크 시 버튼 GONE 시켰던 것들 모두 초기화
+                    btn_dep_1.setVisibility(View.VISIBLE);
+                    btn_dep_2.setVisibility(View.VISIBLE);
+                    btn_dep_3.setVisibility(View.VISIBLE);
+                    btn_dep_4.setVisibility(View.VISIBLE);
+                    btn_dep_5.setVisibility(View.VISIBLE);
+
+
+
+
+
+                    FURNITURE_FORM_CLICK_CODE = 0;
+
+
+
+
+
 
                 //1, 각 라디오 버튼을 클릭 했을 시 아이디 값을 해당 버튼의 텍스트 값으로 변경
                 RadioButton radioButton = findViewById(rbID);
@@ -318,7 +357,7 @@ public class SearchingTab extends AppCompatActivity {
                         for (int i =0; i<table_dep5_searchForm.length; i++){
                             searchFormCheckBox = new CheckBox(getApplicationContext());
                             searchFormCheckBox.setText(table_dep5_searchForm[i]);
-                            Linear_dep_4.addView(searchFormCheckBox);
+                            Linear_dep_5.addView(searchFormCheckBox);
                         }
 
                         break;
@@ -463,6 +502,7 @@ public class SearchingTab extends AppCompatActivity {
                 }
                 Log.e("rg_id", rb_text);
 
+
             }
         });
 
@@ -473,20 +513,7 @@ public class SearchingTab extends AppCompatActivity {
 
 
 
-        //1. 기본적으로 접혀 있도록 하기 위함
-        //2. 각 버튼 클릭시 해당 리니어가 펼쳐질 수 있도록 구현
-        //3. 전체 체크박스 클릭시 나머지 체크박스들도 클릭될 수 있도록 구현
 
-        //1.
-        if(CATEGORY_CLICK_CODE ==0){
-        Linear_furniture.setVisibility(View.GONE);
-        }
-        if (TIME_CLICK_CODE==0){
-            Linear_time.setVisibility(View.GONE);
-        }
-        if (NATION_CLICK_CODE==0){
-            Linear_nation.setVisibility(View.GONE);
-        }
 
 
 
@@ -538,11 +565,7 @@ public class SearchingTab extends AppCompatActivity {
 
 
 
-        //가구 카테고리를 선택하지 않았을 경우 GONE
-        //가구 카테고리를 선택하는 코드쪽에서 VISIBLE
-        if (FIRST_VISIT_CODE_FURNITURE_FORM==0){
-            btn_FurnitureForm.setVisibility(View.GONE);
-        }
+
 
 
 
@@ -558,30 +581,15 @@ public class SearchingTab extends AppCompatActivity {
 
                         //형태 검색 버튼을 클릭했을 경우 펼치기
                         if (FURNITURE_FORM_CLICK_CODE == 0) {
-
-                            btn_dep_1.setVisibility(View.VISIBLE);
-                            btn_dep_2.setVisibility(View.VISIBLE);
-                            btn_dep_3.setVisibility(View.VISIBLE);
-                            btn_dep_4.setVisibility(View.VISIBLE);
-                            btn_dep_5.setVisibility(View.VISIBLE);
+                            Linear_furnitureDetailTotal.setVisibility(View.VISIBLE);
                             //dep_4인경우 예외처리 부분
-                            Log.e("form_count", String.valueOf(form_count));
-                            if (form_count == 4) {
+                            if (form_count==4){
                                 btn_dep_5.setVisibility(View.GONE);
                             }
                             FURNITURE_FORM_CLICK_CODE = 1;
                             //한번더 클릭했을 경우 닫기
                         } else if (FURNITURE_FORM_CLICK_CODE == 1) {
-                            btn_dep_1.setVisibility(View.GONE);
-                            btn_dep_2.setVisibility(View.GONE);
-                            btn_dep_3.setVisibility(View.GONE);
-                            btn_dep_4.setVisibility(View.GONE);
-                            btn_dep_5.setVisibility(View.GONE);
-                            Linear_dep_1.setVisibility(View.GONE);
-                            Linear_dep_2.setVisibility(View.GONE);
-                            Linear_dep_3.setVisibility(View.GONE);
-                            Linear_dep_4.setVisibility(View.GONE);
-                            Linear_dep_5.setVisibility(View.GONE);
+                            Linear_furnitureDetailTotal.setVisibility(View.GONE);
                             FURNITURE_FORM_CLICK_CODE = 0;
                         }
 
@@ -695,9 +703,24 @@ public class SearchingTab extends AppCompatActivity {
 
 
     }
+
+    public void initBtnAndLinear(){
+        btn_dep_1.setText(null);
+        btn_dep_2.setText(null);
+        btn_dep_3.setText(null);
+        btn_dep_4.setText(null);
+        btn_dep_5.setText(null);
+
+        Linear_dep_1.removeAllViews();
+        Linear_dep_2.removeAllViews();
+        Linear_dep_3.removeAllViews();
+        Linear_dep_4.removeAllViews();
+        Linear_dep_5.removeAllViews();
+    }
     public void depthCheck(int count){
         switch (count){
             case 5:
+
                 break;
             case 4:
                 btn_dep_5.setVisibility(View.GONE);
