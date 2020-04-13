@@ -130,9 +130,16 @@ public class MainPageTab extends AppCompatActivity {
         //1. 카테고리 수만큼 버튼 생성하는 코드
         linearLayout_1 = findViewById(R.id.linearLayout_1);
         for(int i=0; i<choiceArr.size(); i++) {
-            Button button = new Button(this);
+            final Button button = new Button(this);
             button.setText(choiceArr.get(i).toString());
             linearLayout_1.addView(button);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String test= button.getText().toString();
+                    Log.e("test",test);
+                }
+            });
         }
     }
 

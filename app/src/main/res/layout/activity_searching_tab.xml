@@ -30,96 +30,89 @@
         app:layout_constraintLeft_toRightOf="@id/btn_searchDetail"/>
 
 
-    <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <Button
+        android:id="@+id/btn_FurnitureCategory"
+        android:layout_width="200dp"
+        android:layout_height="70dp"
+
         android:text="가구 카테고리"
         android:textSize="20dp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/blue_round_line"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_searchDetail"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="10dp"/>
 
-    <Button
-        android:id="@+id/btn_slideFurniture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_searchAPI"/>
+
+
 
     <LinearLayout
         android:id="@+id/Linear_furniture"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="200dp"
         android:orientation="horizontal"
         android:gravity="center"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        app:layout_constraintTop_toBottomOf="@id/btn_FurnitureCategory"
         android:layout_marginTop="10dp">
 
-        <CheckBox
-            android:id="@+id/cb_furnitureAll"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="전체"/>
 
-        <CheckBox
-            android:id="@+id/cb_furnitureDesk"
+        <RadioGroup
+            android:id="@+id/rg_furniture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        <RadioButton
+            android:id="@+id/rb_furnitureDesk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="책상"/>
-        <CheckBox
-            android:id="@+id/cb_furnitureChair"
+        <RadioButton
+            android:id="@+id/rb_furnitureChair"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="의자"/>
-        <CheckBox
-            android:id="@+id/cb_furnitureTable"
+        <RadioButton
+            android:id="@+id/rb_furnitureTable"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="테이블"/>
-        <CheckBox
-            android:id="@+id/cb_furnitureSofa"
+        <RadioButton
+            android:id="@+id/rb_furnitureSofa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="소파"/>
-        <CheckBox
-            android:id="@+id/cb_furnitureLamp"
+        <RadioButton
+            android:id="@+id/rb_furnitureDispatchLamp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="전등/등"/>
+            android:text="전등(벽에 부착식)"/>
 
+        <RadioButton
+            android:id="@+id/rb_furnitureHangLamp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="전등(벽에 매다는 식)"/>
+    </RadioGroup>
 
 
 
     </LinearLayout>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="--------------------------------------------------------------------------------------------------"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/Linear_furniture"/>
 
 
-    <TextView
-        android:id="@+id/tv_titleTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <Button
+        android:id="@+id/btn_FurnitureTime"
+        android:layout_width="200dp"
+        android:layout_height="70dp"
         android:text="시간대"
         android:textSize="20dp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/blue_round_line"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/Linear_furniture"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="30dp"/>
 
-    <Button
-        android:id="@+id/btn_slideTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/Linear_furniture"
-        android:layout_marginTop="20dp"/>
 
     <LinearLayout
         android:id="@+id/Linear_time"
@@ -128,7 +121,7 @@
         android:orientation="horizontal"
         android:gravity="center"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_titleTime"
+        app:layout_constraintTop_toBottomOf="@id/btn_FurnitureTime"
         android:layout_marginTop="10dp">
 
         <CheckBox
@@ -158,32 +151,21 @@
 
 
     </LinearLayout>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="--------------------------------------------------------------------------------------------------"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/Linear_time"/>
 
 
-    <TextView
-        android:id="@+id/tv_titleNation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <Button
+        android:id="@+id/btn_FurnitureNation"
+        android:layout_width="200dp"
+        android:layout_height="70dp"
         android:text="국가"
         android:textSize="20dp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/blue_round_line"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/Linear_time"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="30dp"/>
 
-    <Button
-        android:id="@+id/btn_slideNation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/Linear_time"
-        android:layout_marginTop="20dp"/>
 
     <LinearLayout
         android:id="@+id/Linear_nation"
@@ -192,7 +174,7 @@
         android:orientation="horizontal"
         android:gravity="center"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_titleNation"
+        app:layout_constraintTop_toBottomOf="@id/btn_FurnitureNation"
         android:layout_marginTop="10dp">
 
         <CheckBox
@@ -229,70 +211,127 @@
 
     </LinearLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="--------------------------------------------------------------------------------------------------"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/Linear_nation"/>
 
 
-    <TextView
-        android:id="@+id/tv_titleFurnitureDetail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <Button
+        android:id="@+id/btn_FurnitureForm"
+        android:layout_width="200dp"
+        android:layout_height="70dp"
         android:text="상세 형대 검색"
         android:textSize="20dp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/blue_round_line"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/Linear_nation"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="30dp"/>
 
+<LinearLayout
+    android:id="@+id/Linear_furnitureDetailTotal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/btn_FurnitureForm">
     <Button
-        android:id="@+id/btn_slideFurnitureDetail"
+        android:id="@+id/btn_dep_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/Linear_nation"
+        android:text="유형1"
+        android:textSize="15dp"
+
+        android:layout_marginTop="20dp"/>
+
+
+    <LinearLayout
+        android:id="@+id/Linear_dep_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btn_dep_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="유형2"
+        android:textSize="15dp"
+
         android:layout_marginTop="20dp"/>
 
     <LinearLayout
-        android:id="@+id/Linear_furnitureDetail"
+        android:id="@+id/Linear_dep_2"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:orientation="horizontal"
-        android:gravity="center"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_titleFurnitureDetail"
-        android:layout_marginTop="10dp">
-
-        <CheckBox
-            android:id="@+id/cb_furnitureDetailAll"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="전체"/>
-
-
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        >
 
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_line"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="--------------------------------------------------------------------------------------------------"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/Linear_furnitureDetail"/>
+
 
     <Button
-        android:id="@+id/btn_next"
+        android:id="@+id/btn_dep_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="유형3"
+        android:textSize="15dp"
+
+        android:layout_marginTop="20dp"/>
+
+    <LinearLayout
+        android:id="@+id/Linear_dep_3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tv_line"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+       >
 
+    </LinearLayout>
 
+    <Button
+        android:id="@+id/btn_dep_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="유형4"
+        android:textSize="15dp"
+
+        android:layout_marginTop="20dp"/>
+
+    <LinearLayout
+        android:id="@+id/Linear_dep_4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        >
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_dep_5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="유형2"
+        android:textSize="15dp"
+
+        android:layout_marginTop="20dp"/>
+
+    <LinearLayout
+        android:id="@+id/Linear_dep_5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        >
+
+    </LinearLayout>
+</LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
