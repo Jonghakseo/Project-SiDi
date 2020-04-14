@@ -3,6 +3,7 @@ package com.myapp.sidi.main;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -25,7 +26,9 @@ import com.myapp.sidi.Category.LampDispatchInfo;
 import com.myapp.sidi.Category.LampHangInfo;
 import com.myapp.sidi.Category.SofaInfo;
 import com.myapp.sidi.Category.TableInfo;
+import com.myapp.sidi.Interface.ServerInterface;
 import com.myapp.sidi.R;
+import com.myapp.sidi.search.SearchResult;
 
 import java.util.ArrayList;
 
@@ -55,10 +58,11 @@ public class SearchingTab extends AppCompatActivity {
     private ArrayList dep_1_tmpArr, dep_2_tmpArr,dep_3_tmpArr,dep_4_tmpArr,dep_5_tmpArr;
     private ArrayList dep_1_ResultArr, dep_2_ResultArr,dep_3_ResultArr,dep_4_ResultArr,dep_5_ResultArr;
     private Button btn_test;
-    private String furnitureChoiceResult,timeChoiceResult,nationChoiceResult,dep_1_ChoiceResult,dep_2_ChoiceResult,
+    private String furnitureChoiceResult, startTimeChoiceResult,endTimeChoiceResult,nationChoiceResult,dep_1_ChoiceResult,dep_2_ChoiceResult,
     dep_3_ChoiceResult,dep_4_ChoiceResult,dep_5_ChoiceResult;
     private StringBuilder nationStringBuilder,dep_1_StringBuilder,dep_2_StringBuilder,dep_3_StringBuilder,dep_4_StringBuilder,dep_5_StringBuilder;
-    private TextView tv_middleYear;
+    private TextView tv_middleYear,tv_FurnitureFormExplain;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +73,7 @@ public class SearchingTab extends AppCompatActivity {
         btn_test = findViewById(R.id.test);
 
         tv_middleYear=findViewById(R.id.tv_middleYear);
+        tv_FurnitureFormExplain = findViewById(R.id.tv_FurnitureFormExplain);
 
         Linear_furniture = findViewById(R.id.Linear_furniture);
         Linear_time = findViewById(R.id.Linear_time);
@@ -202,6 +207,7 @@ public class SearchingTab extends AppCompatActivity {
         //가구 카테고리를 처음으로 선택하기전까진 형태 검색 버튼 숨기기
         if (FIRST_VISIT_CODE_FURNITURE_FORM==0){
             btn_FurnitureForm.setVisibility(View.GONE);
+            tv_FurnitureFormExplain.setVisibility(View.GONE);
         }
 
     }
@@ -248,6 +254,7 @@ public class SearchingTab extends AppCompatActivity {
 
 
             btn_FurnitureForm.setVisibility(View.VISIBLE);
+            tv_FurnitureFormExplain.setVisibility(View.VISIBLE);
 
             form_count=0;
 
@@ -719,8 +726,8 @@ public class SearchingTab extends AppCompatActivity {
             });
 
 
-        //<임시> 추후 삭제!!!!!
-        //어레이에 담긴 값 확인하는 버튼
+
+
         btn_test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -728,13 +735,15 @@ public class SearchingTab extends AppCompatActivity {
 
 
                 if (!cb_timeAll.isChecked()){
-                String tmpYear_1 = et_year_1.getText().toString();
-                String tmpYear_2 = et_year_2.getText().toString();
-                timeChoiceResult = tmpYear_1+"-"+tmpYear_2;
+                startTimeChoiceResult = et_year_1.getText().toString();
+                endTimeChoiceResult = et_year_2.getText().toString();
+
                 }else {
-                    timeChoiceResult="ALL";
+                    startTimeChoiceResult ="1960";
+                    endTimeChoiceResult = "2030";
                 }
-                Log.e("timeChoiceResult",timeChoiceResult);
+                Log.e("startTimeChoiceResult", startTimeChoiceResult);
+                Log.e("endTimeChoiceResult", endTimeChoiceResult);
                 ArrayList tmpNationArr= new ArrayList();
                 if (cb_nationKor.isChecked()){
                     tmpNationArr.add(cb_nationKor.getText().toString());
@@ -763,28 +772,55 @@ public class SearchingTab extends AppCompatActivity {
                 if (dep_1_ResultArr.size()!=0){
                     dep_1_ChoiceResult="";
                     dep_1_ChoiceResult = choiceStringBuilder(dep_1_ResultArr);
-                    Log.e("dep_1_ChoiceResult", dep_1_ChoiceResult);
+
+                }else {
+                    dep_1_ChoiceResult="ALL";
                 }
+                Log.e("dep_1_ChoiceResult", dep_1_ChoiceResult);
                 if (dep_2_ResultArr.size()!=0){
                     dep_2_ChoiceResult="";
                     dep_2_ChoiceResult = choiceStringBuilder(dep_2_ResultArr);
-                    Log.e("dep_2_ChoiceResult", dep_2_ChoiceResult);
+
+                }else {
+                    dep_2_ChoiceResult="ALL";
                 }
+                Log.e("dep_2_ChoiceResult", dep_2_ChoiceResult);
                 if (dep_3_ResultArr.size()!=0){
                     dep_3_ChoiceResult="";
                     dep_3_ChoiceResult = choiceStringBuilder(dep_3_ResultArr);
-                    Log.e("dep_3_ChoiceResult", dep_3_ChoiceResult);
+
+                }else {
+                    dep_3_ChoiceResult="ALL";
                 }
+                Log.e("dep_3_ChoiceResult", dep_3_ChoiceResult);
                 if (dep_4_ResultArr.size()!=0){
                     dep_4_ChoiceResult="";
                     dep_4_ChoiceResult = choiceStringBuilder(dep_4_ResultArr);
-                    Log.e("dep_4_ChoiceResult", dep_4_ChoiceResult);
+
+                }else {
+                    dep_4_ChoiceResult="ALL";
                 }
+                Log.e("dep_4_ChoiceResult", dep_4_ChoiceResult);
                 if (dep_5_ResultArr.size()!=0){
                     dep_5_ChoiceResult="";
                     dep_5_ChoiceResult = choiceStringBuilder(dep_5_ResultArr);
-                    Log.e("dep_5_ChoiceResult", dep_5_ChoiceResult);
+
+                }else {
+                    dep_5_ChoiceResult="ALL";
                 }
+                Log.e("dep_5_ChoiceResult", dep_5_ChoiceResult);
+
+                Intent intent = new Intent(SearchingTab.this, SearchResult.class);
+                intent.putExtra("furnitureChoiceResult",furnitureChoiceResult);
+                intent.putExtra("startTimeChoiceResult",startTimeChoiceResult);
+                intent.putExtra("endTimeChoiceResult",endTimeChoiceResult);
+                intent.putExtra("nationChoiceResult",nationChoiceResult);
+                intent.putExtra("dep_1_ChoiceResult",dep_1_ChoiceResult);
+                intent.putExtra("dep_2_ChoiceResult",dep_2_ChoiceResult);
+                intent.putExtra("dep_3_ChoiceResult",dep_3_ChoiceResult);
+                intent.putExtra("dep_4_ChoiceResult",dep_4_ChoiceResult);
+                intent.putExtra("dep_5_ChoiceResult",dep_5_ChoiceResult);
+                startActivity(intent);
 
 
 
