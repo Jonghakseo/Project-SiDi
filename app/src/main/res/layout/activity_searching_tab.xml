@@ -134,10 +134,12 @@
         <EditText
             android:id="@+id/et_year_1"
             android:layout_width="100dp"
-            android:hint="ex)1994"
+            android:inputType="number"
+            android:maxLength="4"
             android:layout_height="50dp"/>
 
         <TextView
+            android:id="@+id/tv_middleYear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="~"
@@ -146,7 +148,8 @@
         <EditText
             android:id="@+id/et_year_2"
             android:layout_width="100dp"
-            android:hint="2020"
+            android:inputType="number"
+            android:maxLength="4"
             android:layout_height="50dp"/>
 
 
@@ -234,6 +237,10 @@
     android:gravity="center_horizontal"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintTop_toBottomOf="@id/btn_FurnitureForm">
+    <Button
+        android:id="@+id/test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
     <Button
         android:id="@+id/btn_dep_1"
         android:layout_width="wrap_content"
