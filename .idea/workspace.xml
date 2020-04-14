@@ -261,7 +261,14 @@
       <option name="project" value="LOCAL" />
       <updated>1586786251353</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="수정전">
+      <created>1586837798978</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1586837798978</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -307,6 +314,7 @@
     <MESSAGE value="3" />
     <MESSAGE value="검색 페이지 &#10;오류 1개 수정해야함 &#10;형태 검색 버튼 개수 오류" />
     <MESSAGE value="오류 수정 완료" />
-    <option name="LAST_COMMIT_MESSAGE" value="오류 수정 완료" />
+    <MESSAGE value="수정전" />
+    <option name="LAST_COMMIT_MESSAGE" value="수정전" />
   </component>
 </project>

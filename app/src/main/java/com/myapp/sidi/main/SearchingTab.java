@@ -5,6 +5,7 @@ import androidx.core.content.ContextCompat;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,7 +51,7 @@ public class SearchingTab extends AppCompatActivity {
     private Button btn_dep_1, btn_dep_2, btn_dep_3, btn_dep_4, btn_dep_5;
     private Button btn_FurnitureCategory,btn_FurnitureTime, btn_FurnitureForm,btn_FurnitureNation;
     private LinearLayout Linear_furnitureDetailTotal,Linear_dep_1,Linear_dep_2,Linear_dep_3,Linear_dep_4,Linear_dep_5;
-    private CheckBox searchFormCheckBox,;
+    private CheckBox searchFormCheckBox,searchFormCheckBox2,searchFormCheckBox3,searchFormCheckBox4,searchFormCheckBox5;
     private ArrayList dep_1_tmpArr, dep_2_tmpArr,dep_3_tmpArr,dep_4_tmpArr,dep_5_tmpArr;
     private ArrayList dep_1_ResultArr, dep_2_ResultArr,dep_3_ResultArr,dep_4_ResultArr,dep_5_ResultArr;
     private Button btn_test;
@@ -718,13 +719,6 @@ public class SearchingTab extends AppCompatActivity {
             });
 
 
-
-
-
-
-
-
-
         //<임시> 추후 삭제!!!!!
         //어레이에 담긴 값 확인하는 버튼
         btn_test.setOnClickListener(new View.OnClickListener() {
@@ -768,28 +762,28 @@ public class SearchingTab extends AppCompatActivity {
 
                 if (dep_1_ResultArr.size()!=0){
                     dep_1_ChoiceResult="";
-                    dep_1_StringBuilder = new StringBuilder(dep_1_ResultArr.get(0).toString());
-                    for (int i = 1; i< dep_1_ResultArr.size(); i++){
-                        if(dep_1_ResultArr.get(i)!=null){
-                            dep_1_StringBuilder.append(","+dep_1_ResultArr.get(i).toString());
-                        }
-                        Log.e("resultArr_1_____________________________", dep_1_ResultArr.get(i).toString());
-                    }
-                    dep_1_ChoiceResult = dep_1_StringBuilder.toString();
+                    dep_1_ChoiceResult = choiceStringBuilder(dep_1_ResultArr);
                     Log.e("dep_1_ChoiceResult", dep_1_ChoiceResult);
-
                 }
-                for (int i = 0; i< dep_2_ResultArr.size(); i++){
-                    Log.e("resultArr_2_____________________________", dep_2_ResultArr.get(i).toString());
+                if (dep_2_ResultArr.size()!=0){
+                    dep_2_ChoiceResult="";
+                    dep_2_ChoiceResult = choiceStringBuilder(dep_2_ResultArr);
+                    Log.e("dep_2_ChoiceResult", dep_2_ChoiceResult);
                 }
-                for (int i = 0; i< dep_3_ResultArr.size(); i++){
-                    Log.e("resultArr_3_____________________________", dep_3_ResultArr.get(i).toString());
+                if (dep_3_ResultArr.size()!=0){
+                    dep_3_ChoiceResult="";
+                    dep_3_ChoiceResult = choiceStringBuilder(dep_3_ResultArr);
+                    Log.e("dep_3_ChoiceResult", dep_3_ChoiceResult);
                 }
-                for (int i = 0; i< dep_4_ResultArr.size(); i++){
-                    Log.e("resultArr_4_____________________________", dep_4_ResultArr.get(i).toString());
+                if (dep_4_ResultArr.size()!=0){
+                    dep_4_ChoiceResult="";
+                    dep_4_ChoiceResult = choiceStringBuilder(dep_4_ResultArr);
+                    Log.e("dep_4_ChoiceResult", dep_4_ChoiceResult);
                 }
-                for (int i = 0; i< dep_5_ResultArr.size(); i++){
-                    Log.e("resultArr_5_____________________________", dep_5_ResultArr.get(i).toString());
+                if (dep_5_ResultArr.size()!=0){
+                    dep_5_ChoiceResult="";
+                    dep_5_ChoiceResult = choiceStringBuilder(dep_5_ResultArr);
+                    Log.e("dep_5_ChoiceResult", dep_5_ChoiceResult);
                 }
 
 
@@ -908,11 +902,32 @@ public class SearchingTab extends AppCompatActivity {
 
 
     }
+    public String choiceStringBuilder(ArrayList inputArr){
+       StringBuilder stringBuilder = new StringBuilder(inputArr.get(0).toString());
+       for (int i = 1; i< inputArr.size(); i++){
+        if(inputArr.get(i)!=null){
+            stringBuilder.append(","+inputArr.get(i).toString());
+        }
+    }
+        return stringBuilder.toString();
+
+
+}
+
 
     public void checkBoxDataInputArr(final CheckBox checkBox, final ArrayList tmpArrayList, final ArrayList ResultArrayList){
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+
+                }
+            },500);
+
             String data = checkBox.getText().toString();
             if (compoundButton.isChecked()==true){
 
