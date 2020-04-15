@@ -27,6 +27,8 @@ import com.myapp.sidi.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -196,12 +198,13 @@ public class MainPageTab extends AppCompatActivity {
         recyclerView.setAdapter(designAdapter);
 
 
-
+        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(httpLoggingInterceptor()).build();
         //1. 서버에 카테고리 1번을 보내기
         //2. 기본 연도 1960으로 해서 보내기
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(ServerInterface.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
+                .client(client)
                 .build();
         serverInterface = retrofit.create(ServerInterface.class);
 //        Log.e("year",sendYear);
@@ -210,7 +213,7 @@ public class MainPageTab extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<MainPageDesignResult> call, Response<MainPageDesignResult> response) {
                         MainPageDesignResult result = response.body();
-
+                        Log.e("ResponseResult",result.toString());
                         String design = result.getDesign1();
                         String url1 = result.getUrl1();
                         String tag_1_1 = result.getTag1_1();
@@ -406,6 +409,18 @@ public class MainPageTab extends AppCompatActivity {
 
 
 
+    }
+
+    private HttpLoggingInterceptor httpLoggingInterceptor(){
+
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+            @Override
+            public void log(String message) {
+                android.util.Log.e("MyGitHubData :", message + "");
+            }
+        });
+
+        return interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
     }
 
 

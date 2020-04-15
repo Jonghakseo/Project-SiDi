@@ -11,27 +11,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a70173cf-3876-4ad0-ac3c-85e43a83940a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/DTO/SearchingTabDesignResult.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/DTO/Test1.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/DTO/test.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/Category/ChairInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/Category/ChairInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/Category/DeskInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/Category/DeskInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/Category/LampDispatchInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/Category/LampDispatchInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/Category/LampHangInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/Category/LampHangInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/Category/SofaInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/Category/SofaInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/Category/TableInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/Category/TableInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/Adapter/SearchResult_Adapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/Adapter/SearchResult_Adapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/DTO/SearchResultData.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/DTO/SearchResultData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/DTO/SearchingTabDesignResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/DTO/SearchingTabDesignResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/DTO/Test1.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/DTO/test.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/Interface/ServerInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/Interface/ServerInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/main/MainPageTab.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/main/MainPageTab.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/main/SearchingTab.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/main/SearchingTab.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/search/SearchResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/search/SearchResult.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_searching_tab.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_searching_tab.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_view_detail.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_view_detail.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/search_result_design_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/search_result_design_item.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -43,7 +43,7 @@
     <option name="testRunner" value="GRADLE" />
     <option name="delegatedBuild" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="RF9N201XPND" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="a10e_API_28" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -78,8 +78,8 @@
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="PropertiesComponent">
-    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="RF9N201XPND" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-04-13T03:33:50.795Z" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="a10e_API_28" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-04-15T03:46:27.351Z" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
@@ -288,7 +288,14 @@
       <option name="project" value="LOCAL" />
       <updated>1586840158998</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="현재 최신">
+      <created>1586855453100</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1586855453100</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -336,6 +343,41 @@
     <MESSAGE value="오류 수정 완료" />
     <MESSAGE value="수정전" />
     <MESSAGE value="수정 버전2" />
-    <option name="LAST_COMMIT_MESSAGE" value="수정 버전2" />
+    <MESSAGE value="현재 최신" />
+    <option name="LAST_COMMIT_MESSAGE" value="현재 최신" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/Interface/ServerInterface.java</url>
+          <line>22</line>
+          <properties class="com.myapp.sidi.Interface.ServerInterface" method="searching" />
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/search/SearchResult.java</url>
+          <line>106</line>
+          <properties method="onResponse" />
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/search/SearchResult.java</url>
+          <line>158</line>
+          <properties method="onFailure" />
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/search/SearchResult.java</url>
+          <line>95</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/search/SearchResult.java</url>
+          <line>103</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

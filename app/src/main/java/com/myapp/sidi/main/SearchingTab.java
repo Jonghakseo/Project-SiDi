@@ -811,15 +811,15 @@ public class SearchingTab extends AppCompatActivity {
                 Log.e("dep_5_ChoiceResult", dep_5_ChoiceResult);
 
                 Intent intent = new Intent(SearchingTab.this, SearchResult.class);
-                intent.putExtra("furnitureChoiceResult",furnitureChoiceResult);
-                intent.putExtra("startTimeChoiceResult",startTimeChoiceResult);
-                intent.putExtra("endTimeChoiceResult",endTimeChoiceResult);
-                intent.putExtra("nationChoiceResult",nationChoiceResult);
-                intent.putExtra("dep_1_ChoiceResult",dep_1_ChoiceResult);
-                intent.putExtra("dep_2_ChoiceResult",dep_2_ChoiceResult);
-                intent.putExtra("dep_3_ChoiceResult",dep_3_ChoiceResult);
-                intent.putExtra("dep_4_ChoiceResult",dep_4_ChoiceResult);
-                intent.putExtra("dep_5_ChoiceResult",dep_5_ChoiceResult);
+                intent.putExtra("furnitureChoiceResult","desk");
+                intent.putExtra("startTimeChoiceResult","1999");
+                intent.putExtra("endTimeChoiceResult","2010");
+                intent.putExtra("nationChoiceResult","1,2,3,4");
+                intent.putExtra("dep_1_ChoiceResult","1");
+                intent.putExtra("dep_2_ChoiceResult","1,2,3,4,5,6,7,8,9");
+                intent.putExtra("dep_3_ChoiceResult","1,2,3");
+                intent.putExtra("dep_4_ChoiceResult","1,2,3,4");
+                intent.putExtra("dep_5_ChoiceResult","1,2,3");
                 startActivity(intent);
 
 
