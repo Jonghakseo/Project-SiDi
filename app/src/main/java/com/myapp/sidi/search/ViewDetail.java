@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Xml;
 import android.view.View;
 import android.widget.Button;
@@ -17,7 +18,11 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.myapp.sidi.Adapter.SearchDetail_Adapter;
+import com.myapp.sidi.Category.DeskInfo;
+import com.myapp.sidi.DTO.Design_Data;
+import com.myapp.sidi.DTO.MainPageDesignResult;
 import com.myapp.sidi.DTO.SearchDetailData;
+import com.myapp.sidi.Interface.ServerInterface;
 import com.myapp.sidi.R;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -28,6 +33,12 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 
 public class ViewDetail extends AppCompatActivity {
     //    private int searchMode; // 1. 국내 디자인 API, 2. 일본 디자인 API 3. 자체 서버 요청
@@ -36,12 +47,13 @@ public class ViewDetail extends AppCompatActivity {
     private Intent intent;
     private String country; //해당 디자인 출원 국가
     private String registrationNum; //검색 결과로 받은 출원번호
-    private String depth1,depth2,depth3,depth4,depth5;
+    private int depth1,depth2,depth3,depth4,depth5;
     Button btn_fullText, btn_scrap, btn_sketch, btn_moreDescription;
     ImageView main_design;
     TextView text_designNum, text_basicInfo, text_description, tagBox1, tagBox2, tagBox3, tagBox4, tagBox5;
     RecyclerView rv_otherDesign, rv_sameDepth, rv_othersSketch;
     boolean descript = true;//자세한 설명 접혀있는지
+    private ServerInterface serverInterface;
 
 
     String articleName = "";//디자인명
@@ -53,13 +65,15 @@ public class ViewDetail extends AppCompatActivity {
     String designSummary = ""; // 디자인 요약
     String designDescription = ""; // 디자인 설명
     String fullTextFilePath = ""; // 원문 경로
+
     ArrayList<SearchDetailData> ImagePaths = new ArrayList<>(); // 다른 도면 이미지들
     ArrayList<SearchDetailData> sameDepthDesigns = new ArrayList<>(); // 같은 형태분류 이미지들
     ArrayList<SearchDetailData> otherSketches = new ArrayList<>(); // 다른 사람의 스케치 이미지들
+
     private SearchDetail_Adapter otherDesignAdapter;
     private SearchDetail_Adapter sameDepthDesignAdapter;
     private SearchDetail_Adapter sketchDesignAdapter;
-    private LinearLayoutManager linearLayoutManager;
+    private LinearLayoutManager linearLayoutManager1,linearLayoutManager2,linearLayoutManager3;
 
 
     @Override
@@ -107,19 +121,23 @@ public class ViewDetail extends AppCompatActivity {
         try {
             country = intent.getExtras().getString("country");
             registrationNum = intent.getExtras().getString("registrationNum");
-            depth1 = intent.getExtras().getString("depth1",null);
-            depth2 = intent.getExtras().getString("depth2",null);
-            depth3 = intent.getExtras().getString("depth3",null);
-            depth4 = intent.getExtras().getString("depth4",null);
-            depth5 = intent.getExtras().getString("depth5",null);
+            depth1 = intent.getExtras().getInt("depth1",0);
+            depth2 = intent.getExtras().getInt("depth2",0);
+            depth3 = intent.getExtras().getInt("depth3",0);
+            depth4 = intent.getExtras().getInt("depth4",0);
+            depth5 = intent.getExtras().getInt("depth5",0);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        linearLayoutManager = new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false);
-        rv_otherDesign.setLayoutManager(linearLayoutManager);
-        rv_sameDepth.setLayoutManager(linearLayoutManager);
-        rv_othersSketch.setLayoutManager(linearLayoutManager);
+        linearLayoutManager1 = new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false);
+        linearLayoutManager2 = new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false);
+        linearLayoutManager3 = new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false);
+
+        rv_otherDesign.setLayoutManager(linearLayoutManager1);
+        rv_sameDepth.setLayoutManager(linearLayoutManager2);
+        rv_othersSketch.setLayoutManager(linearLayoutManager3);
+
         otherDesignAdapter = new SearchDetail_Adapter(ImagePaths,this);
         sameDepthDesignAdapter = new SearchDetail_Adapter(sameDepthDesigns,this);
         sketchDesignAdapter = new SearchDetail_Adapter(otherSketches,this);
@@ -153,12 +171,15 @@ public class ViewDetail extends AppCompatActivity {
         //인텐트에서 국가와 출원번호 추출
 
         ArrayList<String> depths = new ArrayList<>();
-        depths.add(depth1);
+        DeskInfo deskInfo = new DeskInfo();
+        String[] desk_dep1_searchForm = deskInfo.desk_dep1_searchForm.split(",");
+        depths.add("#"+desk_dep1_searchForm[depth1]);
+        depths.add("#"+desk_dep1_searchForm[depth2]);
+        depths.add("#"+desk_dep1_searchForm[depth3]);
+        depths.add("#"+desk_dep1_searchForm[depth4]);
+        depths.add("#"+desk_dep1_searchForm[depth5]);
 //        System.out.println(depth1);
-        depths.add(depth2);
-        depths.add(depth3);
-        depths.add(depth4);
-        depths.add(depth5);
+
 
         int id = 0;
         for (String depth : depths) {
@@ -334,11 +355,83 @@ public class ViewDetail extends AppCompatActivity {
                 });
                 //pdf 보기
 
+                //레트로핏으로 서버에 스케치, 동일 디자인 요청
+                Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl(ServerInterface.BASE_URL)
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
+                serverInterface = retrofit.create(ServerInterface.class);
+                serverInterface.signUp("desk",sendYear)
+                        .enqueue(new Callback<MainPageDesignResult>() {
+                            @Override
+                            public void onResponse(Call<MainPageDesignResult> call, Response<MainPageDesignResult> response) {
+                                MainPageDesignResult result = response.body();
+
+                                String design = result.getDesign1();
+                                String url1 = result.getUrl1();
+                                String tag_1_1 = result.getTag1_1();
+                                String tag_1_2 = result.getTag1_2();
+                                String tag_1_3 = result.getTag1_3();
+                                Log.e("tag",tag_1_1);
+                                Log.e("tag",tag_1_2);
+                                Log.e("tag",tag_1_3);
+
+                                Design_Data design_data = new Design_Data(design,url1,tag_1_1,tag_1_2,tag_1_3);
+                                re_arrayList.add(design_data);
+
+                                String design2 = result.getDesign2();
+                                String url2 = result.getUrl2();
+                                String tag_2_1 = result.getTag2_1();
+                                String tag_2_2 = result.getTag2_2();
+                                String tag_2_3 = result.getTag2_3();
+
+                                Design_Data design_data2 = new Design_Data(design2,url2,tag_2_1,tag_2_2,tag_2_3);
+                                re_arrayList.add(design_data2);
+
+                                String design3 = result.getDesign3();
+                                String url3 = result.getUrl3();
+                                String tag_3_1 = result.getTag3_1();
+                                String tag_3_2 = result.getTag3_2();
+                                String tag_3_3 = result.getTag3_3();
+
+                                Design_Data design_data3 = new Design_Data(design3,url3,tag_3_1,tag_3_2,tag_3_3);
+                                re_arrayList.add(design_data3);
+
+                                String design4 = result.getDesign4();
+                                String url4 = result.getUrl4();
+                                String tag_4_1 = result.getTag4_1();
+                                String tag_4_2 = result.getTag4_2();
+                                String tag_4_3 = result.getTag4_3();
+
+                                Design_Data design_data4 = new Design_Data(design4,url4,tag_4_1,tag_4_2,tag_4_3);
+                                re_arrayList.add(design_data4);
+
+                                String design5 = result.getDesign5();
+                                String url5 = result.getUrl5();
+                                String tag_5_1 = result.getTag5_1();
+                                String tag_5_2 = result.getTag5_2();
+                                String tag_5_3 = result.getTag5_3();
+
+                                Design_Data design_data5 = new Design_Data(design5,url5,tag_5_1,tag_5_2,tag_5_3);
+                                re_arrayList.add(design_data5);
+
+                                designAdapter.notifyDataSetChanged();
+
+
+                            }
+
+                            @Override
+                            public void onFailure(Call<MainPageDesignResult> call, Throwable t) {
+                                Log.e("networkError",t.toString());
+                            }
+                        });
+
+
                 btn_sketch.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent();
-                        //TODO 인텐트 내용 채워줘야함 ( 현재 이미지 선택 후 함께 전송 )
+                        //TODO 인텐트 내용 채워줘야함 ( 현재 이미지 선택 후 스케치 페이지로 함께 전송 )
                         startActivity(intent);
                     }
                 });

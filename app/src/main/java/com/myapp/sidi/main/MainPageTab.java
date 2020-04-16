@@ -150,11 +150,11 @@ public class MainPageTab extends AppCompatActivity {
                 Intent intent = new Intent(MainPageTab.this, ViewDetail.class);
                 intent.putExtra("country","kor");
                 intent.putExtra("registrationNum","3020180027259");
-                intent.putExtra("depth1","형태1");
-                intent.putExtra("depth2","형태2");
-//                intent.putExtra("depth3","형태3");
+                intent.putExtra("depth1",1);
+                intent.putExtra("depth2",2);
+                intent.putExtra("depth3",3);
 //                intent.putExtra("depth4","형태4");
-                intent.putExtra("depth5","형태5");
+                intent.putExtra("depth5",5);
                 startActivity(intent);
             }
         });

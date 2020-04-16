@@ -28,4 +28,7 @@ public interface ServerInterface {
                                @Query("dep_3")String dep_3,
                                @Query("dep_4")String dep_4,
                                @Query("dep_5")String dep_5);
+
+
+
 }

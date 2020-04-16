@@ -86,60 +86,57 @@
 
         <TextView
             android:id="@+id/detail_tag1"
-            android:layout_width="90dp"
+            android:layout_width="110dp"
             android:layout_height="25dp"
             android:layout_marginTop="10dp"
             android:text="#형태 태그"
+            android:textSize="10sp"
             app:layout_constraintBottom_toTopOf="@+id/detail_tag4"
             app:layout_constraintEnd_toStartOf="@+id/detail_tag2"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/detail_text_basicInfo"
-            tools:visibility="gone" />
+            app:layout_constraintTop_toBottomOf="@+id/detail_text_basicInfo" />
 
         <TextView
             android:id="@+id/detail_tag3"
-            android:layout_width="90dp"
+            android:layout_width="110dp"
             android:layout_height="25dp"
             android:text="#형태 태그"
+            android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="@+id/detail_tag2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/detail_tag2"
-            tools:visibility="gone" />
+            app:layout_constraintStart_toEndOf="@+id/detail_tag2" />
 
         <TextView
             android:id="@+id/detail_tag2"
-            android:layout_width="90dp"
+            android:layout_width="110dp"
             android:layout_height="25dp"
             android:text="#형태 태그"
+            android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="@+id/detail_tag1"
             app:layout_constraintEnd_toStartOf="@+id/detail_tag3"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/detail_tag1"
-            tools:visibility="gone" />
+            app:layout_constraintStart_toEndOf="@+id/detail_tag1" />
 
         <TextView
             android:id="@+id/detail_tag5"
-            android:layout_width="90dp"
+            android:layout_width="110dp"
             android:layout_height="25dp"
             android:text="#형태 태그"
+            android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="@+id/detail_tag4"
-            app:layout_constraintEnd_toStartOf="@+id/detail_tag3"
-            app:layout_constraintStart_toEndOf="@+id/detail_tag4"
-            tools:visibility="gone" />
+            app:layout_constraintStart_toStartOf="@+id/detail_tag2" />
 
         <TextView
             android:id="@+id/detail_tag4"
-            android:layout_width="90dp"
+            android:layout_width="110dp"
             android:layout_height="25dp"
             android:layout_marginTop="8dp"
             android:text="#형태 태그"
-            app:layout_constraintEnd_toStartOf="@+id/detail_tag5"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/detail_tag1"
-            tools:visibility="gone" />
+            android:textSize="10sp"
+            app:layout_constraintStart_toStartOf="@+id/detail_tag1"
+            app:layout_constraintTop_toBottomOf="@+id/detail_tag1" />
 
         <TextView
             android:id="@+id/detail_text_basicInfo"
