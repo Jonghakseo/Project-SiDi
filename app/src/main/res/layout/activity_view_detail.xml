@@ -21,7 +21,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginRight="10dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.526"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/detail_main_designView" />
 
@@ -68,7 +68,7 @@
             android:id="@+id/detail_title_basicInfo"
             android:layout_width="68dp"
             android:layout_height="21dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="10dp"
             android:text="상세정보"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@+id/detail_main_designView"
@@ -94,7 +94,8 @@
             app:layout_constraintEnd_toStartOf="@+id/detail_tag2"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/detail_text_basicInfo" />
+            app:layout_constraintTop_toBottomOf="@+id/detail_text_basicInfo"
+            tools:visibility="gone" />
 
         <TextView
             android:id="@+id/detail_tag3"
@@ -104,7 +105,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/detail_tag2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/detail_tag2" />
+            app:layout_constraintStart_toEndOf="@+id/detail_tag2"
+            tools:visibility="gone" />
 
         <TextView
             android:id="@+id/detail_tag2"
@@ -114,7 +116,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/detail_tag1"
             app:layout_constraintEnd_toStartOf="@+id/detail_tag3"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/detail_tag1" />
+            app:layout_constraintStart_toEndOf="@+id/detail_tag1"
+            tools:visibility="gone" />
 
         <TextView
             android:id="@+id/detail_tag5"
@@ -123,7 +126,8 @@
             android:text="#형태 태그"
             app:layout_constraintBottom_toBottomOf="@+id/detail_tag4"
             app:layout_constraintEnd_toStartOf="@+id/detail_tag3"
-            app:layout_constraintStart_toEndOf="@+id/detail_tag4" />
+            app:layout_constraintStart_toEndOf="@+id/detail_tag4"
+            tools:visibility="gone" />
 
         <TextView
             android:id="@+id/detail_tag4"
@@ -134,12 +138,14 @@
             app:layout_constraintEnd_toStartOf="@+id/detail_tag5"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/detail_tag1" />
+            app:layout_constraintTop_toBottomOf="@+id/detail_tag1"
+            tools:visibility="gone" />
 
         <TextView
             android:id="@+id/detail_text_basicInfo"
-            android:layout_width="326dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             app:layout_constraintStart_toStartOf="@+id/detail_title_basicInfo"
             app:layout_constraintTop_toBottomOf="@+id/detail_title_basicInfo" />
 
@@ -167,5 +173,47 @@
             app:layout_constraintBottom_toBottomOf="@+id/detail_title_description"
             app:layout_constraintEnd_toEndOf="@+id/detail_btn_sketch"
             app:layout_constraintTop_toTopOf="@+id/detail_title_description" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/detail_RV_sameDepth"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_margin="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.473"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/detail_title_sameDepth">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/detail_title_sameDepth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="동일 형태 디자인"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/detail_title_description"
+            app:layout_constraintTop_toBottomOf="@id/detail_text_description" />
+
+        <TextView
+            android:id="@+id/detail_title_othersSketch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="다른 유저의 스케치"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/detail_main_designView"
+            app:layout_constraintTop_toBottomOf="@+id/detail_RV_sameDepth" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/detail_RV_othersSketch"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_margin="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/detail_title_othersSketch" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

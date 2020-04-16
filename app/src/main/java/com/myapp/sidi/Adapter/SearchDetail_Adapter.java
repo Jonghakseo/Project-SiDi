@@ -42,7 +42,7 @@ public class SearchDetail_Adapter extends RecyclerView.Adapter<SearchDetail_Adap
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
         Glide.with(holder.itemView).load(arrayList.get(position).getDesign()).into(holder.iv_design);
-        holder.tv_designId.setText(String.valueOf(arrayList.get(position).getDesignId()));
+        holder.tv_designId.setText("도면 "+String.valueOf(arrayList.get(position).getDesignId()));
         holder.itemView.setTag(position);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

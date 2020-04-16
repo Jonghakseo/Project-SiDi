@@ -4,19 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.Xml;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.myapp.sidi.Adapter.Design_Adapter;
 import com.myapp.sidi.Adapter.SearchDetail_Adapter;
 import com.myapp.sidi.DTO.SearchDetailData;
 import com.myapp.sidi.R;
@@ -37,10 +36,11 @@ public class ViewDetail extends AppCompatActivity {
     private Intent intent;
     private String country; //해당 디자인 출원 국가
     private String registrationNum; //검색 결과로 받은 출원번호
+    private String depth1,depth2,depth3,depth4,depth5;
     Button btn_fullText, btn_scrap, btn_sketch, btn_moreDescription;
     ImageView main_design;
     TextView text_designNum, text_basicInfo, text_description, tagBox1, tagBox2, tagBox3, tagBox4, tagBox5;
-    RecyclerView rv_others;
+    RecyclerView rv_otherDesign, rv_sameDepth, rv_othersSketch;
     boolean descript = true;//자세한 설명 접혀있는지
 
 
@@ -53,8 +53,12 @@ public class ViewDetail extends AppCompatActivity {
     String designSummary = ""; // 디자인 요약
     String designDescription = ""; // 디자인 설명
     String fullTextFilePath = ""; // 원문 경로
-    ArrayList<SearchDetailData> ImagePaths = new ArrayList<>(); //이미지들
-    private SearchDetail_Adapter designAdapter;
+    ArrayList<SearchDetailData> ImagePaths = new ArrayList<>(); // 다른 도면 이미지들
+    ArrayList<SearchDetailData> sameDepthDesigns = new ArrayList<>(); // 같은 형태분류 이미지들
+    ArrayList<SearchDetailData> otherSketches = new ArrayList<>(); // 다른 사람의 스케치 이미지들
+    private SearchDetail_Adapter otherDesignAdapter;
+    private SearchDetail_Adapter sameDepthDesignAdapter;
+    private SearchDetail_Adapter sketchDesignAdapter;
     private LinearLayoutManager linearLayoutManager;
 
 
@@ -69,36 +73,101 @@ public class ViewDetail extends AppCompatActivity {
         btn_moreDescription = findViewById(R.id.detail_btn_moreDescription);
 
         main_design = findViewById(R.id.detail_main_designView);
+
         text_basicInfo = findViewById(R.id.detail_text_basicInfo);
         text_description = findViewById(R.id.detail_text_description);
         text_designNum = findViewById(R.id.detail_text_designNum);
-        rv_others = findViewById(R.id.detail_RV_otherDesigns);
+
+        rv_otherDesign = findViewById(R.id.detail_RV_otherDesigns);
+        rv_sameDepth = findViewById(R.id.detail_RV_sameDepth);
+        rv_othersSketch = findViewById(R.id.detail_RV_othersSketch);
+
         tagBox1 = findViewById(R.id.detail_tag1);
         tagBox2 = findViewById(R.id.detail_tag2);
         tagBox3 = findViewById(R.id.detail_tag3);
         tagBox4 = findViewById(R.id.detail_tag4);
         tagBox5 = findViewById(R.id.detail_tag5);
 
+        tagBox1.setVisibility(View.GONE);
+        tagBox2.setVisibility(View.GONE);
+        tagBox3.setVisibility(View.GONE);
+        tagBox4.setVisibility(View.GONE);
+        tagBox5.setVisibility(View.GONE);
+
+        ArrayList<TextView> tagBoxes = new ArrayList<>();
+        tagBoxes.add(tagBox1);
+        tagBoxes.add(tagBox2);
+        tagBoxes.add(tagBox3);
+        tagBoxes.add(tagBox4);
+        tagBoxes.add(tagBox5);
+
+
+
+        intent = getIntent();
+        try {
+            country = intent.getExtras().getString("country");
+            registrationNum = intent.getExtras().getString("registrationNum");
+            depth1 = intent.getExtras().getString("depth1",null);
+            depth2 = intent.getExtras().getString("depth2",null);
+            depth3 = intent.getExtras().getString("depth3",null);
+            depth4 = intent.getExtras().getString("depth4",null);
+            depth5 = intent.getExtras().getString("depth5",null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         linearLayoutManager = new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false);
-        rv_others.setLayoutManager(linearLayoutManager);
-        designAdapter = new SearchDetail_Adapter(ImagePaths,this);
-        designAdapter.setOnItemClickListener(new SearchDetail_Adapter.OnItemClickListener() {
+        rv_otherDesign.setLayoutManager(linearLayoutManager);
+        rv_sameDepth.setLayoutManager(linearLayoutManager);
+        rv_othersSketch.setLayoutManager(linearLayoutManager);
+        otherDesignAdapter = new SearchDetail_Adapter(ImagePaths,this);
+        sameDepthDesignAdapter = new SearchDetail_Adapter(sameDepthDesigns,this);
+        sketchDesignAdapter = new SearchDetail_Adapter(otherSketches,this);
+
+        otherDesignAdapter.setOnItemClickListener(new SearchDetail_Adapter.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
                 System.out.println(position);
                 changeMainDesign(position);
             }
         });
-        rv_others.setAdapter(designAdapter);
+        sameDepthDesignAdapter.setOnItemClickListener(new SearchDetail_Adapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+                System.out.println(position);
+                //TODO 동일 디자인 검색 가능한 인텐트
+            }
+        });
+        sketchDesignAdapter.setOnItemClickListener(new SearchDetail_Adapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+                System.out.println(position);
+                //TODO 스케치 조회 화면으로 넘기는 인텐트
+            }
+        });
+        rv_otherDesign.setAdapter(otherDesignAdapter);
+        rv_sameDepth.setAdapter(sameDepthDesignAdapter);
+        rv_othersSketch.setAdapter(sketchDesignAdapter);
 
-        intent = getIntent();
-        try {
-            country = intent.getExtras().getString("country");
-            registrationNum = intent.getExtras().getString("registrationNum");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
         //인텐트에서 국가와 출원번호 추출
+
+        ArrayList<String> depths = new ArrayList<>();
+        depths.add(depth1);
+//        System.out.println(depth1);
+        depths.add(depth2);
+        depths.add(depth3);
+        depths.add(depth4);
+        depths.add(depth5);
+
+        int id = 0;
+        for (String depth : depths) {
+            if (depth!=null){
+                tagBoxes.get(id).setText(depth);
+                tagBoxes.get(id).setVisibility(View.VISIBLE);
+                id++;
+            }
+        }
 
 //        search(searchMode);
         SearchAsync searchAsync = new SearchAsync();
@@ -247,8 +316,42 @@ public class ViewDetail extends AppCompatActivity {
                 sb.append("디자인 요약 : "+designSummary);
                 text_basicInfo.setText(sb);
                 text_description.setText(designDescription);
+                //pdf 보기
+                btn_fullText.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent();
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.setAction(Intent.ACTION_VIEW);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.setDataAndType(Uri.parse(fullTextFilePath), "application/pdf");
+                        try {
+                            startActivity(intent);
+                        }catch (ActivityNotFoundException e){
+                            e.printStackTrace();
+                        }
+                    }
+                });
+                //pdf 보기
 
-                designAdapter.notifyDataSetChanged();//변경 반영
+                btn_sketch.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent();
+                        //TODO 인텐트 내용 채워줘야함 ( 현재 이미지 선택 후 함께 전송 )
+                        startActivity(intent);
+                    }
+                });
+                btn_scrap.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent();
+                        //TODO 인텐트 내용 채워줘야함 ( 현재 출원번호 데이터 정보 스크랩해서 마이페이지로 보냄 )
+                        startActivity(intent);
+                    }
+                });
+
+                otherDesignAdapter.notifyDataSetChanged();//변경 반영
             }
 
             super.onPostExecute(aVoid);
@@ -257,7 +360,7 @@ public class ViewDetail extends AppCompatActivity {
 
     private void changeMainDesign(int position){
         Glide.with(ViewDetail.this).load(ImagePaths.get(position).getDesign()).into(main_design);
-        text_designNum.setText(""+ImagePaths.get(position).getDesignId()+"번");
+        text_designNum.setText("도면 "+ImagePaths.get(position).getDesignId()+"");
     }
 
 }
