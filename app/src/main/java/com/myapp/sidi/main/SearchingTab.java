@@ -24,6 +24,7 @@ import com.myapp.sidi.Category.ChairInfo;
 import com.myapp.sidi.Category.DeskInfo;
 import com.myapp.sidi.Category.LampDispatchInfo;
 import com.myapp.sidi.Category.LampHangInfo;
+import com.myapp.sidi.Category.NameToNumConverter;
 import com.myapp.sidi.Category.SofaInfo;
 import com.myapp.sidi.Category.TableInfo;
 import com.myapp.sidi.Interface.ServerInterface;
@@ -62,6 +63,7 @@ public class SearchingTab extends AppCompatActivity {
     dep_3_ChoiceResult,dep_4_ChoiceResult,dep_5_ChoiceResult;
     private StringBuilder nationStringBuilder,dep_1_StringBuilder,dep_2_StringBuilder,dep_3_StringBuilder,dep_4_StringBuilder,dep_5_StringBuilder;
     private TextView tv_middleYear,tv_FurnitureFormExplain;
+    private NameToNumConverter converter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -209,6 +211,7 @@ public class SearchingTab extends AppCompatActivity {
             btn_FurnitureForm.setVisibility(View.GONE);
             tv_FurnitureFormExplain.setVisibility(View.GONE);
         }
+        converter = new NameToNumConverter();
 
     }
 
@@ -715,7 +718,7 @@ public class SearchingTab extends AppCompatActivity {
                         cb_nationUS.setChecked(false);
                         cb_nationJp.setChecked(false);
                         cb_nationOther.setChecked(false);
-                        nationChoiceResult = "ALL";
+                        nationChoiceResult = "1,2,3,4";
                     }else if (compoundButton.isChecked()==false){
                         cb_nationKor.setVisibility(View.VISIBLE);
                         cb_nationUS.setVisibility(View.VISIBLE);
@@ -759,25 +762,30 @@ public class SearchingTab extends AppCompatActivity {
                 }
 
                 if (tmpNationArr.size()!=0){
-                    nationStringBuilder = new StringBuilder(tmpNationArr.get(0).toString());
+                    String firstData = nationToNumConverter(tmpNationArr.get(0).toString());
+                    nationStringBuilder = new StringBuilder(firstData);
                     for (int i=1; i<tmpNationArr.size(); i++){
                         if(tmpNationArr.get(i)!=null){
-                            nationStringBuilder.append(","+tmpNationArr.get(i).toString());
+                            String temp =nationToNumConverter(tmpNationArr.get(i).toString());
+                            nationStringBuilder.append(","+temp);
                         }
                     }
                     nationChoiceResult = nationStringBuilder.toString();
                 }
                 Log.e("nationChoiceResult",nationChoiceResult);
 
+
                 if (dep_1_ResultArr.size()!=0){
+                    nameToNumConverter_dep1(furnitureChoiceResult);
                     dep_1_ChoiceResult="";
                     dep_1_ChoiceResult = choiceStringBuilder(dep_1_ResultArr);
-
                 }else {
                     dep_1_ChoiceResult="ALL";
                 }
                 Log.e("dep_1_ChoiceResult", dep_1_ChoiceResult);
+
                 if (dep_2_ResultArr.size()!=0){
+                    nameToNumConverter_dep2(furnitureChoiceResult);
                     dep_2_ChoiceResult="";
                     dep_2_ChoiceResult = choiceStringBuilder(dep_2_ResultArr);
 
@@ -786,6 +794,7 @@ public class SearchingTab extends AppCompatActivity {
                 }
                 Log.e("dep_2_ChoiceResult", dep_2_ChoiceResult);
                 if (dep_3_ResultArr.size()!=0){
+                    nameToNumConverter_dep3(furnitureChoiceResult);
                     dep_3_ChoiceResult="";
                     dep_3_ChoiceResult = choiceStringBuilder(dep_3_ResultArr);
 
@@ -794,6 +803,7 @@ public class SearchingTab extends AppCompatActivity {
                 }
                 Log.e("dep_3_ChoiceResult", dep_3_ChoiceResult);
                 if (dep_4_ResultArr.size()!=0){
+                    nameToNumConverter_dep4(furnitureChoiceResult);
                     dep_4_ChoiceResult="";
                     dep_4_ChoiceResult = choiceStringBuilder(dep_4_ResultArr);
 
@@ -802,6 +812,7 @@ public class SearchingTab extends AppCompatActivity {
                 }
                 Log.e("dep_4_ChoiceResult", dep_4_ChoiceResult);
                 if (dep_5_ResultArr.size()!=0){
+                    nameToNumConverter_dep5(furnitureChoiceResult);
                     dep_5_ChoiceResult="";
                     dep_5_ChoiceResult = choiceStringBuilder(dep_5_ResultArr);
 
@@ -811,15 +822,15 @@ public class SearchingTab extends AppCompatActivity {
                 Log.e("dep_5_ChoiceResult", dep_5_ChoiceResult);
 
                 Intent intent = new Intent(SearchingTab.this, SearchResult.class);
-                intent.putExtra("furnitureChoiceResult","desk");
-                intent.putExtra("startTimeChoiceResult","1999");
-                intent.putExtra("endTimeChoiceResult","2010");
-                intent.putExtra("nationChoiceResult","1,2,3,4");
-                intent.putExtra("dep_1_ChoiceResult","1");
-                intent.putExtra("dep_2_ChoiceResult","1,2,3,4,5,6,7,8,9");
-                intent.putExtra("dep_3_ChoiceResult","1,2,3");
-                intent.putExtra("dep_4_ChoiceResult","1,2,3,4");
-                intent.putExtra("dep_5_ChoiceResult","1,2,3");
+                intent.putExtra("furnitureChoiceResult",furnitureChoiceResult);
+                intent.putExtra("startTimeChoiceResult",startTimeChoiceResult);
+                intent.putExtra("endTimeChoiceResult",endTimeChoiceResult);
+                intent.putExtra("nationChoiceResult",nationChoiceResult);
+                intent.putExtra("dep_1_ChoiceResult",dep_1_ChoiceResult);
+                intent.putExtra("dep_2_ChoiceResult",dep_2_ChoiceResult);
+                intent.putExtra("dep_3_ChoiceResult",dep_3_ChoiceResult);
+                intent.putExtra("dep_4_ChoiceResult",dep_4_ChoiceResult);
+                intent.putExtra("dep_5_ChoiceResult",dep_5_ChoiceResult);
                 startActivity(intent);
 
 
@@ -938,10 +949,254 @@ public class SearchingTab extends AppCompatActivity {
 
 
     }
+
+    public void nameToNumConverter_dep1(String furnitureChoiceResult){
+        switch (furnitureChoiceResult) {
+            case "책상":
+                for (int i = 0; i < dep_1_ResultArr.size(); i++) {
+                    String tmp = converter.deskConverter_dep_1(dep_1_ResultArr.get(i).toString());
+                    dep_1_ResultArr.remove(i);
+                    dep_1_ResultArr.add(i, tmp);
+                }
+                break;
+            case "의자":
+                for (int i = 0; i < dep_1_ResultArr.size(); i++) {
+                    String tmp = converter.chairConverter_dep_1(dep_1_ResultArr.get(i).toString());
+                    dep_1_ResultArr.remove(i);
+                    dep_1_ResultArr.add(i, tmp);
+
+                }
+                break;
+            case "테이블":
+                for (int i = 0; i < dep_1_ResultArr.size(); i++) {
+                    String tmp = converter.tableConverter_dep_1(dep_1_ResultArr.get(i).toString());
+                    dep_1_ResultArr.remove(i);
+                    dep_1_ResultArr.add(i, tmp);
+
+                }
+                break;
+            case "소파":
+                for (int i = 0; i < dep_1_ResultArr.size(); i++) {
+                    String tmp = converter.sofaConverter_dep_1(dep_1_ResultArr.get(i).toString());
+                    dep_1_ResultArr.remove(i);
+                    dep_1_ResultArr.add(i, tmp);
+                    break;
+                }
+            case "전등(벽에 부착식)":
+                for (int i = 0; i < dep_1_ResultArr.size(); i++) {
+                    String tmp = converter.lampDispatchConverter_dep_1(dep_1_ResultArr.get(i).toString());
+                    dep_1_ResultArr.remove(i);
+                    dep_1_ResultArr.add(i, tmp);
+
+                }
+                break;
+            case "전등(벽에 매다는 식)":
+                for (int i = 0; i < dep_1_ResultArr.size(); i++) {
+                    String tmp = converter.lampHangConverter_dep_1(dep_1_ResultArr.get(i).toString());
+                    dep_1_ResultArr.remove(i);
+                    dep_1_ResultArr.add(i, tmp);
+
+                }
+                break;
+        }
+
+    }
+
+    public void nameToNumConverter_dep2(String furnitureChoiceResult){
+        switch (furnitureChoiceResult) {
+            case "책상":
+                for (int i = 0; i < dep_2_ResultArr.size(); i++) {
+                    String tmp = converter.deskConverter_dep_2(dep_2_ResultArr.get(i).toString());
+                    dep_2_ResultArr.remove(i);
+                    dep_2_ResultArr.add(i, tmp);
+                }
+                break;
+            case "의자":
+                for (int i = 0; i < dep_2_ResultArr.size(); i++) {
+                    String tmp = converter.chairConverter_dep_2(dep_2_ResultArr.get(i).toString());
+                    dep_2_ResultArr.remove(i);
+                    dep_2_ResultArr.add(i, tmp);
+
+                }
+                break;
+            case "테이블":
+                for (int i = 0; i < dep_2_ResultArr.size(); i++) {
+                    String tmp = converter.tableConverter_dep_2(dep_2_ResultArr.get(i).toString());
+                    dep_2_ResultArr.remove(i);
+                    dep_2_ResultArr.add(i, tmp);
+
+                }
+                break;
+            case "소파":
+                for (int i = 0; i < dep_2_ResultArr.size(); i++) {
+                    String tmp = converter.sofaConverter_dep_2(dep_2_ResultArr.get(i).toString());
+                    dep_2_ResultArr.remove(i);
+                    dep_2_ResultArr.add(i, tmp);
+                    break;
+                }
+            case "전등(벽에 부착식)":
+                for (int i = 0; i < dep_2_ResultArr.size(); i++) {
+                    String tmp = converter.lampDispatchConverter_dep_2(dep_2_ResultArr.get(i).toString());
+                    dep_2_ResultArr.remove(i);
+                    dep_2_ResultArr.add(i, tmp);
+
+                }
+                break;
+            case "전등(벽에 매다는 식)":
+                for (int i = 0; i < dep_2_ResultArr.size(); i++) {
+                    String tmp = converter.lampHangConverter_dep_2(dep_2_ResultArr.get(i).toString());
+                    dep_2_ResultArr.remove(i);
+                    dep_2_ResultArr.add(i, tmp);
+
+                }
+                break;
+        }
+
+    }
+
+    public void nameToNumConverter_dep3(String furnitureChoiceResult){
+        switch (furnitureChoiceResult) {
+            case "책상":
+                for (int i = 0; i < dep_3_ResultArr.size(); i++) {
+                    String tmp = converter.deskConverter_dep_3(dep_3_ResultArr.get(i).toString());
+                    dep_3_ResultArr.remove(i);
+                    dep_3_ResultArr.add(i, tmp);
+                }
+                break;
+            case "의자":
+                for (int i = 0; i < dep_3_ResultArr.size(); i++) {
+                    String tmp = converter.chairConverter_dep_3(dep_3_ResultArr.get(i).toString());
+                    dep_3_ResultArr.remove(i);
+                    dep_3_ResultArr.add(i, tmp);
+
+                }
+                break;
+            case "테이블":
+                for (int i = 0; i < dep_3_ResultArr.size(); i++) {
+                    String tmp = converter.tableConverter_dep_3(dep_3_ResultArr.get(i).toString());
+                    dep_3_ResultArr.remove(i);
+                    dep_3_ResultArr.add(i, tmp);
+
+                }
+                break;
+            case "소파":
+                for (int i = 0; i < dep_3_ResultArr.size(); i++) {
+                    String tmp = converter.sofaConverter_dep_3(dep_3_ResultArr.get(i).toString());
+                    dep_3_ResultArr.remove(i);
+                    dep_3_ResultArr.add(i, tmp);
+
+                }
+                break;
+            case "전등(벽에 부착식)":
+                for (int i = 0; i < dep_3_ResultArr.size(); i++) {
+                    String tmp = converter.lampDispatchConverter_dep_3(dep_3_ResultArr.get(i).toString());
+                    dep_3_ResultArr.remove(i);
+                    dep_3_ResultArr.add(i, tmp);
+
+                }
+                break;
+            case "전등(벽에 매다는 식)":
+                for (int i = 0; i < dep_3_ResultArr.size(); i++) {
+                    String tmp = converter.lampHangConverter_dep_3(dep_3_ResultArr.get(i).toString());
+                    dep_3_ResultArr.remove(i);
+                    dep_3_ResultArr.add(i, tmp);
+
+                }
+                break;
+        }
+
+    }
+
+    public void nameToNumConverter_dep4(String furnitureChoiceResult){
+        switch (furnitureChoiceResult) {
+            case "책상":
+                for (int i = 0; i < dep_4_ResultArr.size(); i++) {
+                    String tmp = converter.deskConverter_dep_4(dep_4_ResultArr.get(i).toString());
+                    dep_4_ResultArr.remove(i);
+                    dep_4_ResultArr.add(i, tmp);
+                }
+                break;
+            case "의자":
+                for (int i = 0; i < dep_4_ResultArr.size(); i++) {
+                    String tmp = converter.chairConverter_dep_4(dep_4_ResultArr.get(i).toString());
+                    dep_4_ResultArr.remove(i);
+                    dep_4_ResultArr.add(i, tmp);
+
+                }
+                break;
+            case "테이블":
+                for (int i = 0; i < dep_4_ResultArr.size(); i++) {
+                    String tmp = converter.tableConverter_dep_4(dep_4_ResultArr.get(i).toString());
+                    dep_4_ResultArr.remove(i);
+                    dep_4_ResultArr.add(i, tmp);
+
+                }
+                break;
+            case "소파":
+                for (int i = 0; i < dep_4_ResultArr.size(); i++) {
+                    String tmp = converter.sofaConverter_dep_4(dep_4_ResultArr.get(i).toString());
+                    dep_4_ResultArr.remove(i);
+                    dep_4_ResultArr.add(i, tmp);
+
+                }
+                break;
+            case "전등(벽에 부착식)":
+                for (int i = 0; i < dep_4_ResultArr.size(); i++) {
+                    String tmp = converter.lampDispatchConverter_dep_4(dep_4_ResultArr.get(i).toString());
+                    dep_4_ResultArr.remove(i);
+                    dep_4_ResultArr.add(i, tmp);
+
+                }
+                break;
+            case "전등(벽에 매다는 식)":
+                for (int i = 0; i < dep_4_ResultArr.size(); i++) {
+                    String tmp = converter.lampHangConverter_dep_4(dep_4_ResultArr.get(i).toString());
+                    dep_4_ResultArr.remove(i);
+                    dep_4_ResultArr.add(i, tmp);
+
+                }
+                break;
+        }
+
+    }
+
+    public void nameToNumConverter_dep5(String furnitureChoiceResult){
+        switch (furnitureChoiceResult) {
+            case "책상":
+                for (int i = 0; i < dep_5_ResultArr.size(); i++) {
+                    String tmp = converter.deskConverter_dep_5(dep_5_ResultArr.get(i).toString());
+                    dep_5_ResultArr.remove(i);
+                    dep_5_ResultArr.add(i, tmp);
+                }
+                break;
+            case "테이블":
+                for (int i = 0; i < dep_5_ResultArr.size(); i++) {
+                    String tmp = converter.tableConverter_dep_5(dep_5_ResultArr.get(i).toString());
+                    dep_5_ResultArr.remove(i);
+                    dep_5_ResultArr.add(i, tmp);
+
+                }
+                break;
+            case "소파":
+                for (int i = 0; i < dep_5_ResultArr.size(); i++) {
+                    String tmp = converter.sofaConverter_dep_5(dep_5_ResultArr.get(i).toString());
+                    dep_5_ResultArr.remove(i);
+                    dep_5_ResultArr.add(i, tmp);
+
+                }
+                break;
+        }
+
+    }
+
     public String choiceStringBuilder(ArrayList inputArr){
-       StringBuilder stringBuilder = new StringBuilder(inputArr.get(0).toString());
+
+
+        String firstData = inputArr.get(0).toString();
+       StringBuilder stringBuilder = new StringBuilder(firstData);
        for (int i = 1; i< inputArr.size(); i++){
         if(inputArr.get(i)!=null){
+
             stringBuilder.append(","+inputArr.get(i).toString());
         }
     }
@@ -949,6 +1204,27 @@ public class SearchingTab extends AppCompatActivity {
 
 
 }
+
+    public String nationToNumConverter(String nationName){
+        String result="";
+        switch (nationName){
+            case "한국":
+                result = "1";
+                break;
+            case "미국":
+                result = "2";
+                break;
+            case "일본":
+                result = "3";
+                break;
+            case "유럽 및 기타":
+                result = "4";
+                break;
+            default:
+                break;
+        }
+     return result;
+    }
 
 
     public void checkBoxDataInputArr(final CheckBox checkBox, final ArrayList tmpArrayList, final ArrayList ResultArrayList){
@@ -962,7 +1238,7 @@ public class SearchingTab extends AppCompatActivity {
                 public void run() {
 
                 }
-            },500);
+            },1000);
 
             String data = checkBox.getText().toString();
             if (compoundButton.isChecked()==true){
@@ -970,6 +1246,7 @@ public class SearchingTab extends AppCompatActivity {
                 tmpArrayList.add(data);
                 for(int i = 0; i< tmpArrayList.size(); i++){
                     if (!ResultArrayList.contains(tmpArrayList.get(i))){
+
                         ResultArrayList.add(tmpArrayList.get(i));
                     }
                 }

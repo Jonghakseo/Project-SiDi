@@ -53,24 +53,30 @@ public class SearchResult extends AppCompatActivity {
 
         Intent intent = getIntent();
 //        furnitureChoiceResult = intent.getExtras().getString("furnitureChoiceResult");
-//        startTimeChoiceResult = intent.getExtras().getString("startTimeChoiceResult");
-//        endTimeChoiceResult = intent.getExtras().getString("endTimeChoiceResult");
-//        nationChoiceResult = intent.getExtras().getString("nationChoiceResult");
-//        dep_1_ChoiceResult = intent.getExtras().getString("dep_1_ChoiceResult");
-//        dep_2_ChoiceResult = intent.getExtras().getString("dep_2_ChoiceResult");
-//        dep_3_ChoiceResult = intent.getExtras().getString("dep_3_ChoiceResult");
-//        dep_4_ChoiceResult = intent.getExtras().getString("dep_4_ChoiceResult");
-//        dep_5_ChoiceResult = intent.getExtras().getString("dep_5_ChoiceResult");
-
         furnitureChoiceResult = "desk";
-        startTimeChoiceResult = "1999";
-        endTimeChoiceResult = "2010";
-        nationChoiceResult = 1+","+2+","+3+","+"4";
-        dep_1_ChoiceResult = "1";
-        dep_2_ChoiceResult = "1"+","+"2"+","+"3"+","+"4"+","+"5"+","+"6"+","+"7"+","+"8"+","+"9";
-        dep_3_ChoiceResult = "1"+","+"2"+","+"3";
-        dep_4_ChoiceResult = "1"+","+"2"+","+"3"+","+"4";
-        dep_5_ChoiceResult = "1"+","+"2"+","+"3";
+        startTimeChoiceResult = intent.getExtras().getString("startTimeChoiceResult");
+        endTimeChoiceResult = intent.getExtras().getString("endTimeChoiceResult");
+        nationChoiceResult = intent.getExtras().getString("nationChoiceResult");
+        dep_1_ChoiceResult = intent.getExtras().getString("dep_1_ChoiceResult");
+        dep_2_ChoiceResult = intent.getExtras().getString("dep_2_ChoiceResult");
+        dep_3_ChoiceResult = intent.getExtras().getString("dep_3_ChoiceResult");
+        dep_4_ChoiceResult = intent.getExtras().getString("dep_4_ChoiceResult");
+        dep_5_ChoiceResult = intent.getExtras().getString("dep_5_ChoiceResult");
+
+
+
+        Log.e("furnitureChoiceResult",furnitureChoiceResult);
+        Log.e("startTimeChoiceResult",furnitureChoiceResult);
+        Log.e("endTimeChoiceResult",endTimeChoiceResult);
+        Log.e("nationChoiceResult",nationChoiceResult);
+        Log.e("dep_1_ChoiceResult",dep_1_ChoiceResult);
+        Log.e("dep_2_ChoiceResult",dep_2_ChoiceResult);
+        Log.e("dep_3_ChoiceResult",dep_3_ChoiceResult);
+        Log.e("dep_4_ChoiceResult",dep_4_ChoiceResult);
+        Log.e("dep_5_ChoiceResult",dep_5_ChoiceResult);
+
+
+
 
 
         gridLayoutManager = new GridLayoutManager(this,3);
@@ -79,6 +85,8 @@ public class SearchResult extends AppCompatActivity {
         searchResultAdapter = new SearchResult_Adapter(re_arrayList,this);
         recyclerView.setAdapter(searchResultAdapter);
 
+
+        //잠시 주석처리
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();

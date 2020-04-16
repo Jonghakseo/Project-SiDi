@@ -47,7 +47,6 @@ public class MainPageTab extends AppCompatActivity {
     private int YEAR_3_CODE = 0;
     private int YEAR_4_CODE = 0;
     private int YEAR_5_CODE = 0;
-    private int YEAR_6_CODE = 0;
     private ArrayList<Design_Data> re_arrayList;
     private Design_Adapter designAdapter;
     private RecyclerView recyclerView;
@@ -71,7 +70,6 @@ public class MainPageTab extends AppCompatActivity {
         btn_year_3 = findViewById(R.id.btn_year_3);
         btn_year_4 = findViewById(R.id.btn_year_4);
         btn_year_5 = findViewById(R.id.btn_year_5);
-        btn_year_6 = findViewById(R.id.btn_year_6);
         tv_year = findViewById(R.id.tv_year);
         tv_category = findViewById(R.id.tv_category);
 
@@ -157,37 +155,32 @@ public class MainPageTab extends AppCompatActivity {
         sendYear = 1960;
         tv_year.setText("1960");
         if(YEAR_1_CODE==1){
-            sendYear=1960;
-            tv_year.setText("1960");
+            sendYear=1970;
+            tv_year.setText("1970");
             YEAR_1_CODE=0;
         }
         if(YEAR_2_CODE==1){
-            sendYear=1970;
-            tv_year.setText("1970");
+            sendYear=1980;
+            tv_year.setText("1980");
             YEAR_2_CODE=0;
         }
         if(YEAR_3_CODE==1){
-            sendYear=1980;
-            tv_year.setText("1980");
+            sendYear=1990;
+            tv_year.setText("1990");
             YEAR_3_CODE=0;
         }
         if(YEAR_4_CODE==1){
-            sendYear=1990;
-            tv_year.setText("1990");
+            sendYear=2000;
+            tv_year.setText("2000");
             YEAR_4_CODE=0;
         }
 
         if(YEAR_5_CODE==1){
-            sendYear=2000;
-            tv_year.setText("2000");
+            sendYear=2010;
+            tv_year.setText("2010");
             YEAR_5_CODE=0;
         }
 
-        if(YEAR_6_CODE==1){
-            sendYear=2010;
-            tv_year.setText("2010");
-            YEAR_6_CODE=0;
-        }
 
         //1.시대의 디자인 보여줄 리사이클러뷰
 
@@ -398,13 +391,6 @@ public class MainPageTab extends AppCompatActivity {
             }
         });
 
-        btn_year_6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                YEAR_6_CODE=1;
-                onResume();
-            }
-        });
 
 
 
