@@ -1,18 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="300dp"
+    android:layout_height="150dp"
+    android:background="@drawable/round_line"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <ImageView
-        android:id="@+id/iv_url"
-        android:layout_width="300dp"
-        android:layout_height="230dp"
-
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
     <TextView
         android:id="@+id/tv_designCode"
         android:layout_width="wrap_content"
@@ -25,15 +16,71 @@
 
 
     <TextView
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/tv_explain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="디자인권"
+        android:textStyle="bold"/>
+
+    <ImageView
+        android:id="@+id/iv_url"
+        android:layout_width="200dp"
+        android:layout_height="130dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_explain"/>
+
+    <TextView
+        android:id="@+id/tv_explain_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="------상세설명------"
+        android:textStyle="bold"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/tv_explain"
+        app:layout_constraintLeft_toRightOf="@id/iv_url"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_explain_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="형태 태그 순위"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@id/iv_url"
+        app:layout_constraintTop_toBottomOf="@id/tv_explain_2"/>
+
+    <TextView
+        android:id="@+id/tv_explain_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1."
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@id/iv_url"
+        app:layout_constraintTop_toBottomOf="@id/tv_explain_3"/>
+
+    <TextView
         android:id="@+id/tv_tag_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="#직사각형"
-        android:textColor="@android:color/black"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="@id/iv_url"
-        app:layout_constraintLeft_toLeftOf="@id/iv_url"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@id/tv_explain_4"
+        app:layout_constraintTop_toBottomOf="@id/tv_explain_3"
         android:layout_marginBottom="20dp"/>
+
+
+
+    <TextView
+        android:id="@+id/tv_explain_5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2."
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@id/iv_url"
+        app:layout_constraintTop_toBottomOf="@id/tv_explain_4"/>
 
 
     <TextView
@@ -41,11 +88,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="#직사각형"
-        android:textSize="20dp"
-        android:textColor="@android:color/black"
-        app:layout_constraintLeft_toRightOf="@id/tv_tag_1"
-        app:layout_constraintBottom_toBottomOf="@id/iv_url"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@id/tv_explain_5"
+        app:layout_constraintTop_toBottomOf="@id/tv_explain_4"
         android:layout_marginBottom="20dp"/>
+
+    <TextView
+        android:id="@+id/tv_explain_6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3."
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@id/iv_url"
+        app:layout_constraintTop_toBottomOf="@id/tv_explain_5"/>
 
 
     <TextView
@@ -53,10 +108,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="#직사각형"
-        android:textSize="20dp"
-        android:textColor="@android:color/black"
-        app:layout_constraintLeft_toRightOf="@id/tv_tag_2"
-        app:layout_constraintBottom_toBottomOf="@id/iv_url"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@id/tv_explain_6"
+        app:layout_constraintTop_toBottomOf="@id/tv_explain_5"
         android:layout_marginBottom="20dp"/>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

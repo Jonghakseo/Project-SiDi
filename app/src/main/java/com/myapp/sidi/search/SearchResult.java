@@ -66,9 +66,31 @@ public class SearchResult extends AppCompatActivity {
 
 
         Log.e("furnitureChoiceResult",furnitureChoiceResult);
-        Log.e("startTimeChoiceResult",furnitureChoiceResult);
+        Log.e("startTimeChoiceResult",startTimeChoiceResult);
         Log.e("endTimeChoiceResult",endTimeChoiceResult);
         Log.e("nationChoiceResult",nationChoiceResult);
+        Log.e("dep_1_ChoiceResult",dep_1_ChoiceResult);
+        Log.e("dep_2_ChoiceResult",dep_2_ChoiceResult);
+        Log.e("dep_3_ChoiceResult",dep_3_ChoiceResult);
+        Log.e("dep_4_ChoiceResult",dep_4_ChoiceResult);
+        Log.e("dep_5_ChoiceResult",dep_5_ChoiceResult);
+
+        if (dep_1_ChoiceResult.equals("ALL")){
+            dep_1_ChoiceResult = "1,2,3,4,5,6,7,8,9,10,11,12,13";
+        }
+        if (dep_2_ChoiceResult.equals("ALL")){
+            dep_2_ChoiceResult = "1,2,3,4,5,6,7,8,9,10,11,12,13";
+        }
+        if (dep_3_ChoiceResult.equals("ALL")){
+            dep_3_ChoiceResult = "1,2,3,4,5,6,7,8,9,10,11,12,13";
+        }
+        if (dep_4_ChoiceResult.equals("ALL")){
+            dep_4_ChoiceResult = "1,2,3,4,5,6,7,8,9,10,11,12,13";
+        }
+        if (dep_5_ChoiceResult.equals("ALL")){
+            dep_5_ChoiceResult = "1,2,3,4,5,6,7,8,9,10,11,12,13";
+        }
+
         Log.e("dep_1_ChoiceResult",dep_1_ChoiceResult);
         Log.e("dep_2_ChoiceResult",dep_2_ChoiceResult);
         Log.e("dep_3_ChoiceResult",dep_3_ChoiceResult);

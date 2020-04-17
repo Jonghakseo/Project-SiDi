@@ -11,8 +11,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a70173cf-3876-4ad0-ac3c-85e43a83940a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/search_detail_design_item.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/search_result_design_item2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/test.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/values/refs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/main/MainPageTab.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/main/MainPageTab.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/main/SearchingTab.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/main/SearchingTab.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/search/SearchResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/search/SearchResult.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main_page_tab.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main_page_tab.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_view_detail.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_view_detail.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/main_page_design_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/main_page_design_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/search_result_design_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/search_result_design_item.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,7 +41,7 @@
     <option name="testRunner" value="GRADLE" />
     <option name="delegatedBuild" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="a10e_API_28" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="G6_API_28" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -45,10 +62,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="valueResourceFile" />
         <option value="Interface" />
-        <option value="Class" />
         <option value="resourceFile" />
+        <option value="Class" />
+        <option value="valueResourceFile" />
       </list>
     </option>
   </component>
@@ -60,16 +77,17 @@
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="PropertiesComponent">
-    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="a10e_API_28" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-04-15T03:46:27.351Z" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="G6_API_28" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-04-16T07:12:00.557Z" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/drawable" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/layout" />
     <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\HOCHANG\AndroidStudioProjects\teamproject\Project-SiDi\app\src\main\res\layout" />
       <recent name="C:\Users\HOCHANG\AndroidStudioProjects\teamproject\Project-SiDi\app\src\main\res\drawable" />
     </key>
     <key name="android.template.packageName">
@@ -78,7 +96,9 @@
       <recent name="com.myapp.sidi.mypage" />
       <recent name="com.myapp.sidi.myPage" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\HOCHANG\AndroidStudioProjects\teamproject\Project-SiDi\app\src\main\res\layout" />
+      <recent name="C:\Users\HOCHANG\AndroidStudioProjects\teamproject\Project-SiDi\app\src\main\java\com\myapp\sidi" />
       <recent name="C:\Users\HOCHANG\AndroidStudioProjects\teamproject\Project-SiDi\app\src\main\res\drawable" />
     </key>
   </component>
@@ -291,7 +311,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587017025650</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="1차적 메인 수정2">
+      <created>1587017163008</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1587017163008</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -352,7 +379,8 @@
     <MESSAGE value="현재 최신" />
     <MESSAGE value="검색 결과 불러오는 작업까지 성공" />
     <MESSAGE value="1차적 메인 수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="1차적 메인 수정" />
+    <MESSAGE value="1차적 메인 수정2" />
+    <option name="LAST_COMMIT_MESSAGE" value="1차적 메인 수정2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -365,24 +393,24 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/search/SearchResult.java</url>
-          <line>114</line>
+          <line>136</line>
           <properties method="onResponse" />
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/search/SearchResult.java</url>
-          <line>166</line>
+          <line>188</line>
           <properties method="onFailure" />
           <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/search/SearchResult.java</url>
-          <line>103</line>
+          <line>125</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/search/SearchResult.java</url>
-          <line>111</line>
+          <line>133</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>

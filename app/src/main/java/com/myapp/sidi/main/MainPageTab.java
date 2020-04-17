@@ -1,6 +1,7 @@
 package com.myapp.sidi.main;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,11 +11,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.provider.BaseColumns;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.myapp.sidi.ContractAndHelper.SelectFurnitureContract;
 import com.myapp.sidi.ContractAndHelper.SelectFurnitureHelper;
 import com.myapp.sidi.Adapter.Design_Adapter;
@@ -39,9 +43,10 @@ public class MainPageTab extends AppCompatActivity {
     private Button btn_choice,btn_choiceRevise,btn_searchPage;
     private Button btn_year_1,btn_year_2,btn_year_3,btn_year_4,btn_year_5,btn_year_6;
     private TextView tv_year,tv_category;
-    private LinearLayout linearLayout_1;
+    private ImageView iv_design_1,iv_design_2,iv_design_3,iv_design_4,iv_design_5;
+    private LinearLayout linearLayout_1,linear_designBtnList;
     private String choice_1,choice_2,choice_3,choice_4,choice_5;
-    private String existChoice_1,existChoice_2,existChoice_3,existChoice_4,existChoice_5;
+    private String sendCategory="";
     private int YEAR_1_CODE = 0;
     private int YEAR_2_CODE = 0;
     private int YEAR_3_CODE = 0;
@@ -72,6 +77,14 @@ public class MainPageTab extends AppCompatActivity {
         btn_year_5 = findViewById(R.id.btn_year_5);
         tv_year = findViewById(R.id.tv_year);
         tv_category = findViewById(R.id.tv_category);
+
+        iv_design_1 = findViewById(R.id.iv_design_1);
+        iv_design_2 = findViewById(R.id.iv_design_2);
+        iv_design_3 = findViewById(R.id.iv_design_3);
+        iv_design_4 = findViewById(R.id.iv_design_4);
+        iv_design_5 = findViewById(R.id.iv_design_5);
+
+        linear_designBtnList = findViewById(R.id.linear_designBtnList);
 
 
         SelectFurnitureHelper helper = new SelectFurnitureHelper(getApplicationContext());
@@ -125,22 +138,44 @@ public class MainPageTab extends AppCompatActivity {
             }
         }
         cursor.close();
-
-
         //1. 카테고리 수만큼 버튼 생성하는 코드
         linearLayout_1 = findViewById(R.id.linearLayout_1);
         for(int i=0; i<choiceArr.size(); i++) {
             final Button button = new Button(this);
             button.setText(choiceArr.get(i).toString());
+            button.setBackground(ContextCompat.getDrawable(this,R.drawable.blue_round_line2));
+            button.setGravity(Gravity.CENTER);
             linearLayout_1.addView(button);
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    String test= button.getText().toString();
-                    Log.e("test",test);
+                    String tmp= button.getText().toString();
+                    sendCategory = categoryToEngConverter(tmp);
+                    onResume();
                 }
             });
         }
+
+
+//        Button temp = findViewById(R.id.btn_subSearch);
+//        temp.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainPageTab.this, ViewDetail.class);
+////                intent.putExtra("country","kor");
+//                intent.putExtra("country","jap");
+////                intent.putExtra("registrationNum","3020180027259");
+//                intent.putExtra("registrationNum","1380586-000");//등록번호로 사용해야함 ㅠㅠ
+//                intent.putExtra("depth1",1);
+//                intent.putExtra("depth2",2);
+//                intent.putExtra("depth3",3);
+////                intent.putExtra("depth4","형태4");
+//                intent.putExtra("depth5",5);
+//                startActivity(intent);
+//            }
+//        });
+
+
     }
 
     @Override
@@ -148,12 +183,14 @@ public class MainPageTab extends AppCompatActivity {
         super.onResume();
 
 
-
-
+        if (sendCategory.equals("")){
+            sendCategory = categoryToEngConverter(choiceArr.get(0).toString());
+        }
+        Log.e("cate",sendCategory);
         //1. 연도 버튼을 누르고 해당 연도 코드에 따라 서버에 보낼 연도 값을 조정한다.
-        //2. 기본값은 60년대로 설정
-        sendYear = 1960;
-        tv_year.setText("1960");
+        //2. 기본값은 70년대로 설정
+        sendYear = 1970;
+        tv_year.setText("1970");
         if(YEAR_1_CODE==1){
             sendYear=1970;
             tv_year.setText("1970");
@@ -201,7 +238,7 @@ public class MainPageTab extends AppCompatActivity {
                 .build();
         serverInterface = retrofit.create(ServerInterface.class);
 //        Log.e("year",sendYear);
-        serverInterface.signUp("desk",sendYear)
+        serverInterface.signUp(sendCategory,sendYear)
                 .enqueue(new Callback<MainPageDesignResult>() {
                     @Override
                     public void onResponse(Call<MainPageDesignResult> call, Response<MainPageDesignResult> response) {
@@ -215,6 +252,7 @@ public class MainPageTab extends AppCompatActivity {
                         Log.e("tag",tag_1_1);
                         Log.e("tag",tag_1_2);
                         Log.e("tag",tag_1_3);
+                        Glide.with(iv_design_1).load(url1).into(iv_design_1);
 
                         Design_Data design_data = new Design_Data(design,url1,tag_1_1,tag_1_2,tag_1_3);
                         re_arrayList.add(design_data);
@@ -224,6 +262,7 @@ public class MainPageTab extends AppCompatActivity {
                         String tag_2_1 = result.getTag2_1();
                         String tag_2_2 = result.getTag2_2();
                         String tag_2_3 = result.getTag2_3();
+                        Glide.with(iv_design_2).load(url2).into(iv_design_2);
 
                         Design_Data design_data2 = new Design_Data(design2,url2,tag_2_1,tag_2_2,tag_2_3);
                         re_arrayList.add(design_data2);
@@ -233,6 +272,7 @@ public class MainPageTab extends AppCompatActivity {
                         String tag_3_1 = result.getTag3_1();
                         String tag_3_2 = result.getTag3_2();
                         String tag_3_3 = result.getTag3_3();
+                        Glide.with(iv_design_3).load(url3).into(iv_design_3);
 
                         Design_Data design_data3 = new Design_Data(design3,url3,tag_3_1,tag_3_2,tag_3_3);
                         re_arrayList.add(design_data3);
@@ -242,6 +282,7 @@ public class MainPageTab extends AppCompatActivity {
                         String tag_4_1 = result.getTag4_1();
                         String tag_4_2 = result.getTag4_2();
                         String tag_4_3 = result.getTag4_3();
+                        Glide.with(iv_design_4).load(url4).into(iv_design_4);
 
                         Design_Data design_data4 = new Design_Data(design4,url4,tag_4_1,tag_4_2,tag_4_3);
                         re_arrayList.add(design_data4);
@@ -251,6 +292,7 @@ public class MainPageTab extends AppCompatActivity {
                         String tag_5_1 = result.getTag5_1();
                         String tag_5_2 = result.getTag5_2();
                         String tag_5_3 = result.getTag5_3();
+                        Glide.with(iv_design_5).load(url5).into(iv_design_5);
 
                         Design_Data design_data5 = new Design_Data(design5,url5,tag_5_1,tag_5_2,tag_5_3);
                         re_arrayList.add(design_data5);
@@ -407,6 +449,27 @@ public class MainPageTab extends AppCompatActivity {
         });
 
         return interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+    }
+
+    public String categoryToEngConverter(String categoryName){
+        switch (categoryName){
+            case "#책상":
+                categoryName="desk";
+                break;
+            case "#의자":
+                categoryName="chair";
+                break;
+            case "#테이블":
+                categoryName="table";
+                break;
+            case "#소파":
+                categoryName="sofa";
+                break;
+            case "#전등/등":
+                categoryName="lamp";
+                break;
+        }
+        return categoryName;
     }
 
 

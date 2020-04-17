@@ -832,6 +832,7 @@ public class SearchingTab extends AppCompatActivity {
                 intent.putExtra("dep_4_ChoiceResult",dep_4_ChoiceResult);
                 intent.putExtra("dep_5_ChoiceResult",dep_5_ChoiceResult);
                 startActivity(intent);
+                finish();
 
 
 
