@@ -27,6 +27,7 @@ import com.myapp.sidi.DTO.MainPageDesignResult;
 import com.myapp.sidi.InitSelectPage;
 import com.myapp.sidi.Interface.ServerInterface;
 import com.myapp.sidi.R;
+import com.myapp.sidi.search.ViewDetail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -157,23 +158,23 @@ public class MainPageTab extends AppCompatActivity {
         }
 
 
-//        Button temp = findViewById(R.id.btn_subSearch);
-//        temp.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MainPageTab.this, ViewDetail.class);
-////                intent.putExtra("country","kor");
+        Button temp = findViewById(R.id.btn_subSearch);
+        temp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainPageTab.this, ViewDetail.class);
+                intent.putExtra("country","kor");
 //                intent.putExtra("country","jap");
-////                intent.putExtra("registrationNum","3020180027259");
+                intent.putExtra("registrationNum","3020180027259");
 //                intent.putExtra("registrationNum","1380586-000");//등록번호로 사용해야함 ㅠㅠ
-//                intent.putExtra("depth1",1);
-//                intent.putExtra("depth2",2);
-//                intent.putExtra("depth3",3);
-////                intent.putExtra("depth4","형태4");
-//                intent.putExtra("depth5",5);
-//                startActivity(intent);
-//            }
-//        });
+                intent.putExtra("depth1",1);
+                intent.putExtra("depth2",2);
+                intent.putExtra("depth3",3);
+//                intent.putExtra("depth4","형태4");
+                intent.putExtra("depth5",5);
+                startActivity(intent);
+            }
+        });
 
 
     }
