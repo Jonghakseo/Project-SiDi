@@ -5,9 +5,11 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.BaseColumns;
 import android.util.Log;
@@ -27,7 +29,6 @@ import com.myapp.sidi.DTO.MainPageDesignResult;
 import com.myapp.sidi.InitSelectPage;
 import com.myapp.sidi.Interface.ServerInterface;
 import com.myapp.sidi.R;
-import com.myapp.sidi.search.ViewDetail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +63,8 @@ public class MainPageTab extends AppCompatActivity {
     private List choiceArr;
 
 
+
+    @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -144,7 +147,8 @@ public class MainPageTab extends AppCompatActivity {
         for(int i=0; i<choiceArr.size(); i++) {
             final Button button = new Button(this);
             button.setText(choiceArr.get(i).toString());
-            button.setBackground(ContextCompat.getDrawable(this,R.drawable.blue_round_line2));
+            button.setTextColor(Color.parseColor("#ffffff"));
+            button.setBackgroundResource(Color.parseColor("#00000000"));
             button.setGravity(Gravity.CENTER);
             linearLayout_1.addView(button);
             button.setOnClickListener(new View.OnClickListener() {
@@ -158,23 +162,23 @@ public class MainPageTab extends AppCompatActivity {
         }
 
 
-        Button temp = findViewById(R.id.btn_subSearch);
-        temp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainPageTab.this, ViewDetail.class);
-                intent.putExtra("country","kor");
+//        Button temp = findViewById(R.id.btn_subSearch);
+//        temp.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainPageTab.this, ViewDetail.class);
+////                intent.putExtra("country","kor");
 //                intent.putExtra("country","jap");
-                intent.putExtra("registrationNum","3020180027259");
+////                intent.putExtra("registrationNum","3020180027259");
 //                intent.putExtra("registrationNum","1380586-000");//등록번호로 사용해야함 ㅠㅠ
-                intent.putExtra("depth1",1);
-                intent.putExtra("depth2",2);
-                intent.putExtra("depth3",3);
-//                intent.putExtra("depth4","형태4");
-                intent.putExtra("depth5",5);
-                startActivity(intent);
-            }
-        });
+//                intent.putExtra("depth1",1);
+//                intent.putExtra("depth2",2);
+//                intent.putExtra("depth3",3);
+////                intent.putExtra("depth4","형태4");
+//                intent.putExtra("depth5",5);
+//                startActivity(intent);
+//            }
+//        });
 
 
     }

@@ -4,6 +4,7 @@ public class SearchResultData {
     private String url;
     private String serverIndex;
     private String designNum;
+    private String registrationNum;
     private String designCode;
     private String designName;
     private String registerPerson;
@@ -16,10 +17,11 @@ public class SearchResultData {
     private String dep_4;
     private String dep_5;
 
-    public SearchResultData(String url, String serverIndex, String designNum, String designCode, String designName, String registerPerson, String date_application, String date_registration, String date_publication, String dep_1, String dep_2, String dep_3, String dep_4, String dep_5) {
+    public SearchResultData(String url,String serverIndex, String designNum,String registrationNum,String designCode, String designName, String registerPerson, String date_application, String date_registration, String date_publication, String dep_1, String dep_2, String dep_3, String dep_4, String dep_5) {
         this.url = url;
         this.serverIndex = serverIndex;
         this.designNum = designNum;
+        this.registrationNum = registrationNum;
         this.designCode = designCode;
         this.designName = designName;
         this.registerPerson = registerPerson;
@@ -57,6 +59,14 @@ public class SearchResultData {
 
     public void setDesignNum(String designNum) {
         this.designNum = designNum;
+    }
+
+    public String getRegistrationNum() {
+        return registrationNum;
+    }
+
+    public void setRegistrationNum(String registrationNum) {
+        this.registrationNum = registrationNum;
     }
 
     public String getDesignCode() {

@@ -40,6 +40,7 @@ public class SearchResult_Adapter extends RecyclerView.Adapter<SearchResult_Adap
 
         holder.serverIndex.setText(arrayList.get(position).getServerIndex());
         holder.designNum.setText(arrayList.get(position).getDesignNum());
+        holder.registrationNum.setText(arrayList.get(position).getRegistrationNum());
         holder.designCode.setText(arrayList.get(position).getDesignCode());
         holder.designName.setText(arrayList.get(position).getDesignName());
         holder.registerPerson.setText(arrayList.get(position).getRegisterPerson());
@@ -72,6 +73,7 @@ public class SearchResult_Adapter extends RecyclerView.Adapter<SearchResult_Adap
         ImageView url;
         TextView serverIndex;
         TextView designNum;
+        TextView registrationNum;
         TextView designCode;
         TextView designName;
         TextView registerPerson;
@@ -89,6 +91,7 @@ public class SearchResult_Adapter extends RecyclerView.Adapter<SearchResult_Adap
             this.url = itemView.findViewById(R.id.url);
             this.serverIndex = itemView.findViewById(R.id.serverIndex);
             this.designNum = itemView.findViewById(R.id.designNum);
+            this.registrationNum = itemView.findViewById(R.id.registrationNum);
             this.designCode = itemView.findViewById(R.id.designCode);
             this.designName = itemView.findViewById(R.id.designName);
             this.registerPerson = itemView.findViewById(R.id.registerPerson);

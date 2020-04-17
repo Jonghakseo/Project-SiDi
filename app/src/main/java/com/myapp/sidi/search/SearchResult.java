@@ -147,6 +147,7 @@ public class SearchResult extends AppCompatActivity {
                     SearchResultData searchResultData = new SearchResultData(url,
                             result1.getServerIndex(),
                             result1.getDesignNum(),
+                            result1.getRegistrationNum(),
                             result1.getDesignCode(),
                             result1.getDesignName(),
                             result1.getRegisterPerson(),
@@ -164,6 +165,7 @@ public class SearchResult extends AppCompatActivity {
 
                     Log.e("getServerIndex",result1.getServerIndex());
                     Log.e("getDesignNum",result1.getDesignNum());
+                    Log.e("getRegistrationNum",result1.getRegistrationNum());
                     Log.e("getDesignCode",result1.getDesignCode());
                     Log.e("getUrl",result1.getUrl());
                     Log.e("getDesignName",result1.getDesignName());
