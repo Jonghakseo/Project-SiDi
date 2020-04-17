@@ -148,8 +148,10 @@ public class MainPageTab extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainPageTab.this, ViewDetail.class);
-                intent.putExtra("country","kor");
-                intent.putExtra("registrationNum","3020180027259");
+//                intent.putExtra("country","kor");
+                intent.putExtra("country","jap");
+//                intent.putExtra("registrationNum","3020180027259");
+                intent.putExtra("registrationNum","1380586-000");//등록번호로 사용해야함 ㅠㅠ
                 intent.putExtra("depth1",1);
                 intent.putExtra("depth2",2);
                 intent.putExtra("depth3",3);

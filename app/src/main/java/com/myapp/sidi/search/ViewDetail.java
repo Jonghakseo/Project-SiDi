@@ -47,7 +47,8 @@ public class ViewDetail extends AppCompatActivity {
     private Intent intent;
     private String country; //해당 디자인 출원 국가
     private String registrationNum; //검색 결과로 받은 출원번호
-    private int depth1,depth2,depth3,depth4,depth5;
+    private String designMainClassification;//일본 검색에 필요한 디자인 분류코드
+    private int depth1, depth2, depth3, depth4, depth5;
     Button btn_fullText, btn_scrap, btn_sketch, btn_moreDescription;
     ImageView main_design;
     TextView text_designNum, text_basicInfo, text_description, tagBox1, tagBox2, tagBox3, tagBox4, tagBox5;
@@ -73,7 +74,7 @@ public class ViewDetail extends AppCompatActivity {
     private SearchDetail_Adapter otherDesignAdapter;
     private SearchDetail_Adapter sameDepthDesignAdapter;
     private SearchDetail_Adapter sketchDesignAdapter;
-    private LinearLayoutManager linearLayoutManager1,linearLayoutManager2,linearLayoutManager3;
+    private LinearLayoutManager linearLayoutManager1, linearLayoutManager2, linearLayoutManager3;
 
 
     @Override
@@ -116,31 +117,31 @@ public class ViewDetail extends AppCompatActivity {
         tagBoxes.add(tagBox5);
 
 
-
         intent = getIntent();
         try {
             country = intent.getExtras().getString("country");
             registrationNum = intent.getExtras().getString("registrationNum");
-            depth1 = intent.getExtras().getInt("depth1",0);
-            depth2 = intent.getExtras().getInt("depth2",0);
-            depth3 = intent.getExtras().getInt("depth3",0);
-            depth4 = intent.getExtras().getInt("depth4",0);
-            depth5 = intent.getExtras().getInt("depth5",0);
+            designMainClassification = intent.getExtras().getString("designMainClassification", "");
+            depth1 = intent.getExtras().getInt("depth1", 0);
+            depth2 = intent.getExtras().getInt("depth2", 0);
+            depth3 = intent.getExtras().getInt("depth3", 0);
+            depth4 = intent.getExtras().getInt("depth4", 0);
+            depth5 = intent.getExtras().getInt("depth5", 0);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        linearLayoutManager1 = new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false);
-        linearLayoutManager2 = new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false);
-        linearLayoutManager3 = new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false);
+        linearLayoutManager1 = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
+        linearLayoutManager2 = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
+        linearLayoutManager3 = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
 
         rv_otherDesign.setLayoutManager(linearLayoutManager1);
         rv_sameDepth.setLayoutManager(linearLayoutManager2);
         rv_othersSketch.setLayoutManager(linearLayoutManager3);
 
-        otherDesignAdapter = new SearchDetail_Adapter(ImagePaths,this);
-        sameDepthDesignAdapter = new SearchDetail_Adapter(sameDepthDesigns,this);
-        sketchDesignAdapter = new SearchDetail_Adapter(otherSketches,this);
+        otherDesignAdapter = new SearchDetail_Adapter(ImagePaths, this);
+        sameDepthDesignAdapter = new SearchDetail_Adapter(sameDepthDesigns, this);
+        sketchDesignAdapter = new SearchDetail_Adapter(otherSketches, this);
 
         otherDesignAdapter.setOnItemClickListener(new SearchDetail_Adapter.OnItemClickListener() {
             @Override
@@ -173,17 +174,17 @@ public class ViewDetail extends AppCompatActivity {
         ArrayList<String> depths = new ArrayList<>();
         DeskInfo deskInfo = new DeskInfo();
         String[] desk_dep1_searchForm = deskInfo.desk_dep1_searchForm.split(",");
-        depths.add("#"+desk_dep1_searchForm[depth1]);
-        depths.add("#"+desk_dep1_searchForm[depth2]);
-        depths.add("#"+desk_dep1_searchForm[depth3]);
-        depths.add("#"+desk_dep1_searchForm[depth4]);
-        depths.add("#"+desk_dep1_searchForm[depth5]);
+        depths.add("#" + desk_dep1_searchForm[depth1]);
+        depths.add("#" + desk_dep1_searchForm[depth2]);
+        depths.add("#" + desk_dep1_searchForm[depth3]);
+        depths.add("#" + desk_dep1_searchForm[depth4]);
+        depths.add("#" + desk_dep1_searchForm[depth5]);
 //        System.out.println(depth1);
 
 
         int id = 0;
         for (String depth : depths) {
-            if (depth!=null){
+            if (depth != null) {
                 tagBoxes.get(id).setText(depth);
                 tagBoxes.get(id).setVisibility(View.VISIBLE);
                 id++;
@@ -198,11 +199,11 @@ public class ViewDetail extends AppCompatActivity {
         btn_moreDescription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (descript){
+                if (descript) {
                     descript = !descript;
                     text_description.setVisibility(View.VISIBLE);
                     btn_moreDescription.setText("접기");
-                }else{
+                } else {
                     descript = !descript;
                     text_description.setVisibility(View.GONE);
                     btn_moreDescription.setText("펼치기");
@@ -280,7 +281,7 @@ public class ViewDetail extends AppCompatActivity {
                                         case "largePath":
                                             parser.next();
                                             imageIndex++;
-                                            SearchDetailData sdd = new SearchDetailData(parser.getText(),imageIndex);
+                                            SearchDetailData sdd = new SearchDetailData(parser.getText(), imageIndex);
                                             ImagePaths.add(sdd);
                                             break;
                                         case "designSummary":
@@ -316,6 +317,117 @@ public class ViewDetail extends AppCompatActivity {
                     }
                     break;
                 case SEARCH_MODE_JAP:
+                    try {
+                        String result;
+                        apiServerEndpoint = new URL("http://plus.kipris.or.kr/openapi/rest/ForeignDesignBibliographicService/searchAllInfo?literatureNumber=" + registrationNum + "&CountryCode=JP&accessKey=MycjEOwwAfMDHrTT1DIYF=Z4/8MIZY7ofDy4IzoWF14=");
+                        // 서버 엔드포인트
+                        HttpURLConnection myConnection = (HttpURLConnection) apiServerEndpoint.openConnection();
+                        // 커넥션을 통해 요청 헤더를 추가하거나 응답을 읽는 작업 수행
+                        if (myConnection.getResponseCode() == 200) {
+                            status = 1;
+                            // Success
+                            myConnection.setRequestMethod("GET");
+                            //get
+                            InputStream is = myConnection.getInputStream();
+//                                xml로 추출
+                            XmlPullParser parser = Xml.newPullParser();
+                            // create xml parser
+                            parser.setInput(new InputStreamReader(is, "UTF-8"));
+                            int eventType = parser.getEventType();
+                            applicantCountry = "일본 특허청";
+                            while (eventType != XmlPullParser.END_DOCUMENT) {
+                                if (eventType == XmlPullParser.START_DOCUMENT) {
+                                    // XML 데이터 시작
+                                } else if (eventType == XmlPullParser.START_TAG) {
+                                    String startTag = parser.getName();
+                                    // 시작 태그가 파싱. "<TAG>"
+                                    switch (startTag) {
+                                        case "articleNameKR":
+                                            parser.next();
+                                            articleName = parser.getText();
+                                            break;
+                                        case "creator":
+                                            parser.next();
+                                            applicantName = parser.getText();
+                                            break;
+                                        case "applicationDate":
+                                            parser.next();
+                                            applicationDate = parser.getText();
+                                            break;
+                                        case "creatContent":
+                                            parser.next();
+                                            designSummary = parser.getText();
+                                            break;
+                                        case "creatFunction":
+                                            parser.next();
+                                            designDescription = parser.getText();
+                                            break;
+                                    }
+//                                        System.out.println("Start tag "+parser.getName());
+                                } else if (eventType == XmlPullParser.END_TAG) {
+                                    // 종료 태그가 파싱. "</TAG>"
+//                                        System.out.println("End tag "+parser.getName());
+                                } else if (eventType == XmlPullParser.TEXT) {
+                                    // 시작 태그와 종료 태그 사이의 텍스트. "<TAG>TEXT</TAG>"
+//                                        System.out.println("Text "+parser.getText());
+                                }
+                                eventType = parser.next();
+                            }
+
+                        } else {
+                            status = 0;
+                            // Error handling code goes here
+                        }
+
+                        apiServerEndpoint = new URL("http://plus.kipris.or.kr/openapi/rest/ForeignDesignImageAndFullTextService/designImageInfo?literatureNumber=" + registrationNum + "&CountryCode=JP&accessKey=MycjEOwwAfMDHrTT1DIYF=Z4/8MIZY7ofDy4IzoWF14=");
+                        // 서버 엔드포인트
+                        HttpURLConnection imgConnection = (HttpURLConnection) apiServerEndpoint.openConnection();
+                        // 커넥션을 통해 요청 헤더를 추가하거나 응답을 읽는 작업 수행
+                        if (imgConnection.getResponseCode() == 200) {
+                            status = 1;
+                            // Success
+                            imgConnection.setRequestMethod("GET");
+                            //get
+                            InputStream is = imgConnection.getInputStream();
+//                                xml로 추출
+                            XmlPullParser parser = Xml.newPullParser();
+                            // create xml parser
+                            parser.setInput(new InputStreamReader(is, "UTF-8"));
+                            int eventType = parser.getEventType();
+                            int imageIndex = 0;
+                            while (eventType != XmlPullParser.END_DOCUMENT) {
+                                if (eventType == XmlPullParser.START_DOCUMENT) {
+                                    // XML 데이터 시작
+                                } else if (eventType == XmlPullParser.START_TAG) {
+                                    String startTag = parser.getName();
+                                    // 시작 태그가 파싱. "<TAG>"
+                                    switch (startTag) {
+                                        case "imagePath":
+                                            parser.next();
+                                            imageIndex++;
+                                            SearchDetailData sdd = new SearchDetailData(parser.getText(), imageIndex);
+                                            ImagePaths.add(sdd);
+                                            break;
+                                    }
+                                    System.out.println("Start tag " + parser.getName());
+                                } else if (eventType == XmlPullParser.END_TAG) {
+                                    // 종료 태그가 파싱. "</TAG>"
+//                                        System.out.println("End tag "+parser.getName());
+                                } else if (eventType == XmlPullParser.TEXT) {
+                                    // 시작 태그와 종료 태그 사이의 텍스트. "<TAG>TEXT</TAG>"
+//                                        System.out.println("Text "+parser.getText());
+                                }
+                                eventType = parser.next();
+                            }
+
+                        } else {
+                            status = 0;
+                            // Error handling code goes here
+                        }
+                        fullTextFilePath = "http://abdg.kipris.or.kr/abdg/remoteFile.do?method=fullText&publ_key=JP," + registrationNum + ",J01&cntry=JP&dsImgTpcd=jpn";
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     break;
                 case SEARCH_MODE_ETC://or default
                     break;
@@ -326,34 +438,59 @@ public class ViewDetail extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            if (status != 0){
-                text_designNum.setText(""+ImagePaths.get(0).getDesignId()+"번");
-                Glide.with(ViewDetail.this).load(ImagePaths.get(0).getDesign()).into(main_design);
-                StringBuffer sb = new StringBuffer();
-                sb.append("디자인명 : "+articleName+"  /  ");
-                sb.append("출원인 : "+applicantName+"\n");
-                sb.append("출원국가 : "+applicantCountry+"  /  ");
-                sb.append("상태 : "+lastDispositionDescription+"\n");
-                sb.append("디자인 요약 : "+designSummary);
-                text_basicInfo.setText(sb);
-                text_description.setText(designDescription);
+            if (status != 0) {
+
                 //pdf 보기
-                btn_fullText.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent();
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        intent.setAction(Intent.ACTION_VIEW);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        intent.setDataAndType(Uri.parse(fullTextFilePath), "application/pdf");
-                        try {
-                            startActivity(intent);
-                        }catch (ActivityNotFoundException e){
-                            e.printStackTrace();
+                if (country.equals(SEARCH_MODE_KOR)) {
+                    if (ImagePaths.size() > 0)
+                        text_designNum.setText("" + ImagePaths.get(0).getDesignId() + "번");
+                    Glide.with(ViewDetail.this).load(ImagePaths.get(0).getDesign()).into(main_design);
+                    StringBuffer sb = new StringBuffer();
+                    sb.append("디자인명 : " + articleName + "  /  ");
+                    sb.append("출원인 : " + applicantName + "\n");
+                    sb.append("출원국가 : " + applicantCountry + "  /  ");
+                    sb.append("상태 : " + lastDispositionDescription + "\n");
+                    sb.append("디자인 요약 : " + designSummary);
+                    text_basicInfo.setText(sb);
+                    text_description.setText(designDescription);
+
+                    btn_fullText.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent();
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            intent.setAction(Intent.ACTION_VIEW);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            intent.setDataAndType(Uri.parse(fullTextFilePath), "application/pdf");
+                            try {
+                                startActivity(intent);
+                            } catch (ActivityNotFoundException e) {
+                                e.printStackTrace();
+                            }
                         }
+                    });
+                    //pdf 보기
+                } else if (country.equals(SEARCH_MODE_JAP)) {
+                    if (ImagePaths.size() > 0) {
+                        text_designNum.setText("" + ImagePaths.get(0).getDesignId() + "번");
+                        Glide.with(ViewDetail.this).load(ImagePaths.get(0).getDesign()).into(main_design);
                     }
-                });
-                //pdf 보기
+                    StringBuffer sb = new StringBuffer();
+                    sb.append("디자인명 : " + articleName + "  /  ");
+                    sb.append("출원인 : " + applicantName + "\n");
+                    sb.append("출원국가 : " + applicantCountry + "\n");
+                    sb.append("디자인 요약 : " + designSummary);
+                    text_basicInfo.setText(sb);
+                    text_description.setText(designDescription);
+
+                    btn_fullText.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(fullTextFilePath));
+                            startActivity(intent);
+                        }
+                    });
+                }
 
                 //레트로핏으로 서버에 스케치, 동일 디자인 요청
                 Retrofit retrofit = new Retrofit.Builder()
@@ -361,70 +498,70 @@ public class ViewDetail extends AppCompatActivity {
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
                 serverInterface = retrofit.create(ServerInterface.class);
-                serverInterface.signUp("desk",sendYear)
-                        .enqueue(new Callback<MainPageDesignResult>() {
-                            @Override
-                            public void onResponse(Call<MainPageDesignResult> call, Response<MainPageDesignResult> response) {
-                                MainPageDesignResult result = response.body();
-
-                                String design = result.getDesign1();
-                                String url1 = result.getUrl1();
-                                String tag_1_1 = result.getTag1_1();
-                                String tag_1_2 = result.getTag1_2();
-                                String tag_1_3 = result.getTag1_3();
-                                Log.e("tag",tag_1_1);
-                                Log.e("tag",tag_1_2);
-                                Log.e("tag",tag_1_3);
-
-                                Design_Data design_data = new Design_Data(design,url1,tag_1_1,tag_1_2,tag_1_3);
-                                re_arrayList.add(design_data);
-
-                                String design2 = result.getDesign2();
-                                String url2 = result.getUrl2();
-                                String tag_2_1 = result.getTag2_1();
-                                String tag_2_2 = result.getTag2_2();
-                                String tag_2_3 = result.getTag2_3();
-
-                                Design_Data design_data2 = new Design_Data(design2,url2,tag_2_1,tag_2_2,tag_2_3);
-                                re_arrayList.add(design_data2);
-
-                                String design3 = result.getDesign3();
-                                String url3 = result.getUrl3();
-                                String tag_3_1 = result.getTag3_1();
-                                String tag_3_2 = result.getTag3_2();
-                                String tag_3_3 = result.getTag3_3();
-
-                                Design_Data design_data3 = new Design_Data(design3,url3,tag_3_1,tag_3_2,tag_3_3);
-                                re_arrayList.add(design_data3);
-
-                                String design4 = result.getDesign4();
-                                String url4 = result.getUrl4();
-                                String tag_4_1 = result.getTag4_1();
-                                String tag_4_2 = result.getTag4_2();
-                                String tag_4_3 = result.getTag4_3();
-
-                                Design_Data design_data4 = new Design_Data(design4,url4,tag_4_1,tag_4_2,tag_4_3);
-                                re_arrayList.add(design_data4);
-
-                                String design5 = result.getDesign5();
-                                String url5 = result.getUrl5();
-                                String tag_5_1 = result.getTag5_1();
-                                String tag_5_2 = result.getTag5_2();
-                                String tag_5_3 = result.getTag5_3();
-
-                                Design_Data design_data5 = new Design_Data(design5,url5,tag_5_1,tag_5_2,tag_5_3);
-                                re_arrayList.add(design_data5);
-
-                                designAdapter.notifyDataSetChanged();
-
-
-                            }
-
-                            @Override
-                            public void onFailure(Call<MainPageDesignResult> call, Throwable t) {
-                                Log.e("networkError",t.toString());
-                            }
-                        });
+//                serverInterface.signUp("desk",sendYear)
+//                        .enqueue(new Callback<MainPageDesignResult>() {
+//                            @Override
+//                            public void onResponse(Call<MainPageDesignResult> call, Response<MainPageDesignResult> response) {
+//                                MainPageDesignResult result = response.body();
+//
+//                                String design = result.getDesign1();
+//                                String url1 = result.getUrl1();
+//                                String tag_1_1 = result.getTag1_1();
+//                                String tag_1_2 = result.getTag1_2();
+//                                String tag_1_3 = result.getTag1_3();
+//                                Log.e("tag",tag_1_1);
+//                                Log.e("tag",tag_1_2);
+//                                Log.e("tag",tag_1_3);
+//
+//                                Design_Data design_data = new Design_Data(design,url1,tag_1_1,tag_1_2,tag_1_3);
+//                                re_arrayList.add(design_data);
+//
+//                                String design2 = result.getDesign2();
+//                                String url2 = result.getUrl2();
+//                                String tag_2_1 = result.getTag2_1();
+//                                String tag_2_2 = result.getTag2_2();
+//                                String tag_2_3 = result.getTag2_3();
+//
+//                                Design_Data design_data2 = new Design_Data(design2,url2,tag_2_1,tag_2_2,tag_2_3);
+//                                re_arrayList.add(design_data2);
+//
+//                                String design3 = result.getDesign3();
+//                                String url3 = result.getUrl3();
+//                                String tag_3_1 = result.getTag3_1();
+//                                String tag_3_2 = result.getTag3_2();
+//                                String tag_3_3 = result.getTag3_3();
+//
+//                                Design_Data design_data3 = new Design_Data(design3,url3,tag_3_1,tag_3_2,tag_3_3);
+//                                re_arrayList.add(design_data3);
+//
+//                                String design4 = result.getDesign4();
+//                                String url4 = result.getUrl4();
+//                                String tag_4_1 = result.getTag4_1();
+//                                String tag_4_2 = result.getTag4_2();
+//                                String tag_4_3 = result.getTag4_3();
+//
+//                                Design_Data design_data4 = new Design_Data(design4,url4,tag_4_1,tag_4_2,tag_4_3);
+//                                re_arrayList.add(design_data4);
+//
+//                                String design5 = result.getDesign5();
+//                                String url5 = result.getUrl5();
+//                                String tag_5_1 = result.getTag5_1();
+//                                String tag_5_2 = result.getTag5_2();
+//                                String tag_5_3 = result.getTag5_3();
+//
+//                                Design_Data design_data5 = new Design_Data(design5,url5,tag_5_1,tag_5_2,tag_5_3);
+//                                re_arrayList.add(design_data5);
+//
+//                                designAdapter.notifyDataSetChanged();
+//
+//
+//                            }
+//
+//                            @Override
+//                            public void onFailure(Call<MainPageDesignResult> call, Throwable t) {
+//                                Log.e("networkError",t.toString());
+//                            }
+//                        });
 
 
                 btn_sketch.setOnClickListener(new View.OnClickListener() {
@@ -451,9 +588,9 @@ public class ViewDetail extends AppCompatActivity {
         }
     }
 
-    private void changeMainDesign(int position){
+    private void changeMainDesign(int position) {
         Glide.with(ViewDetail.this).load(ImagePaths.get(position).getDesign()).into(main_design);
-        text_designNum.setText("도면 "+ImagePaths.get(position).getDesignId()+"");
+        text_designNum.setText("도면 " + ImagePaths.get(position).getDesignId() + "");
     }
 
 }
