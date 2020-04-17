@@ -254,9 +254,20 @@ public class MainPageTab extends AppCompatActivity {
                         String tag_1_1 = result.getTag1_1();
                         String tag_1_2 = result.getTag1_2();
                         String tag_1_3 = result.getTag1_3();
+                        /**            형태 태그 가져오는 부분 추가                 **/
+                        String depth1 = result.getDepth1();
+                        String depth2 = result.getDepth2();
+                        String depth3 = result.getDepth3();
+                        String depth4 = result.getDepth4();
+                        String depth5 = result.getDepth5();
                         Log.e("tag",tag_1_1);
                         Log.e("tag",tag_1_2);
                         Log.e("tag",tag_1_3);
+                        Log.e("depth1",depth1);
+                        Log.e("depth2",depth2);
+                        Log.e("depth3",depth3);
+                        Log.e("depth4",depth4);
+                        Log.e("depth5",depth5);
                         Glide.with(iv_design_1).load(url1).into(iv_design_1);
 
                         Design_Data design_data = new Design_Data(design,url1,tag_1_1,tag_1_2,tag_1_3);

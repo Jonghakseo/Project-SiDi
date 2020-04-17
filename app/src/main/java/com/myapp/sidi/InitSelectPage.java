@@ -278,7 +278,7 @@ public class InitSelectPage extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        selectFurnitureHelper.close();
+//        selectFurnitureHelper.close();
         super.onDestroy();
     }
 }
