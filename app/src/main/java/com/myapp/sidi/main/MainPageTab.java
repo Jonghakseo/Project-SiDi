@@ -15,12 +15,17 @@ import android.provider.BaseColumns;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.myapp.sidi.Category.DepToImgConverter;
+import com.myapp.sidi.Category.DeskInfo;
 import com.myapp.sidi.ContractAndHelper.SelectFurnitureContract;
 import com.myapp.sidi.ContractAndHelper.SelectFurnitureHelper;
 import com.myapp.sidi.Adapter.Design_Adapter;
@@ -43,24 +48,23 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainPageTab extends AppCompatActivity {
     private Button btn_choice,btn_choiceRevise,btn_searchPage;
-    private Button btn_year_1,btn_year_2,btn_year_3,btn_year_4,btn_year_5,btn_year_6;
+    private Button btn_rankTag_1,btn_rankTag_2,btn_rankTag_3,btn_rankTag_4,btn_rankTag_5;
     private TextView tv_year,tv_category;
+    private TextView rankTagDep_1,rankTagDep_2,rankTagDep_3,rankTagDep_4,rankTagDep_5;
     private ImageView iv_design_1,iv_design_2,iv_design_3,iv_design_4,iv_design_5;
     private LinearLayout linearLayout_1,linear_designBtnList;
     private String choice_1,choice_2,choice_3,choice_4,choice_5;
     private String sendCategory="";
-    private int YEAR_1_CODE = 0;
-    private int YEAR_2_CODE = 0;
-    private int YEAR_3_CODE = 0;
-    private int YEAR_4_CODE = 0;
-    private int YEAR_5_CODE = 0;
     private ArrayList<Design_Data> re_arrayList;
     private Design_Adapter designAdapter;
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
     private ServerInterface serverInterface;
-    private int sendYear;
+    private int sendYear=0;
     private List choiceArr;
+    private Spinner spinner_year;
+    private DepToImgConverter depToImgConverter;
+
 
 
 
@@ -74,12 +78,6 @@ public class MainPageTab extends AppCompatActivity {
         btn_choiceRevise = findViewById(R.id.btn_choiceRevise);
         recyclerView = findViewById(R.id.recyclerView);
         btn_searchPage = findViewById(R.id.btn_searchPage);
-        btn_year_1 = findViewById(R.id.btn_year_1);
-        btn_year_2 = findViewById(R.id.btn_year_2);
-        btn_year_3 = findViewById(R.id.btn_year_3);
-        btn_year_4 = findViewById(R.id.btn_year_4);
-        btn_year_5 = findViewById(R.id.btn_year_5);
-        tv_year = findViewById(R.id.tv_year);
         tv_category = findViewById(R.id.tv_category);
 
         iv_design_1 = findViewById(R.id.iv_design_1);
@@ -87,6 +85,56 @@ public class MainPageTab extends AppCompatActivity {
         iv_design_3 = findViewById(R.id.iv_design_3);
         iv_design_4 = findViewById(R.id.iv_design_4);
         iv_design_5 = findViewById(R.id.iv_design_5);
+
+        btn_rankTag_1 = findViewById(R.id.btn_rankTag_1);
+        btn_rankTag_2 = findViewById(R.id.btn_rankTag_2);
+        btn_rankTag_3 = findViewById(R.id.btn_rankTag_3);
+        btn_rankTag_4 = findViewById(R.id.btn_rankTag_4);
+        btn_rankTag_5 = findViewById(R.id.btn_rankTag_5);
+
+        rankTagDep_1 = findViewById(R.id.rankTagDep_1);
+        rankTagDep_2 = findViewById(R.id.rankTagDep_2);
+        rankTagDep_3 = findViewById(R.id.rankTagDep_3);
+        rankTagDep_4 = findViewById(R.id.rankTagDep_4);
+        rankTagDep_5 = findViewById(R.id.rankTagDep_5);
+
+
+        spinner_year = findViewById(R.id.spinner_year);
+        String[] str= getResources().getStringArray(R.array.year_item);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(MainPageTab.this,R.layout.spinner_item,str);
+        arrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        spinner_year.setAdapter(arrayAdapter);
+
+        spinner_year.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                if(position==0){
+                    sendYear=1970;
+                    onResume();
+                }else if (position==1){
+                    sendYear=1980;
+                    onResume();
+                }else if (position==2){
+                    sendYear=1990;
+                    onResume();
+                }else if (position==3){
+                    sendYear=2000;
+                    onResume();
+                }else if (position==4){
+                    sendYear=2010;
+                    onResume();
+                }
+
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        if (sendYear==0){
+            sendYear=1970;
+        }
 
         linear_designBtnList = findViewById(R.id.linear_designBtnList);
 
@@ -181,47 +229,18 @@ public class MainPageTab extends AppCompatActivity {
 //        });
 
 
+        depToImgConverter = new DepToImgConverter();
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-
         if (sendCategory.equals("")){
             sendCategory = categoryToEngConverter(choiceArr.get(0).toString());
         }
         Log.e("cate",sendCategory);
-        //1. 연도 버튼을 누르고 해당 연도 코드에 따라 서버에 보낼 연도 값을 조정한다.
-        //2. 기본값은 70년대로 설정
-        sendYear = 1970;
-        tv_year.setText("1970");
-        if(YEAR_1_CODE==1){
-            sendYear=1970;
-            tv_year.setText("1970");
-            YEAR_1_CODE=0;
-        }
-        if(YEAR_2_CODE==1){
-            sendYear=1980;
-            tv_year.setText("1980");
-            YEAR_2_CODE=0;
-        }
-        if(YEAR_3_CODE==1){
-            sendYear=1990;
-            tv_year.setText("1990");
-            YEAR_3_CODE=0;
-        }
-        if(YEAR_4_CODE==1){
-            sendYear=2000;
-            tv_year.setText("2000");
-            YEAR_4_CODE=0;
-        }
-
-        if(YEAR_5_CODE==1){
-            sendYear=2010;
-            tv_year.setText("2010");
-            YEAR_5_CODE=0;
-        }
 
 
         //1.시대의 디자인 보여줄 리사이클러뷰
@@ -260,6 +279,23 @@ public class MainPageTab extends AppCompatActivity {
                         String depth3 = result.getDepth3();
                         String depth4 = result.getDepth4();
                         String depth5 = result.getDepth5();
+
+                        //임시로 책상만 가능하게
+                        DeskInfo deskInfo = new DeskInfo();
+                        rankTagDep_1.setText(deskInfo.desk_dep1);
+                        rankTagDep_2.setText(deskInfo.desk_dep2);
+                        rankTagDep_3.setText(deskInfo.desk_dep3);
+                        rankTagDep_4.setText(deskInfo.desk_dep4);
+                        rankTagDep_5.setText(deskInfo.desk_dep5);
+
+                        depToImgConverter.deskConverter_dep_1(depth1,btn_rankTag_1);
+                        depToImgConverter.deskConverter_dep_2(depth2,btn_rankTag_2);
+                        depToImgConverter.deskConverter_dep_3(depth3,btn_rankTag_3);
+                        depToImgConverter.deskConverter_dep_4(depth4,btn_rankTag_4);
+                        depToImgConverter.deskConverter_dep_5(depth5,btn_rankTag_5);
+
+
+
                         Log.e("tag",tag_1_1);
                         Log.e("tag",tag_1_2);
                         Log.e("tag",tag_1_3);
@@ -409,45 +445,45 @@ public class MainPageTab extends AppCompatActivity {
         //1. 연도 눌렸을 경우
         //2. 버튼을 누른 코드 값을 주고
         //3. 서버에 연도 값을 보낼때 해당 코드 값의 연도를 보낸다.
-        btn_year_1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                YEAR_1_CODE=1;
-                onResume();
-            }
-        });
-
-        btn_year_2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                YEAR_2_CODE=1;
-                onResume();
-            }
-        });
-
-        btn_year_3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                YEAR_3_CODE=1;
-                onResume();
-            }
-        });
-
-        btn_year_4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                YEAR_4_CODE=1;
-                onResume();
-            }
-        });
-
-        btn_year_5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                YEAR_5_CODE=1;
-                onResume();
-            }
-        });
+//        btn_year_1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                YEAR_1_CODE=1;
+//                onResume();
+//            }
+//        });
+//
+//        btn_year_2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                YEAR_2_CODE=1;
+//                onResume();
+//            }
+//        });
+//
+//        btn_year_3.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                YEAR_3_CODE=1;
+//                onResume();
+//            }
+//        });
+//
+//        btn_year_4.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                YEAR_4_CODE=1;
+//                onResume();
+//            }
+//        });
+//
+//        btn_year_5.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                YEAR_5_CODE=1;
+//                onResume();
+//            }
+//        });
 
 
 
@@ -487,6 +523,8 @@ public class MainPageTab extends AppCompatActivity {
         }
         return categoryName;
     }
+
+
 
 
 }

@@ -7,11 +7,6 @@ import com.google.gson.internal.$Gson$Preconditions;
 public class NameToNumConverter {
 
     public String deskConverter_dep_1(String name){
-//        String name = input.replaceAll("\\P{Print}","").trim();
-
-//        Log.e("1", String.valueOf(name.equals("CRT(탑 일자)책상")));
-
-
         switch (name){
             case "CRT(탑 일자)책상":
                 name = "1";

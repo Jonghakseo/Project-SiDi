@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="300dp"
     android:layout_height="150dp"
+    android:layout_marginLeft="30dp"
+    android:layout_marginRight="30dp"
+    android:layout_gravity="center"
     android:background="@drawable/round_line"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <TextView
@@ -17,11 +20,11 @@
 
     <TextView
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/tv_explain"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:text="디자인권"
         android:textStyle="bold"/>
 
@@ -32,16 +35,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_explain"/>
 
-    <TextView
-        android:id="@+id/tv_explain_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="-----------------------------------------------"
-        android:textStyle="bold"
-        android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/tv_explain"
-        app:layout_constraintLeft_toRightOf="@id/iv_url"
-        app:layout_constraintRight_toRightOf="parent"/>
 
     <TextView
         android:id="@+id/tv_explain_3"
@@ -50,13 +43,14 @@
         android:text="형태 태그"
         android:textStyle="bold"
         app:layout_constraintLeft_toRightOf="@id/iv_url"
-        app:layout_constraintTop_toBottomOf="@id/tv_explain_2"/>
+        app:layout_constraintTop_toBottomOf="@id/tv_explain"/>
 
     <TextView
         android:id="@+id/tv_explain_4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="1."
+        android:text="#"
+        android:textSize="10dp"
         android:textStyle="bold"
         app:layout_constraintLeft_toRightOf="@id/iv_url"
         app:layout_constraintTop_toBottomOf="@id/tv_explain_3"/>
@@ -67,6 +61,10 @@
         android:layout_height="wrap_content"
         android:text="#직사각형"
         android:textStyle="bold"
+        android:textSize="10dp"
+        android:maxLines="1"
+        android:maxEms="8"
+        android:ellipsize="end"
         app:layout_constraintLeft_toRightOf="@id/tv_explain_4"
         app:layout_constraintTop_toBottomOf="@id/tv_explain_3"
         android:layout_marginBottom="20dp"/>
@@ -77,8 +75,10 @@
         android:id="@+id/tv_explain_5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="2."
+        android:text="#"
         android:textStyle="bold"
+        android:textSize="10dp"
+
         app:layout_constraintLeft_toRightOf="@id/iv_url"
         app:layout_constraintTop_toBottomOf="@id/tv_explain_4"/>
 
@@ -89,6 +89,10 @@
         android:layout_height="wrap_content"
         android:text="#직사각형"
         android:textStyle="bold"
+        android:textSize="10dp"
+        android:maxLines="1"
+        android:maxEms="8"
+        android:ellipsize="end"
         app:layout_constraintLeft_toRightOf="@id/tv_explain_5"
         app:layout_constraintTop_toBottomOf="@id/tv_explain_4"
         android:layout_marginBottom="20dp"/>
@@ -97,7 +101,8 @@
         android:id="@+id/tv_explain_6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="3."
+        android:text="#"
+        android:textSize="10dp"
         android:textStyle="bold"
         app:layout_constraintLeft_toRightOf="@id/iv_url"
         app:layout_constraintTop_toBottomOf="@id/tv_explain_5"/>
@@ -109,6 +114,10 @@
         android:layout_height="wrap_content"
         android:text="#직사각형"
         android:textStyle="bold"
+        android:textSize="10dp"
+        android:maxLines="1"
+        android:maxEms="8"
+        android:ellipsize="end"
         app:layout_constraintLeft_toRightOf="@id/tv_explain_6"
         app:layout_constraintTop_toBottomOf="@id/tv_explain_5"
         android:layout_marginBottom="20dp"/>

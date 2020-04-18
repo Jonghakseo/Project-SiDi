@@ -19,89 +19,49 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+           >
+
+
 
             <HorizontalScrollView
                 android:id="@+id/scrollView"
                 android:background="@android:color/transparent"
-                android:layout_width="300dp"
+                android:layout_width="match_parent"
                 android:layout_margin="10dp"
-                android:layout_height="60dp">
+                android:layout_height="37dp">
                 <LinearLayout
                     android:id="@+id/linearLayout_1"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
                 </LinearLayout>
             </HorizontalScrollView>
 
-            <Button
-                android:id="@+id/btn_choiceRevise"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="태그 수정"
-                android:textStyle="bold"
-                android:background="@android:color/transparent"
-                android:textColor="@android:color/white"
-                android:layout_marginTop="15dp"/>
+
         </LinearLayout>
 
-        <LinearLayout
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btn_year_1"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:textColor="@android:color/white"
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1970's"/>
-
-            <Button
-                android:id="@+id/btn_year_2"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:textColor="@android:color/white"
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1980's"/>
-
-            <Button
-                android:id="@+id/btn_year_3"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:textColor="@android:color/white"
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1990's"/>
-
-            <Button
-                android:id="@+id/btn_year_4"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:textColor="@android:color/white"
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2000's"/>
-
-            <Button
-                android:id="@+id/btn_year_5"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:textColor="@android:color/white"
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2010's"/>
-        </LinearLayout>
+            android:text="가로로 스크롤 해주세요------------------->"
+            android:textSize="10dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="@android:color/white"/>
+        <Button
+            android:id="@+id/btn_choiceRevise"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="태그 수정"
+            android:textStyle="bold"
+            android:background="@drawable/blue_round_line"
+            android:textColor="@android:color/white"
+            android:layout_gravity="right"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            />
 
 
     </LinearLayout>
@@ -128,32 +88,27 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-
-
-
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/allline"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/tv_year"
+                <Spinner
+                    android:id="@+id/spinner_year"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="XX"
-                    android:textSize="50dp"
-                    android:textStyle="bold"/>
+                    android:layout_height="wrap_content"/>
 
                 <TextView
                     android:id="@+id/tv_yearText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="5dp"
                     android:text="년대 대표디자인"
                     android:textSize="30dp"/>
+
+
+
+
             </LinearLayout>
 
             <LinearLayout
@@ -165,6 +120,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
                     android:text="책상"
+                    android:textColor="@android:color/black"
                     android:textSize="20dp"
                     android:textStyle="bold"/>
 
@@ -247,7 +203,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:text="이 시대의 가장 많이 등록된 형태 태그들이에요"
                 android:textSize="15dp" />
 
@@ -261,50 +217,137 @@
                 android:textSize="10dp"/>
 
 
-            <GridLayout
+            <HorizontalScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:rowCount="3"
-                android:columnCount="3">
+                android:layout_height="wrap_content">
 
-                <Button
-                    android:id="@+id/btn_designTag_1"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginTop="15dp"
-                    android:background="@drawable/exam1" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <Button
-                    android:id="@+id/btn_designTag_2"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginTop="15dp"
-                    android:background="@drawable/exam1"/>
-
-                <Button
-                    android:id="@+id/btn_designTag_3"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:background="@drawable/exam1"
-                    android:layout_marginTop="15dp" />
-
-                <Button
-                    android:id="@+id/btn_designTag_4"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:background="@drawable/exam1"
-                    android:layout_marginTop="15dp" />
-                <Button
-                    android:id="@+id/btn_designTag_5"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:background="@drawable/exam1"
-                    android:layout_marginTop="15dp" />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="10dp"
+                        android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/rankTagDep_1"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/black"
+                        android:text="테스트 유형"
+                        android:gravity="center"
+                        android:textAlignment="center"/>
 
 
-            </GridLayout>
+                        <Button
+                        android:id="@+id/btn_rankTag_1"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="10dp"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/rankTagDep_2"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:textColor="@android:color/black"
+                            android:text="테스트 유형"
+                            android:gravity="center"
+                            android:textAlignment="center"/>
+
+
+                        <Button
+                            android:id="@+id/btn_rankTag_2"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="10dp"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/rankTagDep_3"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:textColor="@android:color/black"
+                            android:text="테스트 유형"
+                            android:gravity="center"
+                            android:textAlignment="center"/>
+
+
+                        <Button
+                            android:id="@+id/btn_rankTag_3"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="10dp"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/rankTagDep_4"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:textColor="@android:color/black"
+                            android:text="테스트 유형"
+                            android:gravity="center"
+                            android:textAlignment="center"/>
+
+
+                        <Button
+                            android:id="@+id/btn_rankTag_4"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="10dp"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/rankTagDep_5"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:textColor="@android:color/black"
+                            android:text="테스트 유형"
+                            android:gravity="center"
+                            android:textAlignment="center"/>
+
+
+                        <Button
+                            android:id="@+id/btn_rankTag_5"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
         </LinearLayout>
+
+
+
+
     </ScrollView>
 
 
@@ -322,12 +365,12 @@
             android:layout_weight="1"
             android:textColor="@android:color/white"
             android:background="@drawable/blue_round_line"
-            android:layout_height="60dp"
+            android:layout_height="40dp"
             android:text="홈" />
         <Button
             android:id="@+id/btn_searchPage"
             android:layout_width="100dp"
-            android:layout_height="60dp"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:textColor="@android:color/white"
             android:background="@drawable/blue_round_line"
@@ -335,7 +378,7 @@
         <Button
             android:id="@+id/btn_myPage"
             android:layout_width="100dp"
-            android:layout_height="60dp"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:textColor="@android:color/white"
             android:background="@drawable/blue_round_line"
@@ -343,7 +386,7 @@
         <Button
             android:id="@+id/btn_addPage"
             android:layout_width="100dp"
-            android:layout_height="60dp"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:textColor="@android:color/white"
             android:background="@drawable/blue_round_line"

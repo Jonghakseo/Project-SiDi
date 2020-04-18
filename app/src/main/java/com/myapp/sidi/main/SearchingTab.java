@@ -27,7 +27,6 @@ import com.myapp.sidi.Category.LampHangInfo;
 import com.myapp.sidi.Category.NameToNumConverter;
 import com.myapp.sidi.Category.SofaInfo;
 import com.myapp.sidi.Category.TableInfo;
-import com.myapp.sidi.Interface.ServerInterface;
 import com.myapp.sidi.R;
 import com.myapp.sidi.search.SearchResult;
 
@@ -58,7 +57,7 @@ public class SearchingTab extends AppCompatActivity {
     private CheckBox searchFormCheckBox,searchFormCheckBox2,searchFormCheckBox3,searchFormCheckBox4,searchFormCheckBox5;
     private ArrayList dep_1_tmpArr, dep_2_tmpArr,dep_3_tmpArr,dep_4_tmpArr,dep_5_tmpArr;
     private ArrayList dep_1_ResultArr, dep_2_ResultArr,dep_3_ResultArr,dep_4_ResultArr,dep_5_ResultArr;
-    private Button btn_test;
+    private Button btn_next;
     private String furnitureChoiceResult, startTimeChoiceResult,endTimeChoiceResult,nationChoiceResult,dep_1_ChoiceResult,dep_2_ChoiceResult,
     dep_3_ChoiceResult,dep_4_ChoiceResult,dep_5_ChoiceResult;
     private StringBuilder nationStringBuilder,dep_1_StringBuilder,dep_2_StringBuilder,dep_3_StringBuilder,dep_4_StringBuilder,dep_5_StringBuilder;
@@ -72,7 +71,7 @@ public class SearchingTab extends AppCompatActivity {
 
         et_year_1 = findViewById(R.id.et_year_1);
         et_year_2 = findViewById(R.id.et_year_2);
-        btn_test = findViewById(R.id.test);
+        btn_next = findViewById(R.id.btn_next);
 
         tv_middleYear=findViewById(R.id.tv_middleYear);
         tv_FurnitureFormExplain = findViewById(R.id.tv_FurnitureFormExplain);
@@ -147,11 +146,11 @@ public class SearchingTab extends AppCompatActivity {
         btn_dep_4.setTextSize(10);
         btn_dep_5.setTextSize(10);
 
-        btn_dep_1.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,70));
-        btn_dep_2.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,70));
-        btn_dep_3.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,70));
-        btn_dep_4.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,70));
-        btn_dep_5.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,70));
+        btn_dep_1.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        btn_dep_2.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT));
+        btn_dep_3.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT));
+        btn_dep_4.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT));
+        btn_dep_5.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT));
 
         //1. 기본적으로  각 depth 접혀있는 상태로 시작
         if(CATEGORY_CLICK_CODE ==0){
@@ -730,8 +729,7 @@ public class SearchingTab extends AppCompatActivity {
 
 
 
-
-        btn_test.setOnClickListener(new View.OnClickListener() {
+        btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.e("furnitureChoiceResult", furnitureChoiceResult);
