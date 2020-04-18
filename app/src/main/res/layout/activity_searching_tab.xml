@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:id="@+id/Linear_topPart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btn_next"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:text="선택 완료"
+            android:background="@drawable/blue_round_line"/>
+    </LinearLayout>
 
     <ScrollView
     android:layout_width="match_parent"
@@ -9,51 +27,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".main.SearchingTab">
-
-    <LinearLayout
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/Linear_topPart"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
 
-    <Button
-        android:id="@+id/btn_searchDetail"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="상세검색"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/btn_searchAPI"/>
 
-    <Button
-        android:id="@+id/btn_searchAPI"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="API검색"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/btn_searchDetail"/>
-    </LinearLayout>
+
 
     <Button
         android:id="@+id/btn_FurnitureCategory"
         android:layout_width="200dp"
         android:layout_height="70dp"
-
+        android:layout_gravity="center"
         android:text="가구 카테고리"
         android:textSize="20dp"
         android:textColor="@android:color/white"
         android:background="@drawable/blue_round_line"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/Linear_topPart"
-        app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="10dp"/>
 
 
@@ -118,6 +109,7 @@
         android:layout_height="70dp"
         android:text="시간대"
         android:textSize="20dp"
+        android:layout_gravity="center"
         android:textColor="@android:color/white"
         android:background="@drawable/blue_round_line"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -174,6 +166,7 @@
         android:layout_height="70dp"
         android:text="국가"
         android:textSize="20dp"
+        android:layout_gravity="center"
         android:textColor="@android:color/white"
         android:background="@drawable/blue_round_line"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -234,6 +227,7 @@
         android:background="@drawable/blue_round_line"
         android:text="상세 형대 검색"
         android:textColor="@android:color/white"
+        android:layout_gravity="center"
         android:textSize="20dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -355,11 +349,8 @@
 
     </LinearLayout>
 
-<Button
-    android:id="@+id/btn_next"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/blue_round_line"/>
+
 </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 </ScrollView>
+</LinearLayout>
