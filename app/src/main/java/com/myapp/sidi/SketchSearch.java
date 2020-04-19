@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.icu.text.SimpleDateFormat;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -17,17 +18,48 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.myapp.sidi.Adapter.SearchSketch_Adapter;
+import com.myapp.sidi.DTO.SearchDetailData;
+import com.myapp.sidi.DTO.SimilarImageResult;
+import com.myapp.sidi.Interface.ServerInterface;
+
+import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import yuku.ambilwarna.AmbilWarnaDialog;
 
 public class SketchSearch extends AppCompatActivity {
     MemoDrawView view;
     int tColor, n = 0;
+    String userID;
     File newMemo;
+    Button btn_sketchSearch;
+    RecyclerView rv_similarDesign;
+    GridLayoutManager gridLayoutManager;
+    SearchSketch_Adapter searchSketchAdapter;
+    ArrayList<SearchDetailData> similarImages  = new ArrayList<>();
+
+    String uploadFilePath = "";//경로를 모르겠으면, 갤러리 어플리케이션 가서 메뉴->상세 정보
+    String uploadFileName = ""; //전송하고자하는 파일 이름
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +69,26 @@ public class SketchSearch extends AppCompatActivity {
         view = new MemoDrawView(this);
         //그림을 그릴 수 있는 MemoDrawView를 View로 가져온다.
 
+        userID = getIntent().getStringExtra("user");
+        if (userID == null){
+            userID = "tempUser";
+        }
+
+
+
+        btn_sketchSearch = findViewById(R.id.btn_sketchSearch);
+        rv_similarDesign = findViewById(R.id.rv_similarDesign);
+
+        gridLayoutManager = new GridLayoutManager(this,2,GridLayoutManager.HORIZONTAL,false);
+        rv_similarDesign.setLayoutManager(gridLayoutManager);
+        searchSketchAdapter = new SearchSketch_Adapter(similarImages,this);
+        searchSketchAdapter.setOnItemClickListener(new SearchSketch_Adapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+                //TODO 다시 디테일 페이지로 넘겨줘야함. 출원번호만 가지고 가능...? 레드로핏으로 다시 정보 넘겨서 확인 필요할듯?
+            }
+        });
+        rv_similarDesign.setAdapter(searchSketchAdapter);
 //        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED) {
 //            //쓰기 권한 없음
 //            System.out.println("쓰기 권한 없음");
@@ -145,6 +197,13 @@ public class SketchSearch extends AppCompatActivity {
         });
         //저장 버튼
 
+        btn_sketchSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                search();
+            }
+        });
+
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -193,7 +252,15 @@ public class SketchSearch extends AppCompatActivity {
 
     }
 
-    private void savePicture() {
+    private void search() {
+        savePicture();
+//        if (savePicture() != null){
+        UploadAsync uploadAsync = new UploadAsync();
+        uploadAsync.execute(newMemo);
+//        }
+    }
+
+    private String savePicture() {
         // 1. 캐쉬(Cache)를 허용시킨다.
         // 2. 그림을 Bitmap 으로 저장.
         // 3. 캐쉬를 막는다.
@@ -208,7 +275,7 @@ public class SketchSearch extends AppCompatActivity {
 
         // 접근하려면 반드시 AndroidManifest.xml에 권한 설정을 한다.
 
-        File dir = new File(getApplicationContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES), "memo");
+        File dir = new File(getApplicationContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES), "searchSketch");
 //         폴더가 있는지 확인 후 없으면 새로 만들어준다.
 
         if (!dir.exists()) {
@@ -226,23 +293,26 @@ public class SketchSearch extends AppCompatActivity {
 
         FileOutputStream fos;
         try {
-            newMemo = new File(getApplicationContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES) + "/memo", "memo" + formatDate + ".png");
+            newMemo = new File(getApplicationContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES) + "/searchSketch", "sketch" + userID + formatDate + ".jpg");
 //            System.out.println(getApplicationContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES));
             //앱의 내부 저장소에 접근해서 저장함으로써 권한 문제 회피  https://underground2.tistory.com/39
             fos = new FileOutputStream(newMemo);
-            screenshot.compress(Bitmap.CompressFormat.PNG, 100, fos);
+            screenshot.compress(Bitmap.CompressFormat.JPEG, 100, fos);
             fos.close();
-            Toast.makeText(this, "저장 성공", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "저장 성공", Toast.LENGTH_SHORT).show();
+            uploadFilePath = getApplicationContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES) + "/searchSketch";
+            uploadFileName = "sketch" + userID + formatDate + ".jpg";
 //            memoLists.add(newMemo);
-            finish();
-
+//            finish();
+            return getApplicationContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES) + "/searchSketch/sketch" + formatDate + ".jpg";
         } catch (Exception e) {
-            Log.e("phoro", "그림저장오류", e);
+            Log.e("photo", "그림저장오류", e);
             Toast.makeText(this, "저장 실패", Toast.LENGTH_SHORT).show();
-
+            return null;
         }
 
     }
+
 
 //    private void loadPicture() {
 //
@@ -288,4 +358,347 @@ public class SketchSearch extends AppCompatActivity {
         colorPicker.show();
     }
 //오픈소스로 가져온 컬러 선택기를 팝업한다.
+
+
+    //    private void HttpMultiPart(final File file) {
+//
+//        new AsyncTask<Void, Void, JSONObject>() {
+//
+//            @Override
+//            protected JSONObject doInBackground(Void... voids) {
+//
+//                String boundary = "^-----^";
+//                String LINE_FEED = "\r\n";
+//                String charset = "UTF-8";
+//                OutputStream outputStream;
+//                PrintWriter writer;
+//
+//                JSONObject result = null;
+//                try {
+//
+//                    URL url = new URL("http://ec2-13-125-249-181.ap-northeast-2.compute.amazonaws.com/findSimilarImages.php");
+//                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+//
+//                    connection.setRequestProperty("Content-Type", "multipart/form-data;charset=utf-8;boundary=" + boundary);
+//                    connection.setRequestMethod("POST");
+//                    connection.setDoInput(true);
+//                    connection.setDoOutput(true);
+//                    connection.setUseCaches(false);
+//                    connection.setConnectTimeout(15000);
+//
+//                    outputStream = connection.getOutputStream();
+//                    writer = new PrintWriter(new OutputStreamWriter(outputStream, charset), true);
+//
+//                    /** Body에 데이터를 넣어줘야 할경우 없으면 Pass **/
+////                    writer.append("--" + boundary).append(LINE_FEED);
+////                    writer.append("Content-Disposition: form-data; name=\"데이터 키값\"").append(LINE_FEED);
+////                    writer.append("Content-Type: text/plain; charset=" + charset).append(LINE_FEED);
+////                    writer.append(LINE_FEED);
+////                    writer.append("데이터값").append(LINE_FEED);
+////                    writer.flush();
+//
+//                    /** 파일 데이터를 넣는 부분**/
+//                    writer.append("--" + boundary).append(LINE_FEED);
+//                    writer.append("Content-Disposition: form-data; name=\"file\"; filename=\"" + file.getName() + "\"").append(LINE_FEED);
+//                    writer.append("Content-Type: " + URLConnection.guessContentTypeFromName(file.getName())).append(LINE_FEED);
+//                    writer.append("Content-Transfer-Encoding: binary").append(LINE_FEED);
+//                    writer.append(LINE_FEED);
+//                    writer.flush();
+//
+//                    FileInputStream inputStream = new FileInputStream(file);
+//                    byte[] buffer = new byte[(int) file.length()];
+//                    int bytesRead = -1;
+//                    while ((bytesRead = inputStream.read(buffer)) != -1) {
+//                        outputStream.write(buffer, 0, bytesRead);
+//                    }
+//                    outputStream.flush();
+//                    inputStream.close();
+//                    writer.append(LINE_FEED);
+//                    writer.flush();
+//
+//                    writer.append("--" + boundary + "--").append(LINE_FEED);
+//                    writer.close();
+//
+//                    int responseCode = connection.getResponseCode();
+//                    if (responseCode == HttpURLConnection.HTTP_OK || responseCode == HttpURLConnection.HTTP_CREATED) {
+//                        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+//                        String inputLine;
+//                        StringBuffer response = new StringBuffer();
+//                        while ((inputLine = in.readLine()) != null) {
+//                            response.append(inputLine);
+//                        }
+//                        in.close();
+//
+//                        try {
+//                            result = new JSONObject(response.toString());
+//
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//                    } else {
+//                        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
+//                        String inputLine;
+//                        StringBuffer response = new StringBuffer();
+//                        while ((inputLine = in.readLine()) != null) {
+//                            response.append(inputLine);
+//                        }
+//                        in.close();
+//                        result = new JSONObject(response.toString());
+//                    }
+//
+//                } catch (ConnectException e) {
+//                    Log.e("tag", "ConnectException");
+//                    e.printStackTrace();
+//
+//
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//
+//                return result;
+//            }
+//
+//            @Override
+//            protected void onPostExecute(JSONObject jsonObject) {
+//                super.onPostExecute(jsonObject);
+//            }
+//
+//        }.execute();
+//    }
+
+    int serverResponseCode = 0;
+    String upLoadServerUri = null;
+
+
+
+    class UploadAsync extends AsyncTask<File, Void, Void> {
+        File targetFile;
+        boolean sf = false;
+        @Override
+        protected Void doInBackground(File... files) {
+
+            targetFile = files[0];
+
+            HttpURLConnection conn = null;
+
+            DataOutputStream dos = null;
+
+            String lineEnd = "\r\n";
+
+            String twoHyphens = "--";
+
+            String boundary = "*****";
+
+            int bytesRead, bytesAvailable, bufferSize;
+
+            byte[] buffer;
+
+            int maxBufferSize = 1 * 1024 * 1024;
+
+            File sourceFile = targetFile;
+
+            if (!sourceFile.isFile()) {
+
+                Log.e("uploadFile", "Source File not exist :"
+                        +uploadFilePath + "" + uploadFileName);
+
+            } else {
+
+                try {
+                    // open a URL connection to the Servlet
+                    FileInputStream fileInputStream = new FileInputStream(sourceFile);
+                    URL url = new URL("http://ec2-13-125-249-181.ap-northeast-2.compute.amazonaws.com/sidi/uploadSerchSketch.php");
+                    // Open a HTTP  connection to  the URL
+
+                    conn = (HttpURLConnection) url.openConnection();
+
+                    conn.setDoInput(true); // Allow Inputs
+                    conn.setDoOutput(true); // Allow Outputs
+                    conn.setUseCaches(false); // Don't use a Cached Copy
+                    conn.setRequestMethod("POST");
+                    conn.setRequestProperty("Connection", "Keep-Alive");
+                    conn.setRequestProperty("ENCTYPE", "multipart/form-data");
+                    conn.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
+                    conn.setRequestProperty("uploaded_file", uploadFileName);
+
+                    dos = new DataOutputStream(conn.getOutputStream());
+                    dos.writeBytes(twoHyphens + boundary + lineEnd);
+                    dos.writeBytes("Content-Disposition: form-data; name=\"uploaded_file\";filename=\""
+                            + uploadFileName + "\"" + lineEnd);
+
+
+                    dos.writeBytes(lineEnd);
+                    // crete a buffer of  maximum size
+
+                    bytesAvailable = fileInputStream.available();
+                    bufferSize = Math.min(bytesAvailable, maxBufferSize);
+                    buffer = new byte[bufferSize];
+
+                    // read file and write it into form...
+
+                    bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+
+                    while (bytesRead > 0) {
+                        dos.write(buffer, 0, bufferSize);
+                        bytesAvailable = fileInputStream.available();
+                        bufferSize = Math.min(bytesAvailable, maxBufferSize);
+                        bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+
+                    }
+
+                    // send multipart form data necesssary after file data...
+                    dos.writeBytes(lineEnd);
+                    dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
+
+                    // Responses from the server (code and message)
+                    serverResponseCode = conn.getResponseCode();
+                    String serverResponseMessage = conn.getResponseMessage();
+
+                    Log.i("uploadFile", "HTTP Response is : "
+
+                            + serverResponseMessage + ": " + serverResponseCode);
+
+                    if (serverResponseCode == 200) {
+                        sf = true;
+                        runOnUiThread(new Runnable() {
+
+                            public void run() {
+//                                Toast.makeText(SketchSearch.this, "File Upload Complete.",
+//                                        Toast.LENGTH_SHORT).show();
+
+                            }
+
+                        });
+
+                    }
+
+
+                    //close the streams //
+
+                    fileInputStream.close();
+
+                    dos.flush();
+
+                    dos.close();
+
+
+                } catch (MalformedURLException ex) {
+
+
+
+                    ex.printStackTrace();
+
+
+                    runOnUiThread(new Runnable() {
+
+                        public void run() {
+                            Toast.makeText(SketchSearch.this, "MalformedURLException",
+
+                                    Toast.LENGTH_SHORT).show();
+
+                        }
+
+                    });
+
+
+                    Log.e("Upload file to server", "error: " + ex.getMessage(), ex);
+
+                } catch (Exception e) {
+
+
+
+                    e.printStackTrace();
+
+
+                    runOnUiThread(new Runnable() {
+
+                        public void run() {
+                            Toast.makeText(SketchSearch.this, "Got Exception : see logcat ",
+                                    Toast.LENGTH_SHORT).show();
+
+                        }
+
+                    });
+
+                    Log.e("Upload file to server Exception", "Exception : "
+
+                            + e.getMessage(), e);
+
+                }
+
+
+            } // End else block
+
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            if (sf){
+
+                OkHttpClient client = new OkHttpClient.Builder().addInterceptor(httpLoggingInterceptor()).build();
+                //1. 서버에 카테고리 1번을 보내기
+                //2. 기본 연도 1960으로 해서 보내기
+                Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl(ServerInterface.BASE_URL)
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .client(client)
+                        .build();
+                ServerInterface serverInterface = retrofit.create(ServerInterface.class);
+//        Log.e("year",sendYear);
+                serverInterface.similar(uploadFileName)
+                        .enqueue(new Callback<SimilarImageResult>() {
+                            @Override
+                            public void onResponse(Call<SimilarImageResult> call, Response<SimilarImageResult> response) {
+                                SimilarImageResult result = response.body();
+                                Log.e("SimilarImageResult",result.toString());
+                                String url = "http://ec2-13-125-249-181.ap-northeast-2.compute.amazonaws.com/sidi/deskimg/";
+//                                SearchDetailData sdd = new SearchDetailData(url+result.getSimilarUrl1(),1);
+//                                similarImages.add(sdd);
+                                similarImages.clear();
+                                similarImages.add(new SearchDetailData(url+result.getSimilarUrl1(),Integer.parseInt(String.valueOf(Float.parseFloat(result.getSimilarRate1())*100).substring(0,2))));
+                                similarImages.add(new SearchDetailData(url+result.getSimilarUrl2(),Integer.parseInt(String.valueOf(Float.parseFloat(result.getSimilarRate2())*100).substring(0,2))));
+                                similarImages.add(new SearchDetailData(url+result.getSimilarUrl3(),Integer.parseInt(String.valueOf(Float.parseFloat(result.getSimilarRate3())*100).substring(0,2))));
+                                similarImages.add(new SearchDetailData(url+result.getSimilarUrl4(),Integer.parseInt(String.valueOf(Float.parseFloat(result.getSimilarRate4())*100).substring(0,2))));
+                                similarImages.add(new SearchDetailData(url+result.getSimilarUrl5(),Integer.parseInt(String.valueOf(Float.parseFloat(result.getSimilarRate5())*100).substring(0,2))));
+                                similarImages.add(new SearchDetailData(url+result.getSimilarUrl6(),Integer.parseInt(String.valueOf(Float.parseFloat(result.getSimilarRate6())*100).substring(0,2))));
+                                similarImages.add(new SearchDetailData(url+result.getSimilarUrl7(),Integer.parseInt(String.valueOf(Float.parseFloat(result.getSimilarRate7())*100).substring(0,2))));
+                                similarImages.add(new SearchDetailData(url+result.getSimilarUrl8(),Integer.parseInt(String.valueOf(Float.parseFloat(result.getSimilarRate8())*100).substring(0,2))));
+                                similarImages.add(new SearchDetailData(url+result.getSimilarUrl9(),Integer.parseInt(String.valueOf(Float.parseFloat(result.getSimilarRate9())*100).substring(0,2))));
+                                similarImages.add(new SearchDetailData(url+result.getSimilarUrl10(),Integer.parseInt(String.valueOf(Float.parseFloat(result.getSimilarRate10())*100).substring(0,2))));
+
+                                searchSketchAdapter.notifyDataSetChanged();
+                                rv_similarDesign.setFocusedByDefault(true);
+
+                            }
+
+                            @Override
+                            public void onFailure(Call<SimilarImageResult> call, Throwable t) {
+                                Log.e("networkError",t.toString());
+                            }
+                        });
+
+
+            }
+
+            super.onPostExecute(aVoid);
+        }
+
+
+    }
+
+    private HttpLoggingInterceptor httpLoggingInterceptor(){
+
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+            @Override
+            public void log(String message) {
+                android.util.Log.e("MyGitHubData :", message + "");
+            }
+        });
+
+        return interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+    }
+
+
 }

@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.myapp.sidi.Category.ChairInfo;
+import com.myapp.sidi.Category.CountryInfo;
 import com.myapp.sidi.Category.DeskInfo;
 import com.myapp.sidi.Category.LampDispatchInfo;
 import com.myapp.sidi.Category.LampHangInfo;
@@ -48,7 +49,7 @@ public class SearchingTab extends AppCompatActivity {
     private RadioButton rb_furnitureDesk,rb_furnitureChair,rb_furnitureTable,rb_furnitureSofa,rb_furnitureDispatchLamp,rb_furnitureHangLamp;
     private RadioGroup rg_furniture;
     private CheckBox cb_timeAll;
-    private CheckBox cb_nationAll,cb_nationKor,cb_nationUS,cb_nationJp,cb_nationOther;
+    private CheckBox cb_nationAll,cb_nationKor,cb_nationUS,cb_nationJp, cb_nationGm,cb_nationWipo,cb_nationOhim;
     private CheckBox cb_furnitureDetailAll;
     private EditText et_year_1,et_year_2;
     private Button btn_dep_1, btn_dep_2, btn_dep_3, btn_dep_4, btn_dep_5;
@@ -60,10 +61,11 @@ public class SearchingTab extends AppCompatActivity {
     private Button btn_next;
     private String furnitureChoiceResult="", startTimeChoiceResult="",endTimeChoiceResult="",nationChoiceResult="",
             dep_1_ChoiceResult="",dep_2_ChoiceResult="",
-    dep_3_ChoiceResult="",dep_4_ChoiceResult="",dep_5_ChoiceResult="";
+            dep_3_ChoiceResult="",dep_4_ChoiceResult="",dep_5_ChoiceResult="";
     private StringBuilder nationStringBuilder,dep_1_StringBuilder,dep_2_StringBuilder,dep_3_StringBuilder,dep_4_StringBuilder,dep_5_StringBuilder;
     private TextView tv_middleYear,tv_FurnitureFormExplain;
     private NameToNumConverter converter;
+    private CountryInfo countryInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +98,11 @@ public class SearchingTab extends AppCompatActivity {
         cb_nationKor = findViewById(R.id.cb_nationKor);
         cb_nationUS = findViewById(R.id.cb_nationUS);
         cb_nationJp = findViewById(R.id.cb_nationJp);
-        cb_nationOther = findViewById(R.id.cb_nationOther);
+        cb_nationGm = findViewById(R.id.cb_nationGm);
+        cb_nationWipo = findViewById(R.id.cb_nationWipo);
+        cb_nationOhim = findViewById(R.id.cb_nationOhim);
+
+
 //        cb_furnitureDetailAll = findViewById(R.id.cb_furnitureDetailAll);
 
         btn_dep_1 = findViewById(R.id.btn_dep_1);
@@ -212,6 +218,7 @@ public class SearchingTab extends AppCompatActivity {
             tv_FurnitureFormExplain.setVisibility(View.GONE);
         }
         converter = new NameToNumConverter();
+        countryInfo = new CountryInfo();
 
     }
 
@@ -236,8 +243,8 @@ public class SearchingTab extends AppCompatActivity {
 
 
         //가구를 선택할 때 마다 발생하는 이벤트를 구현
-            //해당 가구의 형태 검색 내용들 동적으로 만들기
-            rg_furniture.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        //해당 가구의 형태 검색 내용들 동적으로 만들기
+        rg_furniture.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int rbID) {
                 furnitureChoiceResult ="";
@@ -256,40 +263,40 @@ public class SearchingTab extends AppCompatActivity {
 
 
 
-            btn_FurnitureForm.setVisibility(View.VISIBLE);
-            tv_FurnitureFormExplain.setVisibility(View.VISIBLE);
+                btn_FurnitureForm.setVisibility(View.VISIBLE);
+                tv_FurnitureFormExplain.setVisibility(View.VISIBLE);
 
-            form_count=0;
+                form_count=0;
 
                 //해당 값들 초기화
                 initBtnAndLinear();
-                    //처음으로 가구를 선택했을때 형태 검색 버튼이 나오도록 하기
-                    FIRST_VISIT_CODE_FURNITURE_FORM=1;
-                    //가구를 변경시킬 때 마다 형태 검색 버튼쪽 내용 접기
-                    Linear_furnitureDetailTotal.setVisibility(View.GONE);
+                //처음으로 가구를 선택했을때 형태 검색 버튼이 나오도록 하기
+                FIRST_VISIT_CODE_FURNITURE_FORM=1;
+                //가구를 변경시킬 때 마다 형태 검색 버튼쪽 내용 접기
+                Linear_furnitureDetailTotal.setVisibility(View.GONE);
 
-                    //다른 가구에서 형태 검색 클릭했을 시 열려 있던 부분 닫아주고 클릭 코드 값 초기화
-                    Linear_dep_1.setVisibility(View.GONE);
-                    Linear_dep_2.setVisibility(View.GONE);
-                    Linear_dep_3.setVisibility(View.GONE);
-                    Linear_dep_4.setVisibility(View.GONE);
-                    Linear_dep_5.setVisibility(View.GONE);
-                    DEP_1_CLICK_CODE=0;
-                    DEP_2_CLICK_CODE=0;
-                    DEP_3_CLICK_CODE=0;
-                    DEP_4_CLICK_CODE=0;
-                    DEP_5_CLICK_CODE=0;
+                //다른 가구에서 형태 검색 클릭했을 시 열려 있던 부분 닫아주고 클릭 코드 값 초기화
+                Linear_dep_1.setVisibility(View.GONE);
+                Linear_dep_2.setVisibility(View.GONE);
+                Linear_dep_3.setVisibility(View.GONE);
+                Linear_dep_4.setVisibility(View.GONE);
+                Linear_dep_5.setVisibility(View.GONE);
+                DEP_1_CLICK_CODE=0;
+                DEP_2_CLICK_CODE=0;
+                DEP_3_CLICK_CODE=0;
+                DEP_4_CLICK_CODE=0;
+                DEP_5_CLICK_CODE=0;
 
-                    //형태 검색 버튼 클릭 코드 초기화
-                    FURNITURE_FORM_CLICK_CODE = 0;
+                //형태 검색 버튼 클릭 코드 초기화
+                FURNITURE_FORM_CLICK_CODE = 0;
 
 
                 //depth 체크 시 버튼 GONE 시켰던 것들 모두 초기화
-                    btn_dep_1.setVisibility(View.VISIBLE);
-                    btn_dep_2.setVisibility(View.VISIBLE);
-                    btn_dep_3.setVisibility(View.VISIBLE);
-                    btn_dep_4.setVisibility(View.VISIBLE);
-                    btn_dep_5.setVisibility(View.VISIBLE);
+                btn_dep_1.setVisibility(View.VISIBLE);
+                btn_dep_2.setVisibility(View.VISIBLE);
+                btn_dep_3.setVisibility(View.VISIBLE);
+                btn_dep_4.setVisibility(View.VISIBLE);
+                btn_dep_5.setVisibility(View.VISIBLE);
 
 
 
@@ -686,48 +693,55 @@ public class SearchingTab extends AppCompatActivity {
         });
 
 
-            //"시간대" 선택하고 저장하는 부분
-            //체크박스 전체 선택시 동작하는 부분
-            cb_timeAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    if (compoundButton.isChecked()==true){
-                        et_year_1.setVisibility(View.GONE);
-                        et_year_2.setVisibility(View.GONE);
-                        tv_middleYear.setVisibility(View.GONE);
-                    }else if (compoundButton.isChecked()==false){
-                        et_year_1.setVisibility(View.VISIBLE);
-                        et_year_2.setVisibility(View.VISIBLE);
-                        tv_middleYear.setVisibility(View.VISIBLE);
-                    }
-
+        //"시간대" 선택하고 저장하는 부분
+        //체크박스 전체 선택시 동작하는 부분
+        cb_timeAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (compoundButton.isChecked()==true){
+                    et_year_1.setVisibility(View.GONE);
+                    et_year_2.setVisibility(View.GONE);
+                    tv_middleYear.setVisibility(View.GONE);
+                }else if (compoundButton.isChecked()==false){
+                    et_year_1.setVisibility(View.VISIBLE);
+                    et_year_2.setVisibility(View.VISIBLE);
+                    tv_middleYear.setVisibility(View.VISIBLE);
                 }
-            });
+
+            }
+        });
 
 
-            //"국가" 선택하고 저장하는 부분
-            //체크박스 전체 선택시 동작하는 부분
-            cb_nationAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    if (compoundButton.isChecked()==true){
-                        cb_nationKor.setVisibility(View.GONE);
-                        cb_nationUS.setVisibility(View.GONE);
-                        cb_nationJp.setVisibility(View.GONE);
-                        cb_nationOther.setVisibility(View.GONE);
-                        cb_nationKor.setChecked(false);
-                        cb_nationUS.setChecked(false);
-                        cb_nationJp.setChecked(false);
-                        cb_nationOther.setChecked(false);
-                        nationChoiceResult = "1,2,3,4";
-                    }else if (compoundButton.isChecked()==false){
-                        cb_nationKor.setVisibility(View.VISIBLE);
-                        cb_nationUS.setVisibility(View.VISIBLE);
-                        cb_nationJp.setVisibility(View.VISIBLE);
-                        cb_nationOther.setVisibility(View.VISIBLE);
-                    }
+        //"국가" 선택하고 저장하는 부분
+        //체크박스 전체 선택시 동작하는 부분
+        cb_nationAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (compoundButton.isChecked()==true){
+                    cb_nationKor.setVisibility(View.GONE);
+                    cb_nationUS.setVisibility(View.GONE);
+                    cb_nationJp.setVisibility(View.GONE);
+                    cb_nationGm.setVisibility(View.GONE);
+                    cb_nationWipo.setVisibility(View.GONE);
+                    cb_nationOhim.setVisibility(View.GONE);
+
+                    cb_nationKor.setChecked(false);
+                    cb_nationUS.setChecked(false);
+                    cb_nationJp.setChecked(false);
+                    cb_nationGm.setChecked(false);
+                    cb_nationWipo.setChecked(false);
+                    cb_nationWipo.setChecked(false);
+                    nationChoiceResult = "1,2,3,4,5,6";
+                }else if (compoundButton.isChecked()==false){
+                    cb_nationKor.setVisibility(View.VISIBLE);
+                    cb_nationUS.setVisibility(View.VISIBLE);
+                    cb_nationJp.setVisibility(View.VISIBLE);
+                    cb_nationGm.setVisibility(View.VISIBLE);
+                    cb_nationWipo.setVisibility(View.VISIBLE);
+                    cb_nationOhim.setVisibility(View.VISIBLE);
                 }
-            });
+            }
+        });
 
 
 
@@ -739,8 +753,8 @@ public class SearchingTab extends AppCompatActivity {
 
                 if (!cb_timeAll.isChecked()&&!et_year_1.getText().toString().equals("")&&
                         !et_year_2.getText().toString().equals("")){
-                startTimeChoiceResult = et_year_1.getText().toString();
-                endTimeChoiceResult = et_year_2.getText().toString();
+                    startTimeChoiceResult = et_year_1.getText().toString();
+                    endTimeChoiceResult = et_year_2.getText().toString();
 
                 }
 
@@ -781,8 +795,14 @@ public class SearchingTab extends AppCompatActivity {
                 if (cb_nationJp.isChecked()){
                     tmpNationArr.add(cb_nationJp.getText().toString());
                 }
-                if (cb_nationOther.isChecked()){
-                    tmpNationArr.add(cb_nationOther.getText().toString());
+                if (cb_nationGm.isChecked()){
+                    tmpNationArr.add(cb_nationGm.getText().toString());
+                }
+                if (cb_nationWipo.isChecked()){
+                    tmpNationArr.add(cb_nationWipo.getText().toString());
+                }
+                if(cb_nationOhim.isChecked()){
+                    tmpNationArr.add(cb_nationOhim.getText().toString());
                 }
 
                 if (tmpNationArr.size()!=0){
@@ -871,30 +891,30 @@ public class SearchingTab extends AppCompatActivity {
 
 
 
-            //상세 형태 검색 클릭시
-            //유형별 제목만 보이도록 함
-            btn_FurnitureForm.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    //가구 카테고리를 선택하고 난 뒤에 형태 검색이 보이도록 하기 위한 예외처리
-                    //하나라도 클릭했을 경우부터 보이도록 함
+        //상세 형태 검색 클릭시
+        //유형별 제목만 보이도록 함
+        btn_FurnitureForm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //가구 카테고리를 선택하고 난 뒤에 형태 검색이 보이도록 하기 위한 예외처리
+                //하나라도 클릭했을 경우부터 보이도록 함
 
-                        //형태 검색 버튼을 클릭했을 경우 펼치기
-                        if (FURNITURE_FORM_CLICK_CODE == 0) {
-                            Linear_furnitureDetailTotal.setVisibility(View.VISIBLE);
-                            //dep_4인경우 예외처리 부분
-                            if (form_count==4){
-                                btn_dep_5.setVisibility(View.GONE);
-                            }
-                            FURNITURE_FORM_CLICK_CODE = 1;
-                            //한번더 클릭했을 경우 닫기
-                        } else if (FURNITURE_FORM_CLICK_CODE == 1) {
-                            Linear_furnitureDetailTotal.setVisibility(View.GONE);
-                            FURNITURE_FORM_CLICK_CODE = 0;
-                        }
-
+                //형태 검색 버튼을 클릭했을 경우 펼치기
+                if (FURNITURE_FORM_CLICK_CODE == 0) {
+                    Linear_furnitureDetailTotal.setVisibility(View.VISIBLE);
+                    //dep_4인경우 예외처리 부분
+                    if (form_count==4){
+                        btn_dep_5.setVisibility(View.GONE);
+                    }
+                    FURNITURE_FORM_CLICK_CODE = 1;
+                    //한번더 클릭했을 경우 닫기
+                } else if (FURNITURE_FORM_CLICK_CODE == 1) {
+                    Linear_furnitureDetailTotal.setVisibility(View.GONE);
+                    FURNITURE_FORM_CLICK_CODE = 0;
                 }
-            });
+
+            }
+        });
 
 
 
@@ -905,11 +925,11 @@ public class SearchingTab extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (DEP_1_CLICK_CODE==0){
-                Linear_dep_1.setVisibility(View.VISIBLE);
-                DEP_1_CLICK_CODE=1;
+                    Linear_dep_1.setVisibility(View.VISIBLE);
+                    DEP_1_CLICK_CODE=1;
                 }else if(DEP_1_CLICK_CODE==1){
-                Linear_dep_1.setVisibility(View.GONE);
-                DEP_1_CLICK_CODE=0;
+                    Linear_dep_1.setVisibility(View.GONE);
+                    DEP_1_CLICK_CODE=0;
                 }
             }
         });
@@ -1220,73 +1240,79 @@ public class SearchingTab extends AppCompatActivity {
 
 
         String firstData = inputArr.get(0).toString();
-       StringBuilder stringBuilder = new StringBuilder(firstData);
-       for (int i = 1; i< inputArr.size(); i++){
-        if(inputArr.get(i)!=null){
+        StringBuilder stringBuilder = new StringBuilder(firstData);
+        for (int i = 1; i< inputArr.size(); i++){
+            if(inputArr.get(i)!=null){
 
-            stringBuilder.append(","+inputArr.get(i).toString());
+                stringBuilder.append(","+inputArr.get(i).toString());
+            }
         }
-    }
         return stringBuilder.toString();
 
 
-}
+    }
 
     public String nationToNumConverter(String nationName){
         String result="";
         switch (nationName){
-            case "한국":
+            case "대한민국 특허청":
                 result = "1";
                 break;
-            case "미국":
+            case "미국 특허청":
                 result = "2";
                 break;
-            case "일본":
+            case "일본 특허청":
                 result = "3";
                 break;
-            case "유럽 및 기타":
+            case "독일 특허청":
                 result = "4";
+                break;
+            case "세계지적재산기구 WIPO":
+                result = "5";
+                break;
+            case "유럽공동체상표의장청 OHIM":
+                result = "6";
                 break;
             default:
                 break;
         }
-     return result;
+        return result;
     }
 
 
     public void checkBoxDataInputArr(final CheckBox checkBox, final ArrayList tmpArrayList, final ArrayList ResultArrayList){
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-        @Override
-        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
 
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
 
-                }
-            },1000);
+                    }
+                },1000);
 
-            String data = checkBox.getText().toString();
-            if (compoundButton.isChecked()==true){
+                String data = checkBox.getText().toString();
+                if (compoundButton.isChecked()==true){
 
-                tmpArrayList.add(data);
-                for(int i = 0; i< tmpArrayList.size(); i++){
-                    if (!ResultArrayList.contains(tmpArrayList.get(i))){
+                    tmpArrayList.add(data);
+                    for(int i = 0; i< tmpArrayList.size(); i++){
+                        if (!ResultArrayList.contains(tmpArrayList.get(i))){
 
-                        ResultArrayList.add(tmpArrayList.get(i));
+                            ResultArrayList.add(tmpArrayList.get(i));
+                        }
+                    }
+                }else if (compoundButton.isChecked()==false){
+                    for(int i=0; i<ResultArrayList.size(); i++){
+                        if(ResultArrayList.get(i).toString().equals(data)){
+                            ResultArrayList.remove(i);
+                        }
                     }
                 }
-            }else if (compoundButton.isChecked()==false){
-                for(int i=0; i<ResultArrayList.size(); i++){
-                    if(ResultArrayList.get(i).toString().equals(data)){
-                    ResultArrayList.remove(i);
-                    }
-                }
+
             }
-
-        }
-    });
+        });
     }
     public void initBtnAndLinear(){
         btn_dep_1.setText(null);

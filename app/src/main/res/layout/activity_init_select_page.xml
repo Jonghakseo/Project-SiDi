@@ -5,8 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".InitSelectPage">
-
-
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
@@ -26,7 +24,6 @@
         app:layout_constraintTop_toBottomOf="@id/tv_title"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="20dp"/>
-
     <CheckBox
         android:id="@+id/cb_desk"
         android:layout_width="wrap_content"
@@ -36,16 +33,14 @@
         app:layout_constraintTop_toBottomOf="@id/tv_subTitle"
         app:layout_constraintRight_toLeftOf="@id/cb_chair"
         android:layout_marginTop="10dp"/>
-
     <ImageView
         android:id="@+id/iv_desk"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:background="@drawable/exam1"
+        android:background="@drawable/desk"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cb_desk"
         app:layout_constraintRight_toLeftOf="@id/iv_chair"/>
-
     <CheckBox
         android:id="@+id/cb_chair"
         android:layout_width="wrap_content"
@@ -55,17 +50,14 @@
         app:layout_constraintLeft_toRightOf="@id/cb_desk"
         app:layout_constraintTop_toBottomOf="@id/tv_subTitle"
         android:layout_marginTop="10dp"/>
-
     <ImageView
         android:id="@+id/iv_chair"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:background="@drawable/exam1"
+        android:background="@drawable/chair"
         app:layout_constraintLeft_toRightOf="@id/iv_desk"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cb_chair"/>
-
-
     <CheckBox
         android:id="@+id/cb_table"
         android:layout_width="wrap_content"
@@ -75,16 +67,14 @@
         app:layout_constraintTop_toBottomOf="@id/iv_desk"
         app:layout_constraintRight_toLeftOf="@id/cb_chair"
         android:layout_marginTop="10dp"/>
-
     <ImageView
         android:id="@+id/iv_table"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:background="@drawable/exam1"
+        android:background="@drawable/table"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cb_table"
         app:layout_constraintRight_toLeftOf="@id/iv_chair"/>
-
     <CheckBox
         android:id="@+id/cb_sofa"
         android:layout_width="wrap_content"
@@ -94,36 +84,48 @@
         app:layout_constraintLeft_toRightOf="@id/cb_desk"
         app:layout_constraintTop_toBottomOf="@id/iv_chair"
         android:layout_marginTop="10dp"/>
-
     <ImageView
         android:id="@+id/iv_sofa"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:background="@drawable/exam1"
+        android:background="@drawable/sofa"
         app:layout_constraintLeft_toRightOf="@id/iv_desk"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cb_sofa"/>
-
-
     <CheckBox
-        android:id="@+id/cb_lamp"
+        android:id="@+id/cb_dispatchLamp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="전등/등"
+        android:text="전등(벽에 부착식)"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_table"
         app:layout_constraintRight_toLeftOf="@id/cb_chair"
         android:layout_marginTop="10dp"/>
-
     <ImageView
-        android:id="@+id/iv_lamp"
+        android:id="@+id/iv_dispatchLamp"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:background="@drawable/exam1"
+        android:background="@drawable/dispatchlamp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cb_lamp"
+        app:layout_constraintTop_toBottomOf="@id/cb_dispatchLamp"
         app:layout_constraintRight_toLeftOf="@id/iv_chair"/>
-
+    <CheckBox
+        android:id="@+id/cb_hangLamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="전등(벽에 매다는 식)"
+        app:layout_constraintLeft_toRightOf="@id/iv_dispatchLamp"
+        app:layout_constraintTop_toBottomOf="@id/iv_table"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="10dp"/>
+    <ImageView
+        android:id="@+id/iv_hangLamp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/hanglamp"
+        app:layout_constraintLeft_toRightOf="@id/iv_dispatchLamp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cb_hangLamp"/>
     <CheckBox
         android:id="@+id/cb_all"
         android:layout_width="wrap_content"
@@ -131,9 +133,9 @@
         android:text="전체선택"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_lamp"
-        android:layout_marginTop="20dp"/>
-
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_dispatchLamp"
+        android:layout_marginBottom="30dp"/>
     <Button
         android:id="@+id/btn_next"
         android:layout_width="200dp"
@@ -143,12 +145,4 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cb_all"
         app:layout_constraintBottom_toBottomOf="parent"/>
-
-
-
-
-
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

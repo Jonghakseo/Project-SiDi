@@ -39,15 +39,17 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SearchResult extends AppCompatActivity {
 
-    private Button btn_subSearch,btn_searchSketch;
+    private Button btn_subSearch,btn_searchSketch,btn_reSearch;
     private ArrayList<SearchResultData> re_arrayList;
     private SearchResult_Adapter searchResultAdapter;
     private RecyclerView recyclerView;
     private GridLayoutManager gridLayoutManager;
     private String furnitureChoiceResult,startTimeChoiceResult,endTimeChoiceResult,nationChoiceResult,dep_1_ChoiceResult,dep_2_ChoiceResult,
-    dep_3_ChoiceResult,dep_4_ChoiceResult,dep_5_ChoiceResult;
+            dep_3_ChoiceResult,dep_4_ChoiceResult,dep_5_ChoiceResult;
     private int pageNum;
     private ServerInterface serverInterface;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +58,7 @@ public class SearchResult extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         btn_subSearch = findViewById(R.id.btn_subSearch);
         btn_searchSketch= findViewById(R.id.btn_searchSketch);
+        btn_reSearch = findViewById(R.id.btn_reSearch);
 
         final Intent intent = getIntent();
 //        furnitureChoiceResult = intent.getExtras().getString("furnitureChoiceResult");
@@ -70,6 +73,15 @@ public class SearchResult extends AppCompatActivity {
         dep_5_ChoiceResult = intent.getExtras().getString("dep_5_ChoiceResult");
 
 
+
+        btn_reSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent1 = new Intent(SearchResult.this, SearchingTab.class);
+                startActivity(intent1);
+                finish();
+            }
+        });
 
 
 
@@ -204,7 +216,7 @@ public class SearchResult extends AppCompatActivity {
                             result1.getDep3(),
                             result1.getDep4(),
                             result1.getDep5()
-                            );
+                    );
                     re_arrayList.add(searchResultData);
                     searchResultAdapter.notifyDataSetChanged();
 

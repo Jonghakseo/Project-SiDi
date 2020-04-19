@@ -1,7 +1,6 @@
 package com.myapp.sidi.Adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.myapp.sidi.DTO.SearchResultData;
 import com.myapp.sidi.R;
-import com.myapp.sidi.search.ViewDetail;
 
 import java.util.ArrayList;
 
@@ -95,7 +93,7 @@ public class SearchResult_Adapter extends RecyclerView.Adapter<SearchResult_Adap
 
         public CustomViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.url = itemView.findViewById(R.id.url);
+            this.url = itemView.findViewById(R.id.iv_similar);
             this.serverIndex = itemView.findViewById(R.id.serverIndex);
             this.designNum = itemView.findViewById(R.id.designNum);
             this.registrationNum = itemView.findViewById(R.id.registrationNum);

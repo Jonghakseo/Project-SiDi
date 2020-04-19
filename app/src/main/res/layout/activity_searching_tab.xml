@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,7 +8,6 @@
         android:id="@+id/Linear_topPart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
         <Button
             android:id="@+id/btn_next"
             android:layout_width="match_parent"
@@ -19,338 +16,279 @@
             android:text="선택 완료"
             android:background="@drawable/blue_round_line"/>
     </LinearLayout>
-
     <ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-
-
-
-
-    <Button
-        android:id="@+id/btn_FurnitureCategory"
-        android:layout_width="200dp"
-        android:layout_height="70dp"
-        android:layout_gravity="center"
-        android:text="가구 카테고리"
-        android:textSize="20dp"
-        android:textColor="@android:color/white"
-        android:background="@drawable/blue_round_line"
-        android:layout_marginTop="10dp"/>
-
-
-
-
-    <LinearLayout
-        android:id="@+id/Linear_furniture"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:orientation="horizontal"
-        android:gravity="center"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_FurnitureCategory"
-        android:layout_marginTop="10dp">
-
-
-        <RadioGroup
-            android:id="@+id/rg_furniture"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        <RadioButton
-            android:id="@+id/rb_furnitureDesk"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="책상"/>
-        <RadioButton
-            android:id="@+id/rb_furnitureChair"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="의자"/>
-        <RadioButton
-            android:id="@+id/rb_furnitureTable"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="테이블"/>
-        <RadioButton
-            android:id="@+id/rb_furnitureSofa"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="소파"/>
-        <RadioButton
-            android:id="@+id/rb_furnitureDispatchLamp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="전등(벽에 부착식)"/>
-
-        <RadioButton
-            android:id="@+id/rb_furnitureHangLamp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="전등(벽에 매다는 식)"/>
-    </RadioGroup>
-
-
-
-    </LinearLayout>
-
-
-    <Button
-        android:id="@+id/btn_FurnitureTime"
-        android:layout_width="200dp"
-        android:layout_height="70dp"
-        android:text="시간대"
-        android:textSize="20dp"
-        android:layout_gravity="center"
-        android:textColor="@android:color/white"
-        android:background="@drawable/blue_round_line"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/Linear_furniture"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="30dp"/>
-
-
-    <LinearLayout
-        android:id="@+id/Linear_time"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:orientation="horizontal"
-        android:gravity="center"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_FurnitureTime"
-        android:layout_marginTop="10dp">
-
-        <CheckBox
-            android:id="@+id/cb_timeAll"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="전체"/>
-
-
-        <EditText
-            android:id="@+id/et_year_1"
-            android:layout_width="100dp"
-            android:inputType="number"
-            android:maxLength="4"
-            android:layout_height="50dp"/>
-
-        <TextView
-            android:id="@+id/tv_middleYear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="~"
-            android:textSize="30dp"/>
-
-        <EditText
-            android:id="@+id/et_year_2"
-            android:layout_width="100dp"
-            android:inputType="number"
-            android:maxLength="4"
-            android:layout_height="50dp"/>
-
-
-    </LinearLayout>
-
-
-    <Button
-        android:id="@+id/btn_FurnitureNation"
-        android:layout_width="200dp"
-        android:layout_height="70dp"
-        android:text="국가"
-        android:textSize="20dp"
-        android:layout_gravity="center"
-        android:textColor="@android:color/white"
-        android:background="@drawable/blue_round_line"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/Linear_time"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="30dp"/>
-
-
-    <LinearLayout
-        android:id="@+id/Linear_nation"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:orientation="horizontal"
-        android:gravity="center"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_FurnitureNation"
-        android:layout_marginTop="10dp">
-
-        <CheckBox
-            android:id="@+id/cb_nationAll"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="전체"/>
-
-        <CheckBox
-            android:id="@+id/cb_nationKor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="한국"/>
-
-        <CheckBox
-            android:id="@+id/cb_nationUS"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="미국"/>
-
-        <CheckBox
-            android:id="@+id/cb_nationJp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="일본"/>
-
-        <CheckBox
-            android:id="@+id/cb_nationOther"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="유럽 및 기타"/>
-
-
-
-    </LinearLayout>
-
-
-    <Button
-        android:id="@+id/btn_FurnitureForm"
-        android:layout_width="200dp"
-        android:layout_height="70dp"
-        android:background="@drawable/blue_round_line"
-        android:text="상세 형대 검색"
-        android:textColor="@android:color/white"
-        android:layout_gravity="center"
-        android:textSize="20dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/Linear_nation" />
-
-    <TextView
-        android:id="@+id/tv_FurnitureFormExplain"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="아무 것도 체크하지 않으면 전체 검색으로 간주됩니다."
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_FurnitureForm"/>
-
-    <LinearLayout
-    android:id="@+id/Linear_furnitureDetailTotal"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center_horizontal"
-    app:layout_constraintLeft_toLeftOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/tv_FurnitureFormExplain">
-
-    <Button
-        android:id="@+id/btn_dep_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="유형1"
-        android:textSize="15dp"
-
-        android:layout_marginTop="20dp"/>
-
-
-    <LinearLayout
-        android:id="@+id/Linear_dep_1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_horizontal">
-    </LinearLayout>
-
-
-    <Button
-        android:id="@+id/btn_dep_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="유형2"
-        android:textSize="15dp"
-
-        android:layout_marginTop="20dp"/>
-
-    <LinearLayout
-        android:id="@+id/Linear_dep_2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
-        >
-
-
-    </LinearLayout>
-
-
-
-    <Button
-        android:id="@+id/btn_dep_3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="유형3"
-        android:textSize="15dp"
-
-        android:layout_marginTop="20dp"/>
-
-    <LinearLayout
-        android:id="@+id/Linear_dep_3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
-       >
-
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/btn_dep_4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="유형4"
-        android:textSize="15dp"
-
-        android:layout_marginTop="20dp"/>
-
-    <LinearLayout
-        android:id="@+id/Linear_dep_4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
-        >
-
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/btn_dep_5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="유형2"
-        android:textSize="15dp"
-
-        android:layout_marginTop="20dp"/>
-
-    <LinearLayout
-        android:id="@+id/Linear_dep_5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
-        >
-
-    </LinearLayout>
-
-
-</LinearLayout>
+            <Button
+                android:id="@+id/btn_FurnitureCategory"
+                android:layout_width="200dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:text="가구 카테고리"
+                android:textSize="20dp"
+                android:textColor="@android:color/white"
+                android:background="@drawable/blue_round_line"
+                android:layout_marginTop="10dp"/>
+            <LinearLayout
+                android:id="@+id/Linear_furniture"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:orientation="horizontal"
+                android:gravity="center"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_FurnitureCategory"
+                android:layout_marginTop="10dp">
+                <RadioGroup
+                    android:id="@+id/rg_furniture"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <RadioButton
+                        android:id="@+id/rb_furnitureDesk"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="책상"/>
+                    <RadioButton
+                        android:id="@+id/rb_furnitureChair"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="의자"/>
+                    <RadioButton
+                        android:id="@+id/rb_furnitureTable"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="테이블"/>
+                    <RadioButton
+                        android:id="@+id/rb_furnitureSofa"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="소파"/>
+                    <RadioButton
+                        android:id="@+id/rb_furnitureDispatchLamp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="전등(벽에 부착식)"/>
+                    <RadioButton
+                        android:id="@+id/rb_furnitureHangLamp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="전등(벽에 매다는 식)"/>
+                </RadioGroup>
+            </LinearLayout>
+            <Button
+                android:id="@+id/btn_FurnitureTime"
+                android:layout_width="200dp"
+                android:layout_height="70dp"
+                android:text="시간대"
+                android:textSize="20dp"
+                android:layout_gravity="center"
+                android:textColor="@android:color/white"
+                android:background="@drawable/blue_round_line"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/Linear_furniture"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="30dp"/>
+            <LinearLayout
+                android:id="@+id/Linear_time"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:orientation="horizontal"
+                android:gravity="center"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_FurnitureTime"
+                android:layout_marginTop="10dp">
+                <CheckBox
+                    android:id="@+id/cb_timeAll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="전체"/>
+                <EditText
+                    android:id="@+id/et_year_1"
+                    android:layout_width="100dp"
+                    android:inputType="number"
+                    android:maxLength="4"
+                    android:layout_height="50dp"/>
+                <TextView
+                    android:id="@+id/tv_middleYear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="~"
+                    android:textSize="30dp"/>
+                <EditText
+                    android:id="@+id/et_year_2"
+                    android:layout_width="100dp"
+                    android:inputType="number"
+                    android:maxLength="4"
+                    android:layout_height="50dp"/>
+            </LinearLayout>
+            <Button
+                android:id="@+id/btn_FurnitureNation"
+                android:layout_width="200dp"
+                android:layout_height="70dp"
+                android:text="국가"
+                android:textSize="20dp"
+                android:layout_gravity="center"
+                android:textColor="@android:color/white"
+                android:background="@drawable/blue_round_line"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/Linear_time"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="30dp"/>
+            <LinearLayout
+                android:id="@+id/Linear_nation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="left"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_FurnitureNation"
+                android:layout_marginTop="10dp">
+                <CheckBox
+                    android:id="@+id/cb_nationAll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="전체"/>
+                <CheckBox
+                    android:id="@+id/cb_nationKor"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="대한민국 특허청"/>
+                <CheckBox
+                    android:id="@+id/cb_nationUS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="미국 특허청"/>
+                <CheckBox
+                    android:id="@+id/cb_nationJp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="일본 특허청"/>
+                <CheckBox
+                    android:id="@+id/cb_nationGm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="독일 특허청"/>
+                <CheckBox
+                    android:id="@+id/cb_nationWipo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="세계지적재산기구 WIPO"/>
+                <CheckBox
+                    android:id="@+id/cb_nationOhim"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="유럽공동체상표의장청 OHIM"/>
+            </LinearLayout>
+            <Button
+                android:id="@+id/btn_FurnitureForm"
+                android:layout_width="200dp"
+                android:layout_height="70dp"
+                android:background="@drawable/blue_round_line"
+                android:text="상세 형대 검색"
+                android:textColor="@android:color/white"
+                android:layout_gravity="center"
+                android:textSize="20dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/Linear_nation" />
+            <TextView
+                android:id="@+id/tv_FurnitureFormExplain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="아무 것도 체크하지 않으면 전체 검색으로 간주됩니다."
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_FurnitureForm"/>
+            <LinearLayout
+                android:id="@+id/Linear_furnitureDetailTotal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_FurnitureFormExplain">
+                <Button
+                    android:id="@+id/btn_dep_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="유형1"
+                    android:textSize="15dp"
+                    android:layout_marginTop="20dp"/>
+                <LinearLayout
+                    android:id="@+id/Linear_dep_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+                </LinearLayout>
+                <Button
+                    android:id="@+id/btn_dep_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="유형2"
+                    android:textSize="15dp"
+                    android:layout_marginTop="20dp"/>
+                <LinearLayout
+                    android:id="@+id/Linear_dep_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    >
+                </LinearLayout>
+                <Button
+                    android:id="@+id/btn_dep_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="유형3"
+                    android:textSize="15dp"
+                    android:layout_marginTop="20dp"/>
+                <LinearLayout
+                    android:id="@+id/Linear_dep_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    >
+                </LinearLayout>
+                <Button
+                    android:id="@+id/btn_dep_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="유형4"
+                    android:textSize="15dp"
+                    android:layout_marginTop="20dp"/>
+                <LinearLayout
+                    android:id="@+id/Linear_dep_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    >
+                </LinearLayout>
+                <Button
+                    android:id="@+id/btn_dep_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="유형2"
+                    android:textSize="15dp"
+                    android:layout_marginTop="20dp"/>
+                <LinearLayout
+                    android:id="@+id/Linear_dep_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    >
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
-</ScrollView>
+    </ScrollView>
 </LinearLayout>
