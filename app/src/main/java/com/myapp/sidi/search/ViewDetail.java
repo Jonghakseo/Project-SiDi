@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.Target;
 import com.myapp.sidi.Adapter.SearchDetail_Adapter;
 import com.myapp.sidi.Adapter.SearchResult_Adapter;
 import com.myapp.sidi.Category.DeskInfo;
@@ -51,11 +52,12 @@ public class ViewDetail extends AppCompatActivity {
     private String registrationNum; //검색 결과로 받은 출원번호
     private String designMainClassification;//일본 검색에 필요한 디자인 분류코드
     private int depth1, depth2, depth3, depth4, depth5;
-    Button btn_fullText, btn_scrap, btn_sketch, btn_moreDescription;
+    Button btn_fullText, btn_scrap, btn_sketch, btn_moreDescription, btn_basicInfo;
     ImageView main_design;
     TextView text_designNum, text_basicInfo, text_description, tagBox1, tagBox2, tagBox3, tagBox4, tagBox5;
     RecyclerView rv_otherDesign, rv_sameDepth, rv_othersSketch;
     boolean descript = true;//자세한 설명 접혀있는지
+    boolean basicInfo = true;//기본 정보 접혀있는지
     private ServerInterface serverInterface;
 
 
@@ -91,6 +93,7 @@ public class ViewDetail extends AppCompatActivity {
         btn_scrap = findViewById(R.id.detail_btn_scrap);
         btn_sketch = findViewById(R.id.detail_btn_sketch);
         btn_moreDescription = findViewById(R.id.detail_btn_moreDescription);
+        btn_basicInfo = findViewById(R.id.detail_btn_basicInfo);
 
         main_design = findViewById(R.id.detail_main_designView);
 
@@ -126,8 +129,6 @@ public class ViewDetail extends AppCompatActivity {
 
         try {
 
-
-
             country = intent.getExtras().getString("country");
             registrationNum = intent.getExtras().getString("registrationNum");
             designMainClassification = intent.getExtras().getString("designMainClassification");
@@ -138,26 +139,18 @@ public class ViewDetail extends AppCompatActivity {
             depth5 = Integer.parseInt(intent.getExtras().getString("depth5"));
 
 
-
-
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
 
 
-
-
-
-
-        Log.e("country",country);
-        Log.e("registrationNum",registrationNum);
-        Log.e("depth1",""+depth1);
-        Log.e("depth2",""+depth2);
-        Log.e("depth3",""+depth3);
-        Log.e("depth4",""+depth4);
-        Log.e("depth5",""+depth5);
+        Log.e("country", country);
+        Log.e("registrationNum", registrationNum);
+        Log.e("depth1", "" + depth1);
+        Log.e("depth2", "" + depth2);
+        Log.e("depth3", "" + depth3);
+        Log.e("depth4", "" + depth4);
+        Log.e("depth5", "" + depth5);
 
         linearLayoutManager1 = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
         linearLayoutManager2 = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
@@ -202,11 +195,25 @@ public class ViewDetail extends AppCompatActivity {
         ArrayList<String> depths = new ArrayList<>();
         DeskInfo deskInfo = new DeskInfo();
         String[] desk_dep1_searchForm = deskInfo.desk_dep1_searchForm.split(",");
-        depths.add("#" + desk_dep1_searchForm[depth1]);
-        depths.add("#" + desk_dep1_searchForm[depth2]);
-        depths.add("#" + desk_dep1_searchForm[depth3]);
-        depths.add("#" + desk_dep1_searchForm[depth4]);
-        depths.add("#" + desk_dep1_searchForm[depth5]);
+        String[] desk_dep2_searchForm = deskInfo.desk_dep2_searchForm.split(",");
+        String[] desk_dep3_searchForm = deskInfo.desk_dep3_searchForm.split(",");
+        String[] desk_dep4_searchForm = deskInfo.desk_dep4_searchForm.split(",");
+        String[] desk_dep5_searchForm = deskInfo.desk_dep5_searchForm.split(",");
+        if (depth1 != 0) {
+            depths.add(" # " + desk_dep1_searchForm[depth1 - 1]);
+        }
+        if (depth2 != 0) {
+            depths.add(" # " + desk_dep2_searchForm[depth2 - 1]);
+        }
+        if (depth3 != 0) {
+            depths.add(" # " + desk_dep3_searchForm[depth3 - 1]);
+        }
+        if (depth4 != 0) {
+            depths.add(" # " + desk_dep4_searchForm[depth4 - 1]);
+        }
+        if (depth5 != 0) {
+            depths.add(" # " + desk_dep5_searchForm[depth5 - 1]);
+        }
 //        System.out.println(depth1);
 
 
@@ -238,6 +245,20 @@ public class ViewDetail extends AppCompatActivity {
                 }
             }
         });
+        btn_basicInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (basicInfo) {
+                    basicInfo = !basicInfo;
+                    text_basicInfo.setVisibility(View.GONE);
+                    btn_basicInfo.setText("펼치기");
+                } else {
+                    basicInfo = !basicInfo;
+                    text_basicInfo.setVisibility(View.VISIBLE);
+                    btn_basicInfo.setText("접기");
+                }
+            }
+        });
 
     }
 
@@ -247,14 +268,14 @@ public class ViewDetail extends AppCompatActivity {
     }
 
     class SearchAsync extends AsyncTask<String, Void, Void> {
-        final String SEARCH_MODE_KOR = "kor"; //한국은 국내 api요청
-        final String SEARCH_MODE_JAP = "jap"; //일본은 일본 api요청
+        final String SEARCH_MODE_KOR = "대한민국 특허청"; //한국은 국내 api요청
+        final String SEARCH_MODE_JAP = "일본 특허청"; //일본은 일본 api요청
         final String SEARCH_MODE_ETC = "etc"; //그 외는 자체 서버로 요청
         int status = 0;
 
         @Override
         protected Void doInBackground(String... strings) {
-
+//            Log.e("country_tag", strings[0].substring(0, 2));
             switch (strings[0]) {
                 case SEARCH_MODE_KOR:
                     try {
@@ -457,7 +478,13 @@ public class ViewDetail extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     break;
-                case SEARCH_MODE_ETC://or default
+                default://case SEARCH_MODE_ETC://or default
+//                case SEARCH_MODE_ETC://or default
+                    //TODO 레트로핏으로 세부정보 요청
+                    String fileName = registrationNum.replaceAll("/", "");
+                    String imagePath = "http://" + "ec2-13-125-249-181.ap-northeast-2.compute.amazonaws.com/sidi/deskimg/" + fileName + ".jpg";
+                    ImagePaths.add(new SearchDetailData(imagePath, 1));
+                    status = 2;
                     break;
             }
 
@@ -467,17 +494,18 @@ public class ViewDetail extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             if (status != 0) {
-
+                System.out.println(country);
                 //pdf 보기
                 if (country.equals(SEARCH_MODE_KOR)) {
-                    if (ImagePaths.size() > 0){
+                    if (ImagePaths.size() > 0) {
                         text_designNum.setText("" + ImagePaths.get(0).getDesignId() + "번");
-                    Glide.with(ViewDetail.this).load(ImagePaths.get(0).getDesign()).into(main_design);
+                        Glide.with(ViewDetail.this).load(ImagePaths.get(0).getDesign()).into(main_design);
                     }
                     StringBuffer sb = new StringBuffer();
-                    sb.append("디자인명 : " + articleName + "  /  ");
+                    sb.append("디자인명 : " + articleName + "\n");
                     sb.append("출원인 : " + applicantName + "\n");
-                    sb.append("출원국가 : " + applicantCountry + "  /  ");
+                    sb.append("출원일 : " + applicationDate + "\n");
+                    sb.append("출원국가 : " + applicantCountry + "\n");
                     sb.append("상태 : " + lastDispositionDescription + "\n");
                     sb.append("디자인 요약 : " + designSummary);
                     text_basicInfo.setText(sb);
@@ -505,8 +533,9 @@ public class ViewDetail extends AppCompatActivity {
                         Glide.with(ViewDetail.this).load(ImagePaths.get(0).getDesign()).into(main_design);
                     }
                     StringBuffer sb = new StringBuffer();
-                    sb.append("디자인명 : " + articleName + "  /  ");
+                    sb.append("디자인명 : " + articleName + "\n");
                     sb.append("출원인 : " + applicantName + "\n");
+                    sb.append("출원일 : " + applicationDate + "\n");
                     sb.append("출원국가 : " + applicantCountry + "\n");
                     sb.append("디자인 요약 : " + designSummary);
                     text_basicInfo.setText(sb);
@@ -519,8 +548,22 @@ public class ViewDetail extends AppCompatActivity {
                             startActivity(intent);
                         }
                     });
+                } else {//etc
+                    if (ImagePaths.size() > 0) {
+                        text_designNum.setText("대표 이미지");
+                        Glide.with(ViewDetail.this).load(ImagePaths.get(0).getDesign()).into(main_design);
+                        StringBuffer sb = new StringBuffer();
+//                        sb.append("디자인명 : " + articleName + "\n");
+//                        sb.append("출원인 : " + applicantName + "\n");
+//                        sb.append("출원일 : " + applicationDate + "\n");
+                        sb.append("출원국가 : " + country + "\n");
+//                        sb.append("디자인 요약 : " + designSummary);
+                        text_basicInfo.setText(sb);
+//                        text_description.setText(designDescription);
+                        btn_fullText.setVisibility(View.GONE);
+                        rv_otherDesign.setVisibility(View.GONE);
+                    }
                 }
-
                 //레트로핏으로 서버에 스케치, 동일 디자인 요청
                 Retrofit retrofit = new Retrofit.Builder()
                         .baseUrl(ServerInterface.BASE_URL)

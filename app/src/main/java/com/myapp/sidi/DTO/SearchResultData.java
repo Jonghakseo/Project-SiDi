@@ -5,6 +5,7 @@ public class SearchResultData {
     private String serverIndex;
     private String designNum;
     private String registrationNum;
+    private String country;
     private String designCode;
     private String designName;
     private String registerPerson;
@@ -17,11 +18,12 @@ public class SearchResultData {
     private String dep_4;
     private String dep_5;
 
-    public SearchResultData(String url,String serverIndex, String designNum,String registrationNum,String designCode, String designName, String registerPerson, String date_application, String date_registration, String date_publication, String dep_1, String dep_2, String dep_3, String dep_4, String dep_5) {
+    public SearchResultData(String url,String serverIndex, String designNum,String registrationNum,String designCode,String country, String designName, String registerPerson, String date_application, String date_registration, String date_publication, String dep_1, String dep_2, String dep_3, String dep_4, String dep_5) {
         this.url = url;
         this.serverIndex = serverIndex;
         this.designNum = designNum;
         this.registrationNum = registrationNum;
+        this.country = country;
         this.designCode = designCode;
         this.designName = designName;
         this.registerPerson = registerPerson;
@@ -35,7 +37,13 @@ public class SearchResultData {
         this.dep_5 = dep_5;
     }
 
+    public String getCountry() {
+        return country;
+    }
 
+    public void setCountry(String country) {
+        this.country = country;
+    }
 
     public String getUrl() {
         return url;

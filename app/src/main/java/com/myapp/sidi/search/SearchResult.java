@@ -73,23 +73,23 @@ public class SearchResult extends AppCompatActivity {
 
 
 
-        Button temp = findViewById(R.id.btn_subSearch);
-        temp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SearchResult.this, ViewDetail.class);
-                intent.putExtra("country","kor");
-//                intent.putExtra("country","jap");
-                intent.putExtra("registrationNum","3020180027259");
-//                intent.putExtra("registrationNum","1380586-000");//등록번호로 사용해야함 ㅠㅠ
-                intent.putExtra("depth1",1);
-                intent.putExtra("depth2",2);
-                intent.putExtra("depth3",3);
-//                intent.putExtra("depth4","형태4");
-                intent.putExtra("depth5",5);
-                startActivity(intent);
-            }
-        });
+//        Button temp = findViewById(R.id.btn_subSearch);
+//        temp.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(SearchResult.this, ViewDetail.class);
+//                intent.putExtra("country","kor");
+////                intent.putExtra("country","jap");
+//                intent.putExtra("registrationNum","3020180027259");
+////                intent.putExtra("registrationNum","1380586-000");//등록번호로 사용해야함 ㅠㅠ
+//                intent.putExtra("depth1",1);
+//                intent.putExtra("depth2",2);
+//                intent.putExtra("depth3",3);
+////                intent.putExtra("depth4","형태4");
+//                intent.putExtra("depth5",5);
+//                startActivity(intent);
+//            }
+//        });
 
         Log.e("furnitureChoiceResult",furnitureChoiceResult);
         Log.e("startTimeChoiceResult",startTimeChoiceResult);
@@ -135,7 +135,7 @@ public class SearchResult extends AppCompatActivity {
             @Override
             public void onItemClick(View v, int position) {
                 Intent intent1 = new Intent(SearchResult.this,ViewDetail.class);
-                intent1.putExtra("country","kor");
+                intent1.putExtra("country",re_arrayList.get(position).getCountry());
                 intent1.putExtra("registrationNum",re_arrayList.get(position).getDesignNum());
                 intent1.putExtra("depth1",re_arrayList.get(position).getDep_1());
                 intent1.putExtra("depth2",re_arrayList.get(position).getDep_2());
@@ -193,6 +193,7 @@ public class SearchResult extends AppCompatActivity {
                             result1.getDesignNum(),
                             result1.getRegistrationNum(),
                             result1.getDesignCode(),
+                            result1.getCountry(),
                             result1.getDesignName(),
                             result1.getRegisterPerson(),
                             result1.getDateApplication(),
@@ -210,6 +211,7 @@ public class SearchResult extends AppCompatActivity {
                     Log.e("getServerIndex",result1.getServerIndex());
                     Log.e("getDesignNum",result1.getDesignNum());
                     Log.e("getRegistrationNum",result1.getRegistrationNum());
+                    Log.e("getCountry",result1.getCountry());
                     Log.e("getDesignCode",result1.getDesignCode());
                     Log.e("getUrl",result1.getUrl());
                     Log.e("getDesignName",result1.getDesignName());

@@ -30,6 +30,9 @@ public class SearchingTabDesignResult {
         @SerializedName("registrationNum")
         @Expose
         private String registrationNum;
+        @SerializedName("country")
+        @Expose
+        private String country;
         @SerializedName("designCode")
         @Expose
         private String designCode;
@@ -83,13 +86,20 @@ public class SearchingTabDesignResult {
             this.designNum = designNum;
         }
 
-
         public String getRegistrationNum() {
             return registrationNum;
         }
 
         public void setRegistrationNum(String registrationNum) {
             this.registrationNum = registrationNum;
+        }
+
+        public String getCountry() {
+            return country;
+        }
+
+        public void setCountry(String country) {
+            this.country = country;
         }
 
         public String getDesignCode() {

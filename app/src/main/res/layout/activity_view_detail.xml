@@ -13,6 +13,16 @@
         android:background="#FFFFFF"
         tools:context=".search.ViewDetail">
 
+        <Button
+            android:id="@+id/detail_btn_basicInfo"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:text="접기"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@+id/detail_title_basicInfo"
+            app:layout_constraintEnd_toEndOf="@+id/detail_btn_moreDescription"
+            app:layout_constraintTop_toTopOf="@+id/detail_title_basicInfo" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/detail_RV_otherDesigns"
             android:layout_width="match_parent"
@@ -42,7 +52,8 @@
             android:layout_height="wrap_content"
             android:text="스크랩"
             app:layout_constraintBottom_toTopOf="@+id/detail_btn_sketch"
-            app:layout_constraintStart_toStartOf="@+id/detail_btn_fullText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/detail_main_designView"
             app:layout_constraintTop_toBottomOf="@+id/detail_btn_fullText" />
 
         <Button
@@ -51,7 +62,8 @@
             android:layout_height="wrap_content"
             android:text="스케치"
             app:layout_constraintBottom_toTopOf="@+id/detail_RV_otherDesigns"
-            app:layout_constraintStart_toStartOf="@+id/detail_btn_scrap"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/detail_main_designView"
             app:layout_constraintTop_toBottomOf="@+id/detail_btn_scrap" />
 
         <ImageView
@@ -61,8 +73,7 @@
             android:layout_margin="10dp"
             android:paddingStart="10dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/exam3" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/detail_title_basicInfo"
@@ -89,7 +100,8 @@
             android:layout_width="110dp"
             android:layout_height="25dp"
             android:layout_marginTop="10dp"
-            android:text="#형태 태그"
+            android:background="@drawable/round_line"
+            android:gravity="center"
             android:textSize="10sp"
             app:layout_constraintBottom_toTopOf="@+id/detail_tag4"
             app:layout_constraintEnd_toStartOf="@+id/detail_tag2"
@@ -101,7 +113,8 @@
             android:id="@+id/detail_tag3"
             android:layout_width="110dp"
             android:layout_height="25dp"
-            android:text="#형태 태그"
+            android:background="@drawable/round_line"
+            android:gravity="center"
             android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="@+id/detail_tag2"
             app:layout_constraintEnd_toEndOf="parent"
@@ -112,7 +125,8 @@
             android:id="@+id/detail_tag2"
             android:layout_width="110dp"
             android:layout_height="25dp"
-            android:text="#형태 태그"
+            android:background="@drawable/round_line"
+            android:gravity="center"
             android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="@+id/detail_tag1"
             app:layout_constraintEnd_toStartOf="@+id/detail_tag3"
@@ -123,7 +137,8 @@
             android:id="@+id/detail_tag5"
             android:layout_width="110dp"
             android:layout_height="25dp"
-            android:text="#형태 태그"
+            android:background="@drawable/round_line"
+            android:gravity="center"
             android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="@+id/detail_tag4"
             app:layout_constraintStart_toStartOf="@+id/detail_tag2" />
@@ -133,7 +148,8 @@
             android:layout_width="110dp"
             android:layout_height="25dp"
             android:layout_marginTop="8dp"
-            android:text="#형태 태그"
+            android:background="@drawable/round_line"
+            android:gravity="center"
             android:textSize="10sp"
             app:layout_constraintStart_toStartOf="@+id/detail_tag1"
             app:layout_constraintTop_toBottomOf="@+id/detail_tag1" />
