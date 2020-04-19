@@ -45,7 +45,7 @@ public class SearchResult extends AppCompatActivity {
     private RecyclerView recyclerView;
     private GridLayoutManager gridLayoutManager;
     private String furnitureChoiceResult,startTimeChoiceResult,endTimeChoiceResult,nationChoiceResult,dep_1_ChoiceResult,dep_2_ChoiceResult,
-    dep_3_ChoiceResult,dep_4_ChoiceResult,dep_5_ChoiceResult;
+            dep_3_ChoiceResult,dep_4_ChoiceResult,dep_5_ChoiceResult;
     private int pageNum;
     private ServerInterface serverInterface;
 
@@ -216,7 +216,7 @@ public class SearchResult extends AppCompatActivity {
                             result1.getDep3(),
                             result1.getDep4(),
                             result1.getDep5()
-                            );
+                    );
                     re_arrayList.add(searchResultData);
                     searchResultAdapter.notifyDataSetChanged();
 

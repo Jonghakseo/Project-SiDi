@@ -35,11 +35,11 @@ public class InitSelectPage extends AppCompatActivity {
      * 추후에 로딩화면을 배치한다면, 이 액티비티 이전에 배치해도 된다. 다만 매니페스트 수정이 있어야 함.
      **/
 
-    CheckBox cb_desk,cb_chair,cb_table,cb_sofa,cb_lamp,cb_all;
-    Button btn_next;
-    String choice_1,choice_2,choice_3,choice_4,choice_5;
-    String deleteKey="deleteKey";
-    SelectFurnitureHelper selectFurnitureHelper;
+    private CheckBox cb_desk,cb_chair,cb_table,cb_sofa, cb_dispatchLamp,cb_hangLamp,cb_all;
+    private Button btn_next;
+    private String choice_1,choice_2,choice_3,choice_4,choice_5,choice_6;
+    private String deleteKey="deleteKey";
+    private SelectFurnitureHelper selectFurnitureHelper;
     public static int REVISE_CODE=0;
 
 
@@ -53,7 +53,8 @@ public class InitSelectPage extends AppCompatActivity {
         cb_chair = findViewById(R.id.cb_chair);
         cb_table = findViewById(R.id.cb_table);
         cb_sofa = findViewById(R.id.cb_sofa);
-        cb_lamp = findViewById(R.id.cb_lamp);
+        cb_dispatchLamp = findViewById(R.id.cb_dispatchLamp);
+        cb_hangLamp = findViewById(R.id.cb_hangLamp);
         cb_all = findViewById(R.id.cb_all);
         btn_next = findViewById(R.id.btn_next);
 
@@ -62,7 +63,7 @@ public class InitSelectPage extends AppCompatActivity {
         //3, 체크박스에 체크해주는 코드
         Intent intent = getIntent();
         if (REVISE_CODE==1){
-            String existChoice,existChoice2,existChoice3,existChoice4,existChoice5;
+            String existChoice,existChoice2,existChoice3,existChoice4,existChoice5,existChoice6;
             String str_size = intent.getExtras().getString("size");
             if (str_size.equals("1")){
                 existChoice = intent.getExtras().getString("existChoice_1");
@@ -106,6 +107,20 @@ public class InitSelectPage extends AppCompatActivity {
                 existDataCheck(existChoice4);
                 existDataCheck(existChoice5);
                 cb_all.setChecked(true);
+            }else if (str_size.equals("6")){
+                existChoice = intent.getExtras().getString("existChoice_1");
+                existChoice2 = intent.getExtras().getString("existChoice_2");
+                existChoice3 = intent.getExtras().getString("existChoice_3");
+                existChoice4 = intent.getExtras().getString("existChoice_4");
+                existChoice5 = intent.getExtras().getString("existChoice_5");
+                existChoice6 = intent.getExtras().getString("existChoice_6");
+                existDataCheck(existChoice);
+                existDataCheck(existChoice2);
+                existDataCheck(existChoice3);
+                existDataCheck(existChoice4);
+                existDataCheck(existChoice5);
+                existDataCheck(existChoice6);
+                cb_all.setChecked(true);
             }
             REVISE_CODE=0;
         }
@@ -121,14 +136,16 @@ public class InitSelectPage extends AppCompatActivity {
                     cb_chair.setChecked(true);
                     cb_table.setChecked(true);
                     cb_sofa.setChecked(true);
-                    cb_lamp.setChecked(true);
+                    cb_dispatchLamp.setChecked(true);
+                    cb_hangLamp.setChecked(true);
 
                 }else {
                     cb_desk.setChecked(false);
                     cb_chair.setChecked(false);
                     cb_table.setChecked(false);
                     cb_sofa.setChecked(false);
-                    cb_lamp.setChecked(false);
+                    cb_dispatchLamp.setChecked(false);
+                    cb_hangLamp.setChecked(false);
                 }
             }
         });
@@ -170,8 +187,13 @@ public class InitSelectPage extends AppCompatActivity {
                 }else {
 
                 }
-                if(cb_lamp.isChecked()){
-                    choiceArr.add("#전등/등");
+                if(cb_dispatchLamp.isChecked()){
+                    choiceArr.add("#전등(벽에 부착식)");
+                }else {
+
+                }
+                if(cb_hangLamp.isChecked()){
+                    choiceArr.add("#전등(벽에 매다는 식)");
                 }else {
 
                 }
@@ -189,6 +211,7 @@ public class InitSelectPage extends AppCompatActivity {
                         choice_3="";
                         choice_4="";
                         choice_5="";
+                        choice_6="";
                         break;
                     case 2:
                         choice_1=choiceArr.get(0).toString();
@@ -196,6 +219,7 @@ public class InitSelectPage extends AppCompatActivity {
                         choice_3="";
                         choice_4="";
                         choice_5="";
+                        choice_6="";
                         break;
                     case 3:
                         choice_1=choiceArr.get(0).toString();
@@ -203,6 +227,7 @@ public class InitSelectPage extends AppCompatActivity {
                         choice_3=choiceArr.get(2).toString();
                         choice_4="";
                         choice_5="";
+                        choice_6="";
                         break;
                     case 4:
                         choice_1=choiceArr.get(0).toString();
@@ -210,6 +235,7 @@ public class InitSelectPage extends AppCompatActivity {
                         choice_3=choiceArr.get(2).toString();
                         choice_4=choiceArr.get(3).toString();
                         choice_5="";
+                        choice_6="";
                         break;
                     case 5:
                         choice_1=choiceArr.get(0).toString();
@@ -217,6 +243,16 @@ public class InitSelectPage extends AppCompatActivity {
                         choice_3=choiceArr.get(2).toString();
                         choice_4=choiceArr.get(3).toString();
                         choice_5=choiceArr.get(4).toString();
+                        choice_6="";
+                        break;
+
+                    case 6:
+                        choice_1=choiceArr.get(0).toString();
+                        choice_2=choiceArr.get(1).toString();
+                        choice_3=choiceArr.get(2).toString();
+                        choice_4=choiceArr.get(3).toString();
+                        choice_5=choiceArr.get(4).toString();
+                        choice_6=choiceArr.get(5).toString();
                         break;
                     default:
                         break;
@@ -229,16 +265,17 @@ public class InitSelectPage extends AppCompatActivity {
                 contentValues.put(SelectFurnitureContract.TableEntry.COLUMN_CHOICE_3,choice_3);
                 contentValues.put(SelectFurnitureContract.TableEntry.COLUMN_CHOICE_4,choice_4);
                 contentValues.put(SelectFurnitureContract.TableEntry.COLUMN_CHOICE_5,choice_5);
+                contentValues.put(SelectFurnitureContract.TableEntry.COLUMN_CHOICE_6,choice_6);
 
                 //1. 추가된 row의 id(PRIMARY KEY)값을 반환한다.
                 long rowId = sqLiteDatabase.insert(SelectFurnitureContract.TableEntry.TABLE_NAME,null,contentValues);
                 Log.e("rowId", String.valueOf(rowId));
 
                 if (choiceArr.size()!=0){
-                Intent intent = new Intent(InitSelectPage.this, MainPageTab.class);
-                startActivity(intent);
+                    Intent intent = new Intent(InitSelectPage.this, MainPageTab.class);
+                    startActivity(intent);
 
-                finish();
+                    finish();
                 }else {
                     Toast.makeText(InitSelectPage.this,"카테고리를 선택해주세요",Toast.LENGTH_SHORT).show();
                 }
@@ -269,8 +306,11 @@ public class InitSelectPage extends AppCompatActivity {
             case "#소파":
                 cb_sofa.setChecked(true);
                 break;
-            case "#전등/등":
-                cb_lamp.setChecked(true);
+            case "#전등(벽에 부착식)":
+                cb_dispatchLamp.setChecked(true);
+                break;
+            case "#전등(벽에 매다는 식)":
+                cb_hangLamp.setChecked(true);
                 break;
 
         }

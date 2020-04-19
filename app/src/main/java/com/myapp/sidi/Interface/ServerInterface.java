@@ -2,6 +2,7 @@ package com.myapp.sidi.Interface;
 
 import com.myapp.sidi.DTO.MainPageDesignResult;
 import com.myapp.sidi.DTO.SearchingTabDesignResult;
+import com.myapp.sidi.DTO.SimilarImageResult;
 
 import java.util.List;
 
@@ -30,4 +31,7 @@ public interface ServerInterface {
                                @Query("dep_4")String dep_4,
                                @Query("dep_5")String dep_5,
                                @Query("pageNum")int pageNum);
+
+    @GET("/sidi/findSimilarImages.php")
+    Call<SimilarImageResult> similar(@Query("file") String file);
 }
