@@ -18,10 +18,12 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.myapp.sidi.Adapter.SearchDetail_Adapter;
+import com.myapp.sidi.Adapter.SearchResult_Adapter;
 import com.myapp.sidi.Category.DeskInfo;
 import com.myapp.sidi.DTO.Design_Data;
 import com.myapp.sidi.DTO.MainPageDesignResult;
 import com.myapp.sidi.DTO.SearchDetailData;
+import com.myapp.sidi.DTO.SearchResultData;
 import com.myapp.sidi.Interface.ServerInterface;
 import com.myapp.sidi.R;
 
@@ -71,9 +73,12 @@ public class ViewDetail extends AppCompatActivity {
     ArrayList<SearchDetailData> sameDepthDesigns = new ArrayList<>(); // 같은 형태분류 이미지들
     ArrayList<SearchDetailData> otherSketches = new ArrayList<>(); // 다른 사람의 스케치 이미지들
 
+    ArrayList<SearchResultData> searchResultData = new ArrayList<>();
+
     private SearchDetail_Adapter otherDesignAdapter;
     private SearchDetail_Adapter sameDepthDesignAdapter;
     private SearchDetail_Adapter sketchDesignAdapter;
+    private SearchResult_Adapter searchResultAdapter;
     private LinearLayoutManager linearLayoutManager1, linearLayoutManager2, linearLayoutManager3;
 
 
@@ -118,18 +123,41 @@ public class ViewDetail extends AppCompatActivity {
 
 
         intent = getIntent();
+
         try {
+
+
+
             country = intent.getExtras().getString("country");
             registrationNum = intent.getExtras().getString("registrationNum");
-            designMainClassification = intent.getExtras().getString("designMainClassification", "");
-            depth1 = intent.getExtras().getInt("depth1", 0);
-            depth2 = intent.getExtras().getInt("depth2", 0);
-            depth3 = intent.getExtras().getInt("depth3", 0);
-            depth4 = intent.getExtras().getInt("depth4", 0);
-            depth5 = intent.getExtras().getInt("depth5", 0);
+            designMainClassification = intent.getExtras().getString("designMainClassification");
+            depth1 = Integer.parseInt(intent.getExtras().getString("depth1"));
+            depth2 = Integer.parseInt(intent.getExtras().getString("depth2"));
+            depth3 = Integer.parseInt(intent.getExtras().getString("depth3"));
+            depth4 = Integer.parseInt(intent.getExtras().getString("depth4"));
+            depth5 = Integer.parseInt(intent.getExtras().getString("depth5"));
+
+
+
+
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+
+
+
+
+
+        Log.e("country",country);
+        Log.e("registrationNum",registrationNum);
+        Log.e("depth1",""+depth1);
+        Log.e("depth2",""+depth2);
+        Log.e("depth3",""+depth3);
+        Log.e("depth4",""+depth4);
+        Log.e("depth5",""+depth5);
 
         linearLayoutManager1 = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
         linearLayoutManager2 = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
@@ -442,9 +470,10 @@ public class ViewDetail extends AppCompatActivity {
 
                 //pdf 보기
                 if (country.equals(SEARCH_MODE_KOR)) {
-                    if (ImagePaths.size() > 0)
+                    if (ImagePaths.size() > 0){
                         text_designNum.setText("" + ImagePaths.get(0).getDesignId() + "번");
                     Glide.with(ViewDetail.this).load(ImagePaths.get(0).getDesign()).into(main_design);
+                    }
                     StringBuffer sb = new StringBuffer();
                     sb.append("디자인명 : " + articleName + "  /  ");
                     sb.append("출원인 : " + applicantName + "\n");

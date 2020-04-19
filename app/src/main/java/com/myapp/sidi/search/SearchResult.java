@@ -71,6 +71,8 @@ public class SearchResult extends AppCompatActivity {
 
 
 
+
+
         Button temp = findViewById(R.id.btn_subSearch);
         temp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,6 +131,21 @@ public class SearchResult extends AppCompatActivity {
         recyclerView.setLayoutManager(gridLayoutManager);
         re_arrayList = new ArrayList<>();
         searchResultAdapter = new SearchResult_Adapter(re_arrayList,this);
+        searchResultAdapter.setOnItemClickListener(new SearchResult_Adapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+                Intent intent1 = new Intent(SearchResult.this,ViewDetail.class);
+                intent1.putExtra("country","kor");
+                intent1.putExtra("registrationNum",re_arrayList.get(position).getDesignNum());
+                intent1.putExtra("depth1",re_arrayList.get(position).getDep_1());
+                intent1.putExtra("depth2",re_arrayList.get(position).getDep_2());
+                intent1.putExtra("depth3",re_arrayList.get(position).getDep_3());
+                intent1.putExtra("depth4",re_arrayList.get(position).getDep_4());
+                intent1.putExtra("depth5",re_arrayList.get(position).getDep_5());
+                startActivity(intent1);
+            }
+        });
+
         recyclerView.setAdapter(searchResultAdapter);
 
 

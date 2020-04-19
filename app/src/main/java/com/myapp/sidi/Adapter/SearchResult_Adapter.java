@@ -20,11 +20,19 @@ import java.util.ArrayList;
 
 public class SearchResult_Adapter extends RecyclerView.Adapter<SearchResult_Adapter.CustomViewHolder> {
    private ArrayList<SearchResultData> arrayList;
+    private OnItemClickListener mListener = null ;
    private Context context;
 
     public SearchResult_Adapter(ArrayList<SearchResultData> arrayList, Context context) {
         this.arrayList = arrayList;
         this.context = context;
+    }
+    public interface OnItemClickListener {
+        void onItemClick(View v, int position) ;
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.mListener = listener ;
     }
 
     @NonNull
@@ -36,7 +44,7 @@ public class SearchResult_Adapter extends RecyclerView.Adapter<SearchResult_Adap
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final CustomViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final CustomViewHolder holder, final int position) {
         Glide.with(holder.itemView)
                 .load(arrayList.get(position).getUrl()).into(holder.url);
 
@@ -58,20 +66,7 @@ public class SearchResult_Adapter extends RecyclerView.Adapter<SearchResult_Adap
 
         holder.itemView.setTag(position);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Intent intent = new Intent(view.getContext(), ViewDetail.class);
-//                intent.putExtra("registrationNum",holder.registrationNum.toString());
-//                intent.putExtra("depth1",holder.dep_1.toString());
-//                intent.putExtra("depth2",holder.dep_2.toString());
-//                intent.putExtra("depth3",holder.dep_3.toString());
-////                intent.putExtra("depth4",holder.dep_4.toString());
-//                intent.putExtra("depth5",holder.dep_5.toString());
-//                view.getContext().startActivity(intent);
 
-            }
-        });
     }
 
     @Override
@@ -96,6 +91,8 @@ public class SearchResult_Adapter extends RecyclerView.Adapter<SearchResult_Adap
         TextView dep_4;
         TextView dep_5;
 
+
+
         public CustomViewHolder(@NonNull View itemView) {
             super(itemView);
             this.url = itemView.findViewById(R.id.url);
@@ -113,6 +110,17 @@ public class SearchResult_Adapter extends RecyclerView.Adapter<SearchResult_Adap
             this.dep_3 = itemView.findViewById(R.id.dep_3);
             this.dep_4 = itemView.findViewById(R.id.dep_4);
             this.dep_5 = itemView.findViewById(R.id.dep_5);
+
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int pos = getAdapterPosition() ;
+                        if (pos != RecyclerView.NO_POSITION) {
+                            // 리스너 객체의 메서드 호출.
+                            mListener.onItemClick(v,pos);
+                        }
+                    }
+                });
         }
     }
 }
