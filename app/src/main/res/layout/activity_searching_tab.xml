@@ -178,9 +178,9 @@
     <LinearLayout
         android:id="@+id/Linear_nation"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:orientation="horizontal"
-        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="left"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_FurnitureNation"
         android:layout_marginTop="10dp">
@@ -193,27 +193,40 @@
 
         <CheckBox
             android:id="@+id/cb_nationKor"
+            android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="한국"/>
+            android:text="대한민국 특허청"/>
 
         <CheckBox
             android:id="@+id/cb_nationUS"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="미국"/>
+            android:text="미국 특허청"/>
 
         <CheckBox
             android:id="@+id/cb_nationJp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="일본"/>
+            android:text="일본 특허청"/>
 
         <CheckBox
-            android:id="@+id/cb_nationOther"
+            android:id="@+id/cb_nationGm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="유럽 및 기타"/>
+            android:text="독일 특허청"/>
+
+        <CheckBox
+            android:id="@+id/cb_nationWipo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="세계지적재산기구 WIPO"/>
+
+        <CheckBox
+            android:id="@+id/cb_nationOhim"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="유럽공동체상표의장청 OHIM"/>
 
 
 

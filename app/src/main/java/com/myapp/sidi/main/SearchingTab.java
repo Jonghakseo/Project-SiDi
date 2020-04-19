@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.myapp.sidi.Category.ChairInfo;
+import com.myapp.sidi.Category.CountryInfo;
 import com.myapp.sidi.Category.DeskInfo;
 import com.myapp.sidi.Category.LampDispatchInfo;
 import com.myapp.sidi.Category.LampHangInfo;
@@ -48,7 +49,7 @@ public class SearchingTab extends AppCompatActivity {
     private RadioButton rb_furnitureDesk,rb_furnitureChair,rb_furnitureTable,rb_furnitureSofa,rb_furnitureDispatchLamp,rb_furnitureHangLamp;
     private RadioGroup rg_furniture;
     private CheckBox cb_timeAll;
-    private CheckBox cb_nationAll,cb_nationKor,cb_nationUS,cb_nationJp,cb_nationOther;
+    private CheckBox cb_nationAll,cb_nationKor,cb_nationUS,cb_nationJp, cb_nationGm,cb_nationWipo,cb_nationOhim;
     private CheckBox cb_furnitureDetailAll;
     private EditText et_year_1,et_year_2;
     private Button btn_dep_1, btn_dep_2, btn_dep_3, btn_dep_4, btn_dep_5;
@@ -64,6 +65,7 @@ public class SearchingTab extends AppCompatActivity {
     private StringBuilder nationStringBuilder,dep_1_StringBuilder,dep_2_StringBuilder,dep_3_StringBuilder,dep_4_StringBuilder,dep_5_StringBuilder;
     private TextView tv_middleYear,tv_FurnitureFormExplain;
     private NameToNumConverter converter;
+    private CountryInfo countryInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +98,11 @@ public class SearchingTab extends AppCompatActivity {
         cb_nationKor = findViewById(R.id.cb_nationKor);
         cb_nationUS = findViewById(R.id.cb_nationUS);
         cb_nationJp = findViewById(R.id.cb_nationJp);
-        cb_nationOther = findViewById(R.id.cb_nationOther);
+        cb_nationGm = findViewById(R.id.cb_nationGm);
+        cb_nationWipo = findViewById(R.id.cb_nationWipo);
+        cb_nationOhim = findViewById(R.id.cb_nationOhim);
+
+
 //        cb_furnitureDetailAll = findViewById(R.id.cb_furnitureDetailAll);
 
         btn_dep_1 = findViewById(R.id.btn_dep_1);
@@ -212,6 +218,7 @@ public class SearchingTab extends AppCompatActivity {
             tv_FurnitureFormExplain.setVisibility(View.GONE);
         }
         converter = new NameToNumConverter();
+        countryInfo = new CountryInfo();
 
     }
 
@@ -714,17 +721,24 @@ public class SearchingTab extends AppCompatActivity {
                         cb_nationKor.setVisibility(View.GONE);
                         cb_nationUS.setVisibility(View.GONE);
                         cb_nationJp.setVisibility(View.GONE);
-                        cb_nationOther.setVisibility(View.GONE);
+                        cb_nationGm.setVisibility(View.GONE);
+                        cb_nationWipo.setVisibility(View.GONE);
+                        cb_nationOhim.setVisibility(View.GONE);
+
                         cb_nationKor.setChecked(false);
                         cb_nationUS.setChecked(false);
                         cb_nationJp.setChecked(false);
-                        cb_nationOther.setChecked(false);
-                        nationChoiceResult = "1,2,3,4";
+                        cb_nationGm.setChecked(false);
+                        cb_nationWipo.setChecked(false);
+                        cb_nationWipo.setChecked(false);
+                        nationChoiceResult = "1,2,3,4,5,6";
                     }else if (compoundButton.isChecked()==false){
                         cb_nationKor.setVisibility(View.VISIBLE);
                         cb_nationUS.setVisibility(View.VISIBLE);
                         cb_nationJp.setVisibility(View.VISIBLE);
-                        cb_nationOther.setVisibility(View.VISIBLE);
+                        cb_nationGm.setVisibility(View.VISIBLE);
+                        cb_nationWipo.setVisibility(View.VISIBLE);
+                        cb_nationOhim.setVisibility(View.VISIBLE);
                     }
                 }
             });
@@ -781,8 +795,14 @@ public class SearchingTab extends AppCompatActivity {
                 if (cb_nationJp.isChecked()){
                     tmpNationArr.add(cb_nationJp.getText().toString());
                 }
-                if (cb_nationOther.isChecked()){
-                    tmpNationArr.add(cb_nationOther.getText().toString());
+                if (cb_nationGm.isChecked()){
+                    tmpNationArr.add(cb_nationGm.getText().toString());
+                }
+                if (cb_nationWipo.isChecked()){
+                    tmpNationArr.add(cb_nationWipo.getText().toString());
+                }
+                if(cb_nationOhim.isChecked()){
+                    tmpNationArr.add(cb_nationOhim.getText().toString());
                 }
 
                 if (tmpNationArr.size()!=0){
@@ -1235,17 +1255,23 @@ public class SearchingTab extends AppCompatActivity {
     public String nationToNumConverter(String nationName){
         String result="";
         switch (nationName){
-            case "한국":
+            case "대한민국 특허청":
                 result = "1";
                 break;
-            case "미국":
+            case "미국 특허청":
                 result = "2";
                 break;
-            case "일본":
+            case "일본 특허청":
                 result = "3";
                 break;
-            case "유럽 및 기타":
+            case "독일 특허청":
                 result = "4";
+                break;
+            case "세계지적재산기구 WIPO":
+                result = "5";
+                break;
+            case "유럽공동체상표의장청 OHIM":
+                result = "6";
                 break;
             default:
                 break;
