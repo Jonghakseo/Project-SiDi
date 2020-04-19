@@ -1,6 +1,7 @@
 package com.myapp.sidi.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.myapp.sidi.DTO.SearchResultData;
 import com.myapp.sidi.R;
+import com.myapp.sidi.search.ViewDetail;
 
 import java.util.ArrayList;
 
@@ -34,7 +36,7 @@ public class SearchResult_Adapter extends RecyclerView.Adapter<SearchResult_Adap
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final CustomViewHolder holder, int position) {
         Glide.with(holder.itemView)
                 .load(arrayList.get(position).getUrl()).into(holder.url);
 
@@ -59,6 +61,14 @@ public class SearchResult_Adapter extends RecyclerView.Adapter<SearchResult_Adap
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                Intent intent = new Intent(view.getContext(), ViewDetail.class);
+//                intent.putExtra("registrationNum",holder.registrationNum.toString());
+//                intent.putExtra("depth1",holder.dep_1.toString());
+//                intent.putExtra("depth2",holder.dep_2.toString());
+//                intent.putExtra("depth3",holder.dep_3.toString());
+////                intent.putExtra("depth4",holder.dep_4.toString());
+//                intent.putExtra("depth5",holder.dep_5.toString());
+//                view.getContext().startActivity(intent);
 
             }
         });

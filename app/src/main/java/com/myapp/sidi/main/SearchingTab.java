@@ -54,12 +54,13 @@ public class SearchingTab extends AppCompatActivity {
     private Button btn_dep_1, btn_dep_2, btn_dep_3, btn_dep_4, btn_dep_5;
     private Button btn_FurnitureCategory,btn_FurnitureTime, btn_FurnitureForm,btn_FurnitureNation;
     private LinearLayout Linear_furnitureDetailTotal,Linear_dep_1,Linear_dep_2,Linear_dep_3,Linear_dep_4,Linear_dep_5;
-    private CheckBox searchFormCheckBox,searchFormCheckBox2,searchFormCheckBox3,searchFormCheckBox4,searchFormCheckBox5;
+    private CheckBox searchFormCheckBoxALL,searchFormCheckBox,searchFormCheckBox2,searchFormCheckBox3,searchFormCheckBox4,searchFormCheckBox5;
     private ArrayList dep_1_tmpArr, dep_2_tmpArr,dep_3_tmpArr,dep_4_tmpArr,dep_5_tmpArr;
     private ArrayList dep_1_ResultArr, dep_2_ResultArr,dep_3_ResultArr,dep_4_ResultArr,dep_5_ResultArr;
     private Button btn_next;
-    private String furnitureChoiceResult, startTimeChoiceResult,endTimeChoiceResult,nationChoiceResult,dep_1_ChoiceResult,dep_2_ChoiceResult,
-    dep_3_ChoiceResult,dep_4_ChoiceResult,dep_5_ChoiceResult;
+    private String furnitureChoiceResult="", startTimeChoiceResult="",endTimeChoiceResult="",nationChoiceResult="",
+            dep_1_ChoiceResult="",dep_2_ChoiceResult="",
+    dep_3_ChoiceResult="",dep_4_ChoiceResult="",dep_5_ChoiceResult="";
     private StringBuilder nationStringBuilder,dep_1_StringBuilder,dep_2_StringBuilder,dep_3_StringBuilder,dep_4_StringBuilder,dep_5_StringBuilder;
     private TextView tv_middleYear,tv_FurnitureFormExplain;
     private NameToNumConverter converter;
@@ -315,6 +316,7 @@ public class SearchingTab extends AppCompatActivity {
                         btn_dep_3.setText(deskInfo.desk_dep3);
                         btn_dep_4.setText(deskInfo.desk_dep4);
                         btn_dep_5.setText(deskInfo.desk_dep5);
+
 
                         //형태를 선택해야하는 유형들의 depth별로 체크박스 동적으로 만들어주기
                         String[] desk_dep1_searchForm = deskInfo.desk_dep1_searchForm.split(",");
@@ -732,19 +734,43 @@ public class SearchingTab extends AppCompatActivity {
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.e("furnitureChoiceResult", furnitureChoiceResult);
+//                Log.e("furnitureChoiceResult", furnitureChoiceResult);
 
 
-                if (!cb_timeAll.isChecked()){
+                if (!cb_timeAll.isChecked()&&!et_year_1.getText().toString().equals("")&&
+                        !et_year_2.getText().toString().equals("")){
                 startTimeChoiceResult = et_year_1.getText().toString();
                 endTimeChoiceResult = et_year_2.getText().toString();
 
-                }else {
-                    startTimeChoiceResult ="1960";
-                    endTimeChoiceResult = "2030";
                 }
-                Log.e("startTimeChoiceResult", startTimeChoiceResult);
-                Log.e("endTimeChoiceResult", endTimeChoiceResult);
+
+                if (!cb_timeAll.isChecked()&&et_year_1.getText().toString().equals("")&&
+                        et_year_2.getText().toString().equals("")){
+                    startTimeChoiceResult = "1970";
+                    endTimeChoiceResult = "2030";
+
+                }
+
+                if (!cb_timeAll.isChecked()&&!et_year_1.getText().toString().equals("")&&
+                        et_year_2.getText().toString().equals("")){
+                    startTimeChoiceResult = et_year_1.getText().toString();
+                    endTimeChoiceResult = et_year_1.getText().toString();
+
+                }
+
+                if (!cb_timeAll.isChecked()&&et_year_1.getText().toString().equals("")&&
+                        !et_year_2.getText().toString().equals("")){
+                    startTimeChoiceResult = et_year_2.getText().toString();
+                    endTimeChoiceResult = et_year_2.getText().toString();
+
+                }
+
+
+
+
+
+//                Log.e("startTimeChoiceResult", startTimeChoiceResult);
+//                Log.e("endTimeChoiceResult", endTimeChoiceResult);
                 ArrayList tmpNationArr= new ArrayList();
                 if (cb_nationKor.isChecked()){
                     tmpNationArr.add(cb_nationKor.getText().toString());
@@ -769,8 +795,10 @@ public class SearchingTab extends AppCompatActivity {
                         }
                     }
                     nationChoiceResult = nationStringBuilder.toString();
+                }else if (tmpNationArr.size()==0){
+                    nationChoiceResult="1,2,3,4";
                 }
-                Log.e("nationChoiceResult",nationChoiceResult);
+//                Log.e("nationChoiceResult",nationChoiceResult);
 
 
                 if (dep_1_ResultArr.size()!=0){
@@ -780,7 +808,7 @@ public class SearchingTab extends AppCompatActivity {
                 }else {
                     dep_1_ChoiceResult="ALL";
                 }
-                Log.e("dep_1_ChoiceResult", dep_1_ChoiceResult);
+//                Log.e("dep_1_ChoiceResult", dep_1_ChoiceResult);
 
                 if (dep_2_ResultArr.size()!=0){
                     nameToNumConverter_dep2(furnitureChoiceResult);
@@ -790,7 +818,7 @@ public class SearchingTab extends AppCompatActivity {
                 }else {
                     dep_2_ChoiceResult="ALL";
                 }
-                Log.e("dep_2_ChoiceResult", dep_2_ChoiceResult);
+//                Log.e("dep_2_ChoiceResult", dep_2_ChoiceResult);
                 if (dep_3_ResultArr.size()!=0){
                     nameToNumConverter_dep3(furnitureChoiceResult);
                     dep_3_ChoiceResult="";
@@ -799,7 +827,7 @@ public class SearchingTab extends AppCompatActivity {
                 }else {
                     dep_3_ChoiceResult="ALL";
                 }
-                Log.e("dep_3_ChoiceResult", dep_3_ChoiceResult);
+//                Log.e("dep_3_ChoiceResult", dep_3_ChoiceResult);
                 if (dep_4_ResultArr.size()!=0){
                     nameToNumConverter_dep4(furnitureChoiceResult);
                     dep_4_ChoiceResult="";
@@ -808,7 +836,7 @@ public class SearchingTab extends AppCompatActivity {
                 }else {
                     dep_4_ChoiceResult="ALL";
                 }
-                Log.e("dep_4_ChoiceResult", dep_4_ChoiceResult);
+//                Log.e("dep_4_ChoiceResult", dep_4_ChoiceResult);
                 if (dep_5_ResultArr.size()!=0){
                     nameToNumConverter_dep5(furnitureChoiceResult);
                     dep_5_ChoiceResult="";
@@ -817,7 +845,7 @@ public class SearchingTab extends AppCompatActivity {
                 }else {
                     dep_5_ChoiceResult="ALL";
                 }
-                Log.e("dep_5_ChoiceResult", dep_5_ChoiceResult);
+//                Log.e("dep_5_ChoiceResult", dep_5_ChoiceResult);
 
                 Intent intent = new Intent(SearchingTab.this, SearchResult.class);
                 intent.putExtra("furnitureChoiceResult",furnitureChoiceResult);

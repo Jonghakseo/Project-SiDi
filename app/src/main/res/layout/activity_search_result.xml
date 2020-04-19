@@ -7,11 +7,11 @@
     tools:context=".search.SearchResult">
 
     <Button
-        android:id="@+id/btn_add"
+        android:id="@+id/btn_subSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
     <TextView
         android:id="@+id/tv_titleFilter"
         android:layout_width="wrap_content"
@@ -21,6 +21,7 @@
         android:layout_margin="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
+
 <HorizontalScrollView
     android:layout_width="match_parent"
     android:layout_height="60dp"

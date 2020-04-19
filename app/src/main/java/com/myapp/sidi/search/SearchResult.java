@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.JsonReader;
@@ -18,6 +20,9 @@ import com.myapp.sidi.DTO.SearchResultData;
 import com.myapp.sidi.DTO.SearchingTabDesignResult;
 import com.myapp.sidi.Interface.ServerInterface;
 import com.myapp.sidi.R;
+import com.myapp.sidi.SketchSearch;
+import com.myapp.sidi.main.MainPageTab;
+import com.myapp.sidi.main.SearchingTab;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -34,7 +39,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SearchResult extends AppCompatActivity {
 
-    private Button btn_add;
+    private Button btn_subSearch,btn_searchSketch;
     private ArrayList<SearchResultData> re_arrayList;
     private SearchResult_Adapter searchResultAdapter;
     private RecyclerView recyclerView;
@@ -49,9 +54,10 @@ public class SearchResult extends AppCompatActivity {
         setContentView(R.layout.activity_search_result);
 
         recyclerView = findViewById(R.id.recyclerView);
-        btn_add = findViewById(R.id.btn_add);
+        btn_subSearch = findViewById(R.id.btn_subSearch);
+        btn_searchSketch= findViewById(R.id.btn_searchSketch);
 
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
 //        furnitureChoiceResult = intent.getExtras().getString("furnitureChoiceResult");
         furnitureChoiceResult = "desk";
         startTimeChoiceResult = intent.getExtras().getString("startTimeChoiceResult");
@@ -64,6 +70,24 @@ public class SearchResult extends AppCompatActivity {
         dep_5_ChoiceResult = intent.getExtras().getString("dep_5_ChoiceResult");
 
 
+
+        Button temp = findViewById(R.id.btn_subSearch);
+        temp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SearchResult.this, ViewDetail.class);
+                intent.putExtra("country","kor");
+//                intent.putExtra("country","jap");
+                intent.putExtra("registrationNum","3020180027259");
+//                intent.putExtra("registrationNum","1380586-000");//등록번호로 사용해야함 ㅠㅠ
+                intent.putExtra("depth1",1);
+                intent.putExtra("depth2",2);
+                intent.putExtra("depth3",3);
+//                intent.putExtra("depth4","형태4");
+                intent.putExtra("depth5",5);
+                startActivity(intent);
+            }
+        });
 
         Log.e("furnitureChoiceResult",furnitureChoiceResult);
         Log.e("startTimeChoiceResult",startTimeChoiceResult);
@@ -141,7 +165,10 @@ public class SearchResult extends AppCompatActivity {
                 Log.e("result",result.toString());
                 List<SearchingTabDesignResult.Result> list = result.getResult();
 
+                Log.e("test", String.valueOf(response.body()));
+
                 for (SearchingTabDesignResult.Result result1 : list){
+
 
                     String url = "http://"+result1.getUrl();
                     SearchResultData searchResultData = new SearchResultData(url,
@@ -190,21 +217,28 @@ public class SearchResult extends AppCompatActivity {
             @Override
             public void onFailure(Call<SearchingTabDesignResult> call, Throwable t) {
                 Log.e("error",t.toString());
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(SearchResult.this);
+                builder.setTitle("해당 검색 내용이 없습니다.").setMessage("다시 검색해주세요");
+                builder.setPositiveButton("돌아가기", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent1 = new Intent(SearchResult.this, SearchingTab.class);
+                        startActivity(intent1);
+                    }
+                });
+
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+
             }
         });
 
-
-
-
-
-
-        final String url = "http://img.designmap.or.kr//IMG_P200/thumbnail/KR/D2330C/3020190001577/M001/thumb_3020190001577.jpg";
-        btn_add.setOnClickListener(new View.OnClickListener() {
+        btn_searchSketch.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-//                SearchResultData searchResultData = new SearchResultData(url,"id");
-//                re_arrayList.add(searchResultData);
-//                searchResultAdapter.notifyDataSetChanged();
+            public void onClick(View v) {
+                Intent intent = new Intent(SearchResult.this, SketchSearch.class);
+                startActivity(intent);
             }
         });
 
