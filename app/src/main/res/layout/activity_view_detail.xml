@@ -164,8 +164,9 @@
 
         <TextView
             android:id="@+id/detail_text_description"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="@+id/detail_title_description"
             app:layout_constraintTop_toBottomOf="@+id/detail_title_description" />
@@ -191,10 +192,8 @@
             android:id="@+id/detail_RV_sameDepth"
             android:layout_width="match_parent"
             android:layout_height="75dp"
-            android:layout_margin="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.473"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_margin="13dp"
+            app:layout_constraintStart_toStartOf="@+id/detail_title_sameDepth"
             app:layout_constraintTop_toBottomOf="@+id/detail_title_sameDepth">
 
         </androidx.recyclerview.widget.RecyclerView>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="5dp"
+    tools:context=".sketch.IdeaSketch">
+    ​
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        ​
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            ​
+            <ImageButton
+                android:id="@+id/idea_memoBackButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="?attr/actionModeCloseDrawable" />
+            ​
+            <Button
+                android:id="@+id/idea_colorPickerButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="색상선택" />
+            ​
+            <Button
+                android:id="@+id/sidea_aveMemoButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="저장하기" />
+
+            ​
+            ​
+        </LinearLayout>
+        ​
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            ​
+            <RadioGroup
+                android:id="@+id/idea_radioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                ​
+                <RadioButton
+                    android:id="@+id/idea_radioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="얇게" />
+                ​
+                <RadioButton
+                    android:id="@+id/idea_radioButton2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="중간" />
+                ​
+                <RadioButton
+                    android:id="@+id/idea_radioButton3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="굵게" />
+                ​
+                <RadioButton
+                    android:id="@+id/idea_eraserButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="지우개" />
+            </RadioGroup>
+            ​
+        </LinearLayout>
+        ​
+    </LinearLayout>
+    ​
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:background="@drawable/round_line"
+        android:padding="@dimen/ambilwarna_spacer">
+        ​
+
+        <ImageView
+            android:id="@+id/iv_idea_backgroundDesign"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:src="@drawable/dep1_3"
+            tools:srcCompat="@drawable/d_kor" />
+
+        <LinearLayout
+            android:id="@+id/idea_drawingLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            ​
+        </LinearLayout>
+    </FrameLayout>
+    ​
+    ​
+</LinearLayout>

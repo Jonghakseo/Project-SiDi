@@ -12,24 +12,36 @@
         app:layout_constraintTop_toTopOf="parent"
         android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/iv_similar"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:scaleType="fitXY"
-        android:background="@android:color/transparent"/>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iv_design"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@android:color/transparent"
+                android:scaleType="fitXY" />
+
+            <ImageView
+                android:id="@+id/iv_country"
+                android:layout_width="35dp"
+                android:layout_height="20dp" />
+        </FrameLayout>
 
         <TextView
             android:id="@+id/serverIndex"
             android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+
         <TextView
             android:id="@+id/designNum"
-            android:visibility="gone"
-
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:visibility="visible" />
 
         <TextView
             android:id="@+id/registrationNum"
@@ -49,18 +61,22 @@
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+
         <TextView
             android:id="@+id/registerPerson"
-            android:visibility="gone"
-
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:visibility="visible" />
+
         <TextView
             android:id="@+id/date_application"
-            android:visibility="gone"
-
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:visibility="visible" />
         <TextView
             android:id="@+id/date_registration"
             android:visibility="gone"

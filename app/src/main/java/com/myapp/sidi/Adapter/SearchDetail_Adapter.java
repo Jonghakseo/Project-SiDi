@@ -62,7 +62,7 @@ public class SearchDetail_Adapter extends RecyclerView.Adapter<SearchDetail_Adap
             iv_design = itemView.findViewById(R.id.iv_design);
             tv_designId = itemView.findViewById(R.id.tv_designId);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
+            iv_design.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int pos = getAdapterPosition() ;

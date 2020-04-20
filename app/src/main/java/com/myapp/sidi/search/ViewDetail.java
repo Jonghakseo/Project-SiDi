@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.myapp.sidi.Adapter.SearchDetail_Adapter;
@@ -24,6 +25,7 @@ import com.myapp.sidi.DTO.SimilarImageRcyData;
 import com.myapp.sidi.DTO.SearchResultData;
 import com.myapp.sidi.Interface.ServerInterface;
 import com.myapp.sidi.R;
+import com.myapp.sidi.sketch.IdeaSketch;
 
 import org.xmlpull.v1.XmlPullParser;
 
@@ -45,7 +47,7 @@ public class ViewDetail extends AppCompatActivity {
     private String country; //해당 디자인 출원 국가
     private String registrationNum; //검색 결과로 받은 출원번호
     private String designMainClassification;//일본 검색에 필요한 디자인 분류코드
-    private int depth1, depth2, depth3, depth4, depth5;
+    private int depth1, depth2, depth3, depth4, depth5, imagePos;
     Button btn_fullText, btn_scrap, btn_sketch, btn_moreDescription, btn_basicInfo;
     ImageView main_design;
     TextView text_designNum, text_basicInfo, text_description, tagBox1, tagBox2, tagBox3, tagBox4, tagBox5;
@@ -273,6 +275,7 @@ public class ViewDetail extends AppCompatActivity {
             switch (strings[0]) {
                 case SEARCH_MODE_KOR:
                     try {
+                        System.out.println(strings[0]);
                         String result;
                         apiServerEndpoint = new URL("http://plus.kipris.or.kr/kipo-api/kipi/designInfoSearchService/getBibliographyDetailInfoSearch?applicationNumber=" + registrationNum + "&ServiceKey=MycjEOwwAfMDHrTT1DIYF=Z4/8MIZY7ofDy4IzoWF14=");
                         // 서버 엔드포인트
@@ -336,7 +339,7 @@ public class ViewDetail extends AppCompatActivity {
                                             break;
                                         case "designDescription":
                                             parser.next();
-                                            designDescription = parser.getText();
+                                            designDescription = ""+parser.getText();
                                             break;
                                         case "fullTextFilePath":
                                             parser.next();
@@ -636,9 +639,17 @@ public class ViewDetail extends AppCompatActivity {
                 btn_sketch.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent();
-                        //TODO 인텐트 내용 채워줘야함 ( 현재 이미지 선택 후 스케치 페이지로 함께 전송 )
-                        startActivity(intent);
+                        if (ImagePaths.size() > 0){
+                            Intent intent = new Intent(ViewDetail.this, IdeaSketch.class);
+                            //TODO 인텐트 내용 채워줘야함 ( 현재 이미지 선택 후 스케치 페이지로 함께 전송 )
+                            intent.putExtra("nowImage",ImagePaths.get(imagePos).getDesign());//현재 선택 이미지 url 보냄
+                            intent.putExtra("registrationNum",registrationNum);//번호
+                            intent.putExtra("country",country);//국가
+
+                            startActivity(intent);
+                        }else {
+                            Toast.makeText(ViewDetail.this,"스케치 가능한 도면이 없습니다.",Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
                 btn_scrap.setOnClickListener(new View.OnClickListener() {
@@ -660,6 +671,7 @@ public class ViewDetail extends AppCompatActivity {
     private void changeMainDesign(int position) {
         Glide.with(ViewDetail.this).load(ImagePaths.get(position).getDesign()).into(main_design);
         text_designNum.setText("도면 " + ImagePaths.get(position).getDesignId() + "");
+        imagePos = position;
     }
 
 }

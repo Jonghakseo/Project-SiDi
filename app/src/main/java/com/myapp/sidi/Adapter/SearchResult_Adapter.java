@@ -11,32 +11,34 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.myapp.sidi.Category.CountryInfo;
 import com.myapp.sidi.DTO.SearchResultData;
 import com.myapp.sidi.R;
 
 import java.util.ArrayList;
 
 public class SearchResult_Adapter extends RecyclerView.Adapter<SearchResult_Adapter.CustomViewHolder> {
-   private ArrayList<SearchResultData> arrayList;
-    private OnItemClickListener mListener = null ;
-   private Context context;
+    private ArrayList<SearchResultData> arrayList;
+    private OnItemClickListener mListener = null;
+    private Context context;
 
     public SearchResult_Adapter(ArrayList<SearchResultData> arrayList, Context context) {
         this.arrayList = arrayList;
         this.context = context;
     }
+
     public interface OnItemClickListener {
-        void onItemClick(View v, int position) ;
+        void onItemClick(View v, int position);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
-        this.mListener = listener ;
+        this.mListener = listener;
     }
 
     @NonNull
     @Override
     public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.search_result_design_item,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.search_result_design_item, parent, false);
         CustomViewHolder viewHolder = new CustomViewHolder(view);
         return viewHolder;
     }
@@ -45,7 +47,22 @@ public class SearchResult_Adapter extends RecyclerView.Adapter<SearchResult_Adap
     public void onBindViewHolder(@NonNull final CustomViewHolder holder, final int position) {
         Glide.with(holder.itemView)
                 .load(arrayList.get(position).getUrl()).into(holder.url);
-
+        CountryInfo countryInfo = new CountryInfo();
+        System.out.println(arrayList.get(position).getCountry());
+        System.out.println(arrayList.get(position).getCountry().equals(countryInfo.getKor()));
+        if (arrayList.get(position).getCountry().equals(countryInfo.getKor())){
+            Glide.with(holder.itemView).load(R.drawable.d_kor).into(holder.country);
+        }else if (arrayList.get(position).getCountry().equals(countryInfo.getJap())){
+            Glide.with(holder.itemView).load(R.drawable.d_jap).into(holder.country);
+        }else if (arrayList.get(position).getCountry().equals(countryInfo.getUsa())){
+            Glide.with(holder.itemView).load(R.drawable.d_usa).into(holder.country);
+        }else if (arrayList.get(position).getCountry().equals(countryInfo.getGer())){
+            Glide.with(holder.itemView).load(R.drawable.d_ger).into(holder.country);
+        }else if (arrayList.get(position).getCountry().equals(countryInfo.getWipo())){
+            Glide.with(holder.itemView).load(R.drawable.d_wipo).into(holder.country);
+        }else if (arrayList.get(position).getCountry().equals(countryInfo.getOhim())){
+            Glide.with(holder.itemView).load(R.drawable.d_ohim).into(holder.country);
+        }
         holder.serverIndex.setText(arrayList.get(position).getServerIndex());
         holder.designNum.setText(arrayList.get(position).getDesignNum());
         holder.registrationNum.setText(arrayList.get(position).getRegistrationNum());
@@ -69,11 +86,12 @@ public class SearchResult_Adapter extends RecyclerView.Adapter<SearchResult_Adap
 
     @Override
     public int getItemCount() {
-        return (arrayList !=null ? arrayList.size():0);
+        return (arrayList != null ? arrayList.size() : 0);
     }
 
-    public class CustomViewHolder extends RecyclerView.ViewHolder{
+    public class CustomViewHolder extends RecyclerView.ViewHolder {
         ImageView url;
+        ImageView country;
         TextView serverIndex;
         TextView designNum;
         TextView registrationNum;
@@ -90,10 +108,10 @@ public class SearchResult_Adapter extends RecyclerView.Adapter<SearchResult_Adap
         TextView dep_5;
 
 
-
         public CustomViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.url = itemView.findViewById(R.id.iv_similar);
+            this.url = itemView.findViewById(R.id.iv_design);
+            this.country = itemView.findViewById(R.id.iv_country);
             this.serverIndex = itemView.findViewById(R.id.serverIndex);
             this.designNum = itemView.findViewById(R.id.designNum);
             this.registrationNum = itemView.findViewById(R.id.registrationNum);
@@ -109,16 +127,16 @@ public class SearchResult_Adapter extends RecyclerView.Adapter<SearchResult_Adap
             this.dep_4 = itemView.findViewById(R.id.dep_4);
             this.dep_5 = itemView.findViewById(R.id.dep_5);
 
-                itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        int pos = getAdapterPosition() ;
-                        if (pos != RecyclerView.NO_POSITION) {
-                            // 리스너 객체의 메서드 호출.
-                            mListener.onItemClick(v,pos);
-                        }
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = getAdapterPosition();
+                    if (pos != RecyclerView.NO_POSITION) {
+                        // 리스너 객체의 메서드 호출.
+                        mListener.onItemClick(v, pos);
                     }
-                });
+                }
+            });
         }
     }
 }

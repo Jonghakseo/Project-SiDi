@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.myapp.sidi.Adapter.SearchSketch_Adapter;
+import com.myapp.sidi.Category.CountryInfo;
 import com.myapp.sidi.DTO.SearchResultData;
 import com.myapp.sidi.DTO.SearchingTabDesignResult;
 import com.myapp.sidi.DTO.SimilarImageDetailData;
@@ -116,11 +117,16 @@ public class SketchSearch extends AppCompatActivity {
                         List<SimilarImageDetailData.Result> list = result.getResult();
 
                         Log.e("test", String.valueOf(response.body()));
+                        CountryInfo countryInfo = new CountryInfo();
 
                         for (SimilarImageDetailData.Result value : list) {
                             Intent intent = new Intent(SketchSearch.this, ViewDetail.class);
+                            if (value.getCountry().equals(countryInfo.jap)){
+                                intent.putExtra("registrationNum",value.getRegistrationNum());
+                            }else {
+                                intent.putExtra("registrationNum",value.getDesignNum());
+                            }
                             intent.putExtra("country",value.getCountry());
-                            intent.putExtra("registrationNum",value.getDesignNum());
                             intent.putExtra("depth1",value.getDep1());
                             intent.putExtra("depth2",value.getDep2());
                             intent.putExtra("depth3",value.getDep3());
@@ -734,7 +740,7 @@ public class SketchSearch extends AppCompatActivity {
                             @Override
                             public void onResponse(Call<SimilarImageResult> call, Response<SimilarImageResult> response) {
 
-
+                                similarImages.clear();//배열 초기화
                                 SimilarImageResult result = response.body();
                                 Log.e("result", result.toString());
 
