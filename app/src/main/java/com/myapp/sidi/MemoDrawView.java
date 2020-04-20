@@ -13,8 +13,6 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
-import com.bumptech.glide.Glide;
-
 public class MemoDrawView extends View {
 
     public boolean changed = false;
@@ -41,21 +39,21 @@ public class MemoDrawView extends View {
 
     int currentColor = Color.BLACK;
 
-    int backgrountColor = Color.WHITE;
+    int backgroundColor = Color.WHITE;
 
     static final float TOUCH_TOLERANCE = 8;
 
     public MemoDrawView(Context context) {
         super(context);
-        this.backgrountColor = Color.TRANSPARENT;
         init(context);
     }
 
     public MemoDrawView(Context context, boolean idea) {
         super(context);
         if (idea)
-            this.backgrountColor = Color.TRANSPARENT;
+            this.backgroundColor = Color.TRANSPARENT;
         init(context);
+
     }
 
     public MemoDrawView(Context context, @Nullable AttributeSet attrs) {
@@ -93,7 +91,7 @@ public class MemoDrawView extends View {
         //TODO 추후에 여기서 한번 배경화면 넣어보기
         Canvas canvas = new Canvas();
         canvas.setBitmap(img);
-        canvas.drawColor(backgrountColor);
+        canvas.drawColor(backgroundColor);
 //        canvas.drawColor(Color.WHITE);
 //        canvas.drawColor(Color.TRANSPARENT);
 
