@@ -3,21 +3,20 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
-import com.myapp.sidi.DTO.SearchDetailData;
+import com.myapp.sidi.DTO.SimilarImageRcyData;
 import com.myapp.sidi.R;
 import java.util.ArrayList;
 public class SearchDetail_Adapter extends RecyclerView.Adapter<SearchDetail_Adapter.CustomViewHolder> {
-    private ArrayList<SearchDetailData> arrayList;
+    private ArrayList<SimilarImageRcyData> arrayList;
     private OnItemClickListener mListener = null ;
     private Context context;
 
-    public SearchDetail_Adapter(ArrayList<SearchDetailData> arrayList, Context context) {
+    public SearchDetail_Adapter(ArrayList<SimilarImageRcyData> arrayList, Context context) {
         this.arrayList = arrayList;
         this.context = context;
     }

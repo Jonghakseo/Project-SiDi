@@ -12,17 +12,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.myapp.sidi.DTO.SearchDetailData;
+import com.myapp.sidi.DTO.SimilarImageRcyData;
 import com.myapp.sidi.R;
 
 import java.util.ArrayList;
 
 public class SearchSketch_Adapter extends RecyclerView.Adapter<SearchSketch_Adapter.CustomViewHolder> {
-    private ArrayList<SearchDetailData> arrayList;
+    private ArrayList<SimilarImageRcyData> arrayList;
     private OnItemClickListener mListener = null ;
     private Context context;
 
-    public SearchSketch_Adapter(ArrayList<SearchDetailData> arrayList, Context context) {
+    public SearchSketch_Adapter(ArrayList<SimilarImageRcyData> arrayList, Context context) {
         this.arrayList = arrayList;
         this.context = context;
     }
@@ -42,6 +42,7 @@ public class SearchSketch_Adapter extends RecyclerView.Adapter<SearchSketch_Adap
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
         Glide.with(holder.itemView).load(arrayList.get(position).getDesign()).into(holder.iv_similar);
+
         if (arrayList.get(position).getDesignId() > 85){
             holder.tv_simRate.setTextColor(Color.GREEN);
         }else if (arrayList.get(position).getDesignId() > 75){
@@ -52,12 +53,7 @@ public class SearchSketch_Adapter extends RecyclerView.Adapter<SearchSketch_Adap
         holder.tv_simRate.setText("유사도 "+String.valueOf(arrayList.get(position).getDesignId())+"%");
         holder.itemView.setTag(position);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-            }
-        });
     }
 
     @Override

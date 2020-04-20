@@ -11,16 +11,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a70173cf-3876-4ad0-ac3c-85e43a83940a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/DTO/SimilarImageDetailData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/DTO/SimilarImageRcyData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/Adapter/SearchDetail_Adapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/Adapter/SearchDetail_Adapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/Adapter/SearchSketch_Adapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/Adapter/SearchSketch_Adapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/DTO/SearchDetailData.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/DTO/SimilarImageResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/DTO/SimilarImageResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/Interface/ServerInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/Interface/ServerInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/MemoDrawView.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/MemoDrawView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/SketchSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/SketchSearch.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/main/SearchingTab.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/main/SearchingTab.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/search/SearchResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/search/SearchResult.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_searching_tab.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_searching_tab.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/test.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/search/ViewDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/search/ViewDetail.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -425,8 +434,8 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/Interface/ServerInterface.java</url>
-          <line>22</line>
-          <properties class="com.myapp.sidi.Interface.ServerInterface" />
+          <line>21</line>
+          <properties class="com.myapp.sidi.Interface.ServerInterface" method="searching" />
           <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>

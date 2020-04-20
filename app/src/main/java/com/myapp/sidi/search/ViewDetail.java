@@ -17,13 +17,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.Target;
 import com.myapp.sidi.Adapter.SearchDetail_Adapter;
 import com.myapp.sidi.Adapter.SearchResult_Adapter;
 import com.myapp.sidi.Category.DeskInfo;
-import com.myapp.sidi.DTO.Design_Data;
-import com.myapp.sidi.DTO.MainPageDesignResult;
-import com.myapp.sidi.DTO.SearchDetailData;
+import com.myapp.sidi.DTO.SimilarImageRcyData;
 import com.myapp.sidi.DTO.SearchResultData;
 import com.myapp.sidi.Interface.ServerInterface;
 import com.myapp.sidi.R;
@@ -36,9 +33,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -71,9 +65,9 @@ public class ViewDetail extends AppCompatActivity {
     String designDescription = ""; // 디자인 설명
     String fullTextFilePath = ""; // 원문 경로
 
-    ArrayList<SearchDetailData> ImagePaths = new ArrayList<>(); // 다른 도면 이미지들
-    ArrayList<SearchDetailData> sameDepthDesigns = new ArrayList<>(); // 같은 형태분류 이미지들
-    ArrayList<SearchDetailData> otherSketches = new ArrayList<>(); // 다른 사람의 스케치 이미지들
+    ArrayList<SimilarImageRcyData> ImagePaths = new ArrayList<>(); // 다른 도면 이미지들
+    ArrayList<SimilarImageRcyData> sameDepthDesigns = new ArrayList<>(); // 같은 형태분류 이미지들
+    ArrayList<SimilarImageRcyData> otherSketches = new ArrayList<>(); // 다른 사람의 스케치 이미지들
 
     ArrayList<SearchResultData> searchResultData = new ArrayList<>();
 
@@ -330,7 +324,10 @@ public class ViewDetail extends AppCompatActivity {
                                         case "largePath":
                                             parser.next();
                                             imageIndex++;
-                                            SearchDetailData sdd = new SearchDetailData(parser.getText(), imageIndex);
+                                            //********************수정해야함
+                                            //imageIndex ?? 이미지 인지 아니면 유사도 인지 알아봐야함
+
+                                            SimilarImageRcyData sdd = new SimilarImageRcyData(parser.getText(), imageIndex);
                                             ImagePaths.add(sdd);
                                             break;
                                         case "designSummary":
@@ -454,7 +451,7 @@ public class ViewDetail extends AppCompatActivity {
                                         case "imagePath":
                                             parser.next();
                                             imageIndex++;
-                                            SearchDetailData sdd = new SearchDetailData(parser.getText(), imageIndex);
+                                            SimilarImageRcyData sdd = new SimilarImageRcyData(parser.getText(), imageIndex);
                                             ImagePaths.add(sdd);
                                             break;
                                     }
@@ -481,10 +478,10 @@ public class ViewDetail extends AppCompatActivity {
                 default://case SEARCH_MODE_ETC://or default
 //                case SEARCH_MODE_ETC://or default
                     //TODO 레트로핏으로 세부정보 요청
-                    String fileName = registrationNum.replaceAll("/", "");
-                    String imagePath = "http://" + "ec2-13-125-249-181.ap-northeast-2.compute.amazonaws.com/sidi/deskimg/" + fileName + ".jpg";
-                    ImagePaths.add(new SearchDetailData(imagePath, 1));
-                    status = 2;
+//                    String fileName = registrationNum.replaceAll("/", "");
+//                    String imagePath = "http://" + "ec2-13-125-249-181.ap-northeast-2.compute.amazonaws.com/sidi/deskimg/" + fileName + ".jpg";
+//                    ImagePaths.add(new SimilarImageRcyData(imagePath, 1));
+//                    status = 2;
                     break;
             }
 
@@ -542,7 +539,7 @@ public class ViewDetail extends AppCompatActivity {
                     text_description.setText(designDescription);
 
                     btn_fullText.setOnClickListener(new View.OnClickListener() {
-                        @Override
+                        @ Override
                         public void onClick(View v) {
                             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(fullTextFilePath));
                             startActivity(intent);

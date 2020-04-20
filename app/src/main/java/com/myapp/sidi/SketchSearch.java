@@ -2,6 +2,7 @@ package com.myapp.sidi;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.icu.text.SimpleDateFormat;
@@ -19,13 +20,17 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.myapp.sidi.Adapter.SearchSketch_Adapter;
-import com.myapp.sidi.DTO.SearchDetailData;
+import com.myapp.sidi.DTO.SearchResultData;
+import com.myapp.sidi.DTO.SearchingTabDesignResult;
+import com.myapp.sidi.DTO.SimilarImageDetailData;
+import com.myapp.sidi.DTO.SimilarImageRcyData;
 import com.myapp.sidi.DTO.SimilarImageResult;
 import com.myapp.sidi.Interface.ServerInterface;
+import com.myapp.sidi.search.ViewDetail;
 
 import java.io.DataOutputStream;
 import java.io.File;
@@ -36,6 +41,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -55,7 +61,9 @@ public class SketchSearch extends AppCompatActivity {
     RecyclerView rv_similarDesign;
     GridLayoutManager gridLayoutManager;
     SearchSketch_Adapter searchSketchAdapter;
-    ArrayList<SearchDetailData> similarImages  = new ArrayList<>();
+    ArrayList<SimilarImageRcyData> similarImages  = new ArrayList<>();
+    ArrayList<SimilarImageDetailData> similarImageDetailArr = new ArrayList<>();
+    ArrayList appNumberArr = new ArrayList();
 
     String uploadFilePath = "";//경로를 모르겠으면, 갤러리 어플리케이션 가서 메뉴->상세 정보
     String uploadFileName = ""; //전송하고자하는 파일 이름
@@ -81,11 +89,85 @@ public class SketchSearch extends AppCompatActivity {
 
         gridLayoutManager = new GridLayoutManager(this,2,GridLayoutManager.HORIZONTAL,false);
         rv_similarDesign.setLayoutManager(gridLayoutManager);
-        searchSketchAdapter = new SearchSketch_Adapter(similarImages,this);
+        searchSketchAdapter = new SearchSketch_Adapter(similarImages,SketchSearch.this);
         searchSketchAdapter.setOnItemClickListener(new SearchSketch_Adapter.OnItemClickListener() {
             @Override
-            public void onItemClick(View v, int position) {
-                //TODO 다시 디테일 페이지로 넘겨줘야함. 출원번호만 가지고 가능...? 레드로핏으로 다시 정보 넘겨서 확인 필요할듯?
+            public void onItemClick(View v, final int position) {
+                //받아온 모든 데이터들 넘겨주기
+                //일단 데이터를 아이템에 저장시킬 수 있도록 하기
+                String appNumber = appNumberArr.get(position).toString();
+                String cate = "desk";
+
+
+                OkHttpClient client = new OkHttpClient.Builder().addInterceptor(httpLoggingInterceptor()).build();
+                //1. 서버에 카테고리 1번을 보내기
+                //2. 기본 연도 1960으로 해서 보내기
+                Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl(ServerInterface.BASE_URL)
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .client(client)
+                        .build();
+                ServerInterface serverInterface = retrofit.create(ServerInterface.class);
+                serverInterface.similarDetail(cate,appNumber).enqueue(new Callback<SimilarImageDetailData>() {
+                    @Override
+                    public void onResponse(Call<SimilarImageDetailData> call, Response<SimilarImageDetailData> response) {
+                        SimilarImageDetailData result = response.body();
+                        Log.e("result",result.toString());
+                        List<SimilarImageDetailData.Result> list = result.getResult();
+
+                        Log.e("test", String.valueOf(response.body()));
+
+                        for (SimilarImageDetailData.Result value : list) {
+                            Intent intent = new Intent(SketchSearch.this, ViewDetail.class);
+                            intent.putExtra("country",value.getCountry());
+                            intent.putExtra("registrationNum",value.getDesignNum());
+                            intent.putExtra("depth1",value.getDep1());
+                            intent.putExtra("depth2",value.getDep2());
+                            intent.putExtra("depth3",value.getDep3());
+                            intent.putExtra("depth4",value.getDep4());
+                            intent.putExtra("depth5",value.getDep5());
+                            startActivity(intent);
+
+
+
+                            SimilarImageDetailData searchResultData = new SimilarImageDetailData(value.getUrl(),
+                                    value.getServerIndex(),
+                                    value.getDesignNum(),
+                                    value.getRegistrationNum(),
+                                    value.getDesignCode(),
+                                    value.getCountry(),
+                                    value.getDesignName(),
+                                    value.getRegisterPerson(),
+                                    value.getDateApplication(),
+                                    value.getDateRegistration(),
+                                    value.getDatePublication(),
+                                    value.getDep1(),
+                                    value.getDep2(),
+                                    value.getDep3(),
+                                    value.getDep4(),
+                                    value.getDep5()
+                            );
+//                            similarImageDetailArr.add(searchResultData);
+                        }
+
+//                        Log.e("arr[0]",similarImageDetailArr.get(0).toString());
+
+
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<SimilarImageDetailData> call, Throwable t) {
+
+                    }
+                });
+
+
+
+                Log.e("num",appNumberArr.get(position).toString());
+
+
+
             }
         });
         rv_similarDesign.setAdapter(searchSketchAdapter);
@@ -651,28 +733,29 @@ public class SketchSearch extends AppCompatActivity {
                         .enqueue(new Callback<SimilarImageResult>() {
                             @Override
                             public void onResponse(Call<SimilarImageResult> call, Response<SimilarImageResult> response) {
-                                SimilarImageResult result = response.body();
-                                Log.e("SimilarImageResult",result.toString());
-                                String url = "http://ec2-13-125-249-181.ap-northeast-2.compute.amazonaws.com/sidi/deskimg/";
-//                                SearchDetailData sdd = new SearchDetailData(url+result.getSimilarUrl1(),1);
-//                                similarImages.add(sdd);
-                                similarImages.clear();
-                                similarImages.add(new SearchDetailData(url+result.getSimilarUrl1(),Integer.parseInt(String.valueOf(Float.parseFloat(result.getSimilarRate1())*100).substring(0,2))));
-                                similarImages.add(new SearchDetailData(url+result.getSimilarUrl2(),Integer.parseInt(String.valueOf(Float.parseFloat(result.getSimilarRate2())*100).substring(0,2))));
-                                similarImages.add(new SearchDetailData(url+result.getSimilarUrl3(),Integer.parseInt(String.valueOf(Float.parseFloat(result.getSimilarRate3())*100).substring(0,2))));
-                                similarImages.add(new SearchDetailData(url+result.getSimilarUrl4(),Integer.parseInt(String.valueOf(Float.parseFloat(result.getSimilarRate4())*100).substring(0,2))));
-                                similarImages.add(new SearchDetailData(url+result.getSimilarUrl5(),Integer.parseInt(String.valueOf(Float.parseFloat(result.getSimilarRate5())*100).substring(0,2))));
-                                similarImages.add(new SearchDetailData(url+result.getSimilarUrl6(),Integer.parseInt(String.valueOf(Float.parseFloat(result.getSimilarRate6())*100).substring(0,2))));
-                                similarImages.add(new SearchDetailData(url+result.getSimilarUrl7(),Integer.parseInt(String.valueOf(Float.parseFloat(result.getSimilarRate7())*100).substring(0,2))));
-                                similarImages.add(new SearchDetailData(url+result.getSimilarUrl8(),Integer.parseInt(String.valueOf(Float.parseFloat(result.getSimilarRate8())*100).substring(0,2))));
-                                similarImages.add(new SearchDetailData(url+result.getSimilarUrl9(),Integer.parseInt(String.valueOf(Float.parseFloat(result.getSimilarRate9())*100).substring(0,2))));
-                                similarImages.add(new SearchDetailData(url+result.getSimilarUrl10(),Integer.parseInt(String.valueOf(Float.parseFloat(result.getSimilarRate10())*100).substring(0,2))));
 
-                                searchSketchAdapter.notifyDataSetChanged();
-                                rv_similarDesign.setFocusedByDefault(true);
+
+                                SimilarImageResult result = response.body();
+                                Log.e("result", result.toString());
+
+                                List<SimilarImageResult.Result> list = result.getResult();
+
+                                Log.e("test", String.valueOf(response.body()));
+
+                                for (SimilarImageResult.Result value : list) {
+                                    String url = "http://ec2-13-125-249-181.ap-northeast-2.compute.amazonaws.com/sidi/deskimg/"+value.getDesign();
+                                    Log.e("url",url);
+                                    SimilarImageRcyData similarImageResult = new SimilarImageRcyData(
+                                            url,
+                                            Integer.parseInt(String.valueOf(Float.parseFloat(value.getSimilarity())*100).substring(0,2)));
+
+                                    similarImages.add(similarImageResult);
+                                    searchSketchAdapter.notifyDataSetChanged();
+                                    rv_similarDesign.setFocusedByDefault(true);
+                                    appNumberArr.add(value.getDesign());
+                                }
 
                             }
-
                             @Override
                             public void onFailure(Call<SimilarImageResult> call, Throwable t) {
                                 Log.e("networkError",t.toString());

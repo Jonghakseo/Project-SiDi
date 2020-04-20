@@ -1259,10 +1259,10 @@ public class SearchingTab extends AppCompatActivity {
                 result = "1";
                 break;
             case "미국 특허청":
-                result = "2";
+                result = "3";
                 break;
             case "일본 특허청":
-                result = "3";
+                result = "2";
                 break;
             case "독일 특허청":
                 result = "4";

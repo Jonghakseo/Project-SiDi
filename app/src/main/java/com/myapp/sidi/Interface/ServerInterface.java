@@ -2,9 +2,8 @@ package com.myapp.sidi.Interface;
 
 import com.myapp.sidi.DTO.MainPageDesignResult;
 import com.myapp.sidi.DTO.SearchingTabDesignResult;
+import com.myapp.sidi.DTO.SimilarImageDetailData;
 import com.myapp.sidi.DTO.SimilarImageResult;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -34,4 +33,10 @@ public interface ServerInterface {
 
     @GET("/sidi/findSimilarImages.php")
     Call<SimilarImageResult> similar(@Query("file") String file);
+
+    @GET("/sidi/searchByNumber.php")
+    Call<SimilarImageDetailData> similarDetail(@Query("cate") String cate,
+                                               @Query("appNumber") String appNumber);
+
+
 }
