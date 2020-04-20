@@ -11,36 +11,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a70173cf-3876-4ad0-ac3c-85e43a83940a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/d_ger.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/d_jap.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/d_kor.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/d_ohim.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/d_usa.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/d_wipo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_idea_sketch.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/Adapter/SearchDetail_Adapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/Adapter/SearchDetail_Adapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/Adapter/SearchResult_Adapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/Adapter/SearchResult_Adapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/Category/CountryInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/Category/CountryInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/SketchSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/SketchSearch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/search/ViewDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/search/ViewDetail.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_sketch_search.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_sketch_search.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_view_detail.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_view_detail.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/search_detail_design_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/search_detail_design_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/MemoDrawView.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/MemoDrawView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/sketch/IdeaSketch.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/sketch/IdeaSketch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_idea_sketch.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_idea_sketch.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_search_result.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_search_result.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/search_result_design_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/search_result_design_item.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/search_sketch_design_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/search_sketch_design_item.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -72,11 +53,44 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/sketch/IdeaSketch.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="384">
+              <caret line="219" column="27" selection-start-line="219" selection-start-column="27" selection-end-line="219" selection-end-column="27" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#3717#4640#0" expanded="true" />
+                <element signature="e#4639#4640#0" expanded="true" />
+                <element signature="e#5002#5153#0" expanded="true" />
+                <element signature="e#5152#5153#0" expanded="true" />
+                <element signature="e#5218#5358#0" expanded="true" />
+                <element signature="e#5357#5358#0" expanded="true" />
+                <element signature="e#5416#5598#0" expanded="true" />
+                <element signature="e#5597#5598#0" expanded="true" />
+                <element signature="e#5854#6095#0" expanded="true" />
+                <element signature="e#6094#6095#0" expanded="true" />
+                <element signature="e#6154#6350#0" expanded="true" />
+                <element signature="e#6349#6350#0" expanded="true" />
+                <element signature="e#12213#12493#0" expanded="true" />
+                <element signature="e#12492#12493#0" expanded="true" />
+                <element signature="e#12814#13075#0" expanded="true" />
+                <element signature="e#13074#13075#0" expanded="true" />
+                <element signature="e#13286#13552#0" expanded="true" />
+                <element signature="e#13551#13552#0" expanded="true" />
+                <element signature="e#18565#18973#0" />
+                <element signature="e#14074#14271#0" expanded="true" />
+                <element signature="e#14270#14271#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/SketchSearch.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="791">
-              <caret line="131" column="15" selection-start-line="131" selection-start-column="15" selection-end-line="131" selection-end-column="15" />
+            <state relative-caret-position="487">
+              <caret line="789" column="5" lean-forward="true" selection-start-line="561" selection-start-column="4" selection-end-line="789" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -88,81 +102,45 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/Adapter/SearchResult_Adapter.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_search_result.xml">
+          <provider editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="android-designer2" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+          <provider editor-type-id="android-manifest" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="45" column="13" selection-start-line="45" selection-start-column="13" selection-end-line="45" selection-end-column="13" />
-              <folding>
-                <element signature="e#4135#4136#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="38">
+              <caret line="2" column="29" lean-forward="true" selection-start-line="2" selection-start-column="29" selection-end-line="2" selection-end-column="29" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/Category/CountryInfo.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/MemoDrawView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="5" column="10" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="10" />
-              <folding>
-                <element signature="e#350#351#0" expanded="true" />
-                <element signature="e#376#377#0" expanded="true" />
-                <element signature="e#406#407#0" expanded="true" />
-                <element signature="e#432#433#0" expanded="true" />
-                <element signature="e#462#463#0" expanded="true" />
-                <element signature="e#488#489#0" expanded="true" />
-                <element signature="e#518#519#0" expanded="true" />
-                <element signature="e#544#545#0" expanded="true" />
-                <element signature="e#575#576#0" expanded="true" />
-                <element signature="e#602#603#0" expanded="true" />
-                <element signature="e#633#634#0" expanded="true" />
-                <element signature="e#660#661#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="380">
+              <caret line="57" column="22" lean-forward="true" selection-start-line="57" selection-start-column="22" selection-end-line="57" selection-end-column="22" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/search/ViewDetail.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="411">
-              <caret line="482" column="41" lean-forward="true" selection-start-line="482" selection-start-column="41" selection-end-line="482" selection-end-column="41" />
-              <folding>
-                <element signature="e#32103#32427#0" expanded="true" />
-                <element signature="e#32426#32427#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_idea_sketch.xml">
           <provider editor-type-id="text-editor">
-            <state relative-caret-position="456">
-              <caret line="32" column="19" lean-forward="true" selection-start-line="32" selection-start-column="19" selection-end-line="32" selection-end-column="19" />
-              <folding>
-                <element signature="e#3487#3513#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="171">
+              <caret line="33" column="53" lean-forward="true" selection-start-line="33" selection-start-column="53" selection-end-line="33" selection-end-column="53" />
             </state>
           </provider>
           <provider selected="true" editor-type-id="android-designer2" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_sketch_search.xml">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/search/ViewDetail.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="8" column="34" lean-forward="true" selection-end-line="136" selection-end-column="15" />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer2" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/sketch/IdeaSketch.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="15" column="1" lean-forward="true" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
+            <state relative-caret-position="378">
+              <caret line="646" column="67" lean-forward="true" selection-start-line="644" selection-start-column="28" selection-end-line="646" selection-end-column="67" />
             </state>
           </provider>
         </entry>
@@ -185,6 +163,12 @@
       <find>ImagePaths</find>
       <find>btn_sketch</find>
       <find>intent</find>
+      <find>memoder</find>
+      <find>save</find>
+      <find>dir</find>
+      <find>screenshot</find>
+      <find>file</find>
+      <find>glide</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -201,11 +185,15 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/search_sketch_design_item.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/Adapter/SearchSketch_Adapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/Adapter/SearchResult_Adapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/search_result_design_item.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/Sketch/IdeaSketch.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/search/ViewDetail.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_sketch_search.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/MemoDrawView.java" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_search_result.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/search_result_design_item.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_idea_sketch.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/sketch/IdeaSketch.java" />
       </list>
     </option>
   </component>
@@ -230,6 +218,11 @@
             <path>
               <item name="SiDi" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
+            </path>
+            <path>
+              <item name="SiDi" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="manifests" type="f94875db:AndroidManifestsGroupNode" />
             </path>
             <path>
               <item name="SiDi" type="1abcf292:AndroidViewProjectNode" />
@@ -299,7 +292,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="G6_API_28" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-04-16T07:12:00.557Z" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-04-20T11:33:47.290Z" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
@@ -592,7 +585,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Capture Tool" />
-      <window_info active="true" content_ui="combo" id="Project" visible="true" weight="0.32995737" />
+      <window_info content_ui="combo" id="Project" visible="true" weight="0.15671642" />
       <window_info id="Structure" side_tool="true" />
       <window_info id="Favorites" side_tool="true" />
       <window_info id="Build Variants" side_tool="true" />
@@ -600,16 +593,17 @@
       <window_info id="Designer" />
       <window_info id="Resources Explorer" />
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Run" weight="0.24678111" />
-      <window_info anchor="bottom" id="Logcat" />
+      <window_info active="true" anchor="bottom" id="Run" visible="true" weight="0.2081545" />
+      <window_info anchor="bottom" id="Logcat" weight="0.35622317" />
       <window_info anchor="bottom" id="TODO" />
       <window_info anchor="bottom" id="Debug" />
       <window_info anchor="bottom" id="Terminal" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Build" visible="true" weight="0.19957082" />
+      <window_info anchor="bottom" id="Build" weight="0.19957082" />
+      <window_info anchor="bottom" id="Find" weight="0.32939914" />
       <window_info anchor="bottom" id="Android Profiler" />
-      <window_info anchor="right" id="Device File Explorer" side_tool="true" />
+      <window_info anchor="right" id="Device File Explorer" side_tool="true" visible="true" weight="0.23081024" />
       <window_info anchor="right" id="Capture Analysis" />
       <window_info anchor="right" id="Gradle" />
       <window_info anchor="right" id="Theme Preview" />
@@ -734,31 +728,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/search_result_design_item.xml">
-      <provider editor-type-id="text-editor" />
-      <provider selected="true" editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/Category/CountryInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="10" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="10" />
-          <folding>
-            <element signature="e#350#351#0" expanded="true" />
-            <element signature="e#376#377#0" expanded="true" />
-            <element signature="e#406#407#0" expanded="true" />
-            <element signature="e#432#433#0" expanded="true" />
-            <element signature="e#462#463#0" expanded="true" />
-            <element signature="e#488#489#0" expanded="true" />
-            <element signature="e#518#519#0" expanded="true" />
-            <element signature="e#544#545#0" expanded="true" />
-            <element signature="e#575#576#0" expanded="true" />
-            <element signature="e#602#603#0" expanded="true" />
-            <element signature="e#633#634#0" expanded="true" />
-            <element signature="e#660#661#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/DTO/SearchResultData.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
@@ -799,24 +768,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/search/ViewDetail.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="411">
-          <caret line="482" column="41" lean-forward="true" selection-start-line="482" selection-start-column="41" selection-end-line="482" selection-end-column="41" />
-          <folding>
-            <element signature="e#32103#32427#0" expanded="true" />
-            <element signature="e#32426#32427#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/SketchSearch.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="791">
-          <caret line="131" column="15" selection-start-line="131" selection-start-column="15" selection-end-line="131" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_sketch_search.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
@@ -825,23 +776,127 @@
       </provider>
       <provider editor-type-id="android-designer2" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/sketch/IdeaSketch.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/search/ViewDetail.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="15" column="1" lean-forward="true" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
+        <state relative-caret-position="378">
+          <caret line="646" column="67" lean-forward="true" selection-start-line="644" selection-start-column="28" selection-end-line="646" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/graphics/Color.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="326" column="58" selection-start-line="326" selection-start-column="36" selection-end-line="326" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/graphics/PorterDuff.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3126">
+          <caret line="181" column="16" selection-start-line="181" selection-start-column="16" selection-end-line="181" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/graphics/Canvas.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="1716" column="66" selection-start-line="1716" selection-start-column="56" selection-end-line="1716" selection-end-column="66" />
+          <folding>
+            <element signature="e#69702#69703#0" expanded="true" />
+            <element signature="e#69740#69741#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/Category/CountryInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="10" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="10" />
+          <folding>
+            <element signature="e#350#351#0" expanded="true" />
+            <element signature="e#376#377#0" expanded="true" />
+            <element signature="e#406#407#0" expanded="true" />
+            <element signature="e#432#433#0" expanded="true" />
+            <element signature="e#462#463#0" expanded="true" />
+            <element signature="e#488#489#0" expanded="true" />
+            <element signature="e#518#519#0" expanded="true" />
+            <element signature="e#544#545#0" expanded="true" />
+            <element signature="e#575#576#0" expanded="true" />
+            <element signature="e#602#603#0" expanded="true" />
+            <element signature="e#633#634#0" expanded="true" />
+            <element signature="e#660#661#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_idea_sketch.xml">
       <provider editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="32" column="19" lean-forward="true" selection-start-line="32" selection-start-column="19" selection-end-line="32" selection-end-column="19" />
-          <folding>
-            <element signature="e#3487#3513#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="171">
+          <caret line="33" column="53" lean-forward="true" selection-start-line="33" selection-start-column="53" selection-end-line="33" selection-end-column="53" />
         </state>
       </provider>
       <provider selected="true" editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/MemoDrawView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="57" column="22" lean-forward="true" selection-start-line="57" selection-start-column="22" selection-end-line="57" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" column="29" lean-forward="true" selection-start-line="2" selection-start-column="29" selection-end-line="2" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_search_result.xml">
+      <provider editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/search_result_design_item.xml">
+      <provider editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/SketchSearch.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="487">
+          <caret line="789" column="5" lean-forward="true" selection-start-line="561" selection-start-column="4" selection-end-line="789" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/myapp/sidi/sketch/IdeaSketch.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="384">
+          <caret line="219" column="27" selection-start-line="219" selection-start-column="27" selection-end-line="219" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3717#4640#0" expanded="true" />
+            <element signature="e#4639#4640#0" expanded="true" />
+            <element signature="e#5002#5153#0" expanded="true" />
+            <element signature="e#5152#5153#0" expanded="true" />
+            <element signature="e#5218#5358#0" expanded="true" />
+            <element signature="e#5357#5358#0" expanded="true" />
+            <element signature="e#5416#5598#0" expanded="true" />
+            <element signature="e#5597#5598#0" expanded="true" />
+            <element signature="e#5854#6095#0" expanded="true" />
+            <element signature="e#6094#6095#0" expanded="true" />
+            <element signature="e#6154#6350#0" expanded="true" />
+            <element signature="e#6349#6350#0" expanded="true" />
+            <element signature="e#12213#12493#0" expanded="true" />
+            <element signature="e#12492#12493#0" expanded="true" />
+            <element signature="e#12814#13075#0" expanded="true" />
+            <element signature="e#13074#13075#0" expanded="true" />
+            <element signature="e#13286#13552#0" expanded="true" />
+            <element signature="e#13551#13552#0" expanded="true" />
+            <element signature="e#18565#18973#0" />
+            <element signature="e#14074#14271#0" expanded="true" />
+            <element signature="e#14270#14271#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
   </component>
 </project>

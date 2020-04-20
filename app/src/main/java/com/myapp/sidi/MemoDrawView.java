@@ -41,10 +41,20 @@ public class MemoDrawView extends View {
 
     int currentColor = Color.BLACK;
 
+    int backgrountColor = Color.WHITE;
+
     static final float TOUCH_TOLERANCE = 8;
 
     public MemoDrawView(Context context) {
         super(context);
+        this.backgrountColor = Color.TRANSPARENT;
+        init(context);
+    }
+
+    public MemoDrawView(Context context, boolean idea) {
+        super(context);
+        if (idea)
+            this.backgrountColor = Color.TRANSPARENT;
         init(context);
     }
 
@@ -83,7 +93,9 @@ public class MemoDrawView extends View {
         //TODO 추후에 여기서 한번 배경화면 넣어보기
         Canvas canvas = new Canvas();
         canvas.setBitmap(img);
-        canvas.drawColor(Color.WHITE);
+        canvas.drawColor(backgrountColor);
+//        canvas.drawColor(Color.WHITE);
+//        canvas.drawColor(Color.TRANSPARENT);
 
         mBitmap = img;
         mCanvas = canvas;
@@ -129,36 +141,36 @@ public class MemoDrawView extends View {
     }
 
     private Rect touchMove(MotionEvent event) {
-        Rect rect=processMove(event);
+        Rect rect = processMove(event);
         return rect;
     }
 
     private Rect processMove(MotionEvent event) {
-        final float x=event.getX();
-        final float y=event.getY();
+        final float x = event.getX();
+        final float y = event.getY();
 
-        final float dx=Math.abs(x-lastX);
-        final float dy=Math.abs(y-lastY);
+        final float dx = Math.abs(x - lastX);
+        final float dy = Math.abs(y - lastY);
 
-        Rect mInvalidateRect=new Rect();
+        Rect mInvalidateRect = new Rect();
 
-        if(dx>=TOUCH_TOLERANCE || dy>=TOUCH_TOLERANCE){
-            final int border=mInvalidateExtraBorder;
+        if (dx >= TOUCH_TOLERANCE || dy >= TOUCH_TOLERANCE) {
+            final int border = mInvalidateExtraBorder;
 
-            mInvalidateRect.set((int)mCurveEndX-border,(int)mCurveEndY-border,(int)mCurveEndX+border,(int)mCurveEndY+border);
+            mInvalidateRect.set((int) mCurveEndX - border, (int) mCurveEndY - border, (int) mCurveEndX + border, (int) mCurveEndY + border);
 
-            float cx=mCurveEndX=(x+lastX)/2;
-            float cy=mCurveEndY=(y+lastY)/2;
+            float cx = mCurveEndX = (x + lastX) / 2;
+            float cy = mCurveEndY = (y + lastY) / 2;
 
-            mPath.quadTo(lastX,lastY,cx,cy);
+            mPath.quadTo(lastX, lastY, cx, cy);
 
-            mInvalidateRect.union((int)lastX-border,(int)lastY-border,(int)lastX+border,(int)lastY+border);
-            mInvalidateRect.union((int)cx-border,(int)cy-border,(int)cx,(int)cy+border);
+            mInvalidateRect.union((int) lastX - border, (int) lastY - border, (int) lastX + border, (int) lastY + border);
+            mInvalidateRect.union((int) cx - border, (int) cy - border, (int) cx, (int) cy + border);
 
-            lastX=x;
-            lastY=y;
+            lastX = x;
+            lastY = y;
 
-            mCanvas.drawPath(mPath,mPaint);
+            mCanvas.drawPath(mPath, mPaint);
 
         }
 
@@ -166,41 +178,42 @@ public class MemoDrawView extends View {
     }
 
     private Rect touchDown(MotionEvent event) {
-        float x=event.getX();
-        float y=event.getY();
+        float x = event.getX();
+        float y = event.getY();
 
-        lastX=x;
-        lastY=y;
+        lastX = x;
+        lastY = y;
 
-        Rect mInvalidateRect=new Rect();
-        mPath.moveTo(x,y);
+        Rect mInvalidateRect = new Rect();
+        mPath.moveTo(x, y);
 
-        final int border=mInvalidateExtraBorder;
-        mInvalidateRect.set((int)x-border,(int)y-border,(int)x+border,(int)y+border);
-        mCurveEndX=x;
-        mCurveEndY=y;
+        final int border = mInvalidateExtraBorder;
+        mInvalidateRect.set((int) x - border, (int) y - border, (int) x + border, (int) y + border);
+        mCurveEndX = x;
+        mCurveEndY = y;
 
-        mCanvas.drawPath(mPath,mPaint);
+        mCanvas.drawPath(mPath, mPaint);
         return mInvalidateRect;
     }
-    public void setStrokeWidth(int width){
+
+    public void setStrokeWidth(int width) {
         mPaint.setStrokeWidth(width);
     }
 
     private Rect touchUp(MotionEvent event, boolean b) {
-        Rect rect=processMove(event);
+        Rect rect = processMove(event);
         return rect;
     }
 
-    public void setColor(int color){
+    public void setColor(int color) {
         mPaint.setColor(color);
-        if (color!=-1){
+        if (color != -1) {
             currentColor = color;
         }
         //흰색으로 변경하는게 아니라면, 현재 색 저장.
     }
 
-    public void loadColor(){
+    public void loadColor() {
         setColor(currentColor);
     }
 //    public void setCap(int cap){
