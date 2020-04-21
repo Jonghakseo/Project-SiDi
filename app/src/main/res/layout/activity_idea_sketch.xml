@@ -22,18 +22,23 @@
                 android:id="@+id/idea_memoBackButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+
                 android:src="?attr/actionModeCloseDrawable" />
             ​
             <Button
                 android:id="@+id/idea_colorPickerButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/blue_round_line"
+                android:textColor="@android:color/white"
                 android:text="색상선택" />
             ​
             <Button
                 android:id="@+id/idea_saveMemoButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/blue_round_line"
+                android:textColor="@android:color/white"
                 android:text="저장하기" />
 
             ​

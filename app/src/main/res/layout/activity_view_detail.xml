@@ -19,6 +19,8 @@
             android:layout_height="30dp"
             android:text="접기"
             android:textSize="10sp"
+            android:background="@drawable/blue_round_line"
+            android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="@+id/detail_title_basicInfo"
             app:layout_constraintEnd_toEndOf="@+id/detail_btn_moreDescription"
             app:layout_constraintTop_toTopOf="@+id/detail_title_basicInfo" />
@@ -41,6 +43,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="원문보기"
+            android:background="@drawable/blue_round_line"
+            android:textColor="@android:color/white"
             app:layout_constraintBottom_toTopOf="@+id/detail_btn_scrap"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/detail_main_designView"
@@ -51,6 +55,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="스크랩"
+            android:background="@drawable/blue_round_line"
+            android:textColor="@android:color/white"
             app:layout_constraintBottom_toTopOf="@+id/detail_btn_sketch"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/detail_main_designView"
@@ -61,18 +67,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="스케치"
+            android:background="@drawable/blue_round_line"
+            android:textColor="@android:color/white"
             app:layout_constraintBottom_toTopOf="@+id/detail_RV_otherDesigns"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/detail_main_designView"
             app:layout_constraintTop_toBottomOf="@+id/detail_btn_scrap" />
 
-        <Button
-            android:id="@+id/detail_btn_sketchList"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/detail_btn_sketch"
-            app:layout_constraintLeft_toRightOf="@id/detail_main_designView"
-            app:layout_constraintRight_toRightOf="parent"/>
+
 
         <ImageView
             android:id="@+id/detail_main_designView"
@@ -192,6 +194,8 @@
             android:layout_height="30dp"
             android:text="펼치기"
             android:textSize="10sp"
+            android:background="@drawable/blue_round_line"
+            android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="@+id/detail_title_description"
             app:layout_constraintEnd_toEndOf="@+id/detail_btn_sketch"
             app:layout_constraintTop_toTopOf="@+id/detail_title_description" />
@@ -212,9 +216,24 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="동일 형태 디자인"
+
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@+id/detail_title_description"
             app:layout_constraintTop_toBottomOf="@id/detail_text_description" />
+
+        <Button
+            android:id="@+id/detail_btn_sketchList"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="상세보기"
+            android:background="@drawable/blue_round_line"
+            android:textColor="@android:color/white"
+             android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintLeft_toRightOf="@id/detail_title_othersSketch"
+            app:layout_constraintTop_toBottomOf="@+id/detail_RV_sameDepth"
+            />
+
 
         <TextView
             android:id="@+id/detail_title_othersSketch"

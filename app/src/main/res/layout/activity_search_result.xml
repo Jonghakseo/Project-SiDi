@@ -10,6 +10,7 @@
         android:id="@+id/btn_subSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     <TextView
@@ -40,24 +41,44 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="최신순"/>
+            android:text="출원일(오름차순)"
+            android:textColor="@android:color/white"
+            android:textAlignment="center"
+            android:textSize="12dp"
+            android:background="@drawable/blue_round_line"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="과거순"/>
+            android:text="출원일(내림차순)"
+            android:textColor="@android:color/white"
+            android:textAlignment="center"
+            android:textSize="12dp"
+            android:background="@drawable/blue_round_line"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="소멸특허권"/>
+            android:text="대한민국"
+            android:textColor="@android:color/white"
+            android:textAlignment="center"
+            android:textSize="12dp"
+            android:background="@drawable/blue_round_line"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="나중에"/>
+            android:text="일본"
+            android:textColor="@android:color/white"
+            android:textAlignment="center"
+            android:textSize="12dp"
+            android:background="@drawable/blue_round_line"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="나중에"/>
+            android:text="미국"
+            android:textColor="@android:color/white"
+            android:textAlignment="center"
+            android:textSize="12dp"
+            android:background="@drawable/blue_round_line"/>
     </LinearLayout>
 </HorizontalScrollView>
 
@@ -75,6 +96,7 @@
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:background="@drawable/plusbutton"
+        android:visibility="gone"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toRightOf="@id/tv_titleReport"
         app:layout_constraintTop_toBottomOf="@id/recyclerView"
@@ -86,6 +108,7 @@
         android:layout_height="wrap_content"
         android:text="결과 분석 보고서"
         android:textSize="20dp"
+        android:visibility="gone"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/btn_report"
         app:layout_constraintTop_toBottomOf="@id/recyclerView"
@@ -99,6 +122,8 @@
         android:text="재검색"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
+        android:textColor="@android:color/white"
+        android:background="@drawable/blue_round_line"
         app:layout_constraintRight_toLeftOf="@id/btn_searchSketch"/>
 
     <Button
@@ -107,6 +132,8 @@
         android:layout_height="wrap_content"
         android:text="스케치로 검색"
         app:layout_constraintRight_toRightOf="parent"
+        android:textColor="@android:color/white"
+        android:background="@drawable/blue_round_line"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@id/btn_reSearch"/>
 

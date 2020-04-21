@@ -87,7 +87,7 @@ public class SketchList extends AppCompatActivity {
 
 
         //TODO registNum 확인해보고 수정해야함
-        serverInterface.sketchList("3020100040319")
+        serverInterface.sketchList(registrationNum)
                 .enqueue(new Callback<SketchListResult>() {
                     @Override
                     public void onResponse(Call<SketchListResult> call, Response<SketchListResult> response) {
