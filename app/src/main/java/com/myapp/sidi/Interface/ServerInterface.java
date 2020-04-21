@@ -4,6 +4,7 @@ import com.myapp.sidi.DTO.MainPageDesignResult;
 import com.myapp.sidi.DTO.SearchingTabDesignResult;
 import com.myapp.sidi.DTO.SimilarImageDetailData;
 import com.myapp.sidi.DTO.SimilarImageResult;
+import com.myapp.sidi.DTO.SketchListResult;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -37,6 +38,11 @@ public interface ServerInterface {
     @GET("/sidi/searchByNumber.php")
     Call<SimilarImageDetailData> similarDetail(@Query("cate") String cate,
                                                @Query("appNumber") String appNumber);
+
+    @GET("/sidi/findOtherSketch.php")
+    Call<SketchListResult> sketchList(@Query("registrationNum") String registrationNum);
+
+
 
 
 }

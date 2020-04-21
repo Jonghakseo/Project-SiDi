@@ -66,6 +66,14 @@
             app:layout_constraintStart_toEndOf="@+id/detail_main_designView"
             app:layout_constraintTop_toBottomOf="@+id/detail_btn_scrap" />
 
+        <Button
+            android:id="@+id/detail_btn_sketchList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/detail_btn_sketch"
+            app:layout_constraintLeft_toRightOf="@id/detail_main_designView"
+            app:layout_constraintRight_toRightOf="parent"/>
+
         <ImageView
             android:id="@+id/detail_main_designView"
             android:layout_width="250dp"

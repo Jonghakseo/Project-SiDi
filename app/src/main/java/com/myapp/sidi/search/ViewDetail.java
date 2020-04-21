@@ -26,6 +26,7 @@ import com.myapp.sidi.DTO.SearchResultData;
 import com.myapp.sidi.Interface.ServerInterface;
 import com.myapp.sidi.R;
 import com.myapp.sidi.sketch.IdeaSketch;
+import com.myapp.sidi.sketch.SketchList;
 
 import org.xmlpull.v1.XmlPullParser;
 
@@ -48,7 +49,7 @@ public class ViewDetail extends AppCompatActivity {
     private String registrationNum; //검색 결과로 받은 출원번호
     private String designMainClassification;//일본 검색에 필요한 디자인 분류코드
     private int depth1, depth2, depth3, depth4, depth5, imagePos;
-    Button btn_fullText, btn_scrap, btn_sketch, btn_moreDescription, btn_basicInfo;
+    Button btn_fullText, btn_scrap, btn_sketch, btn_moreDescription, btn_basicInfo,detail_btn_sketchList;
     ImageView main_design;
     TextView text_designNum, text_basicInfo, text_description, tagBox1, tagBox2, tagBox3, tagBox4, tagBox5;
     RecyclerView rv_otherDesign, rv_sameDepth, rv_othersSketch;
@@ -90,6 +91,7 @@ public class ViewDetail extends AppCompatActivity {
         btn_sketch = findViewById(R.id.detail_btn_sketch);
         btn_moreDescription = findViewById(R.id.detail_btn_moreDescription);
         btn_basicInfo = findViewById(R.id.detail_btn_basicInfo);
+        detail_btn_sketchList=findViewById(R.id.detail_btn_sketchList);
 
         main_design = findViewById(R.id.detail_main_designView);
 
@@ -253,6 +255,15 @@ public class ViewDetail extends AppCompatActivity {
                     text_basicInfo.setVisibility(View.VISIBLE);
                     btn_basicInfo.setText("접기");
                 }
+            }
+        });
+
+        detail_btn_sketchList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ViewDetail.this, SketchList.class);
+                intent.putExtra("registrationNum",registrationNum);
+                startActivity(intent);
             }
         });
 

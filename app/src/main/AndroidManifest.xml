@@ -33,6 +33,7 @@
         <activity android:name=".main.SearchingTab" />
         <activity android:name=".main.MainPageTab" />
         <activity android:name=".SketchSearch" />
+        <activity android:name=".sketch.SketchList"/>
     </application>
 
 </manifest>
