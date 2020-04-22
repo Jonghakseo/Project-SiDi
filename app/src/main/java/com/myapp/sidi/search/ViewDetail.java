@@ -63,7 +63,7 @@ public class ViewDetail extends AppCompatActivity {
     private String cate;
     private String country; //해당 디자인 출원 국가
     private String registrationNum; //검색 결과로 받은 출원번호
-    private String designMainClassification;//일본 검색에 필요한 디자인 분류코드
+    private String registrationNum_jap;//일본 검색에 필요한 등록번호
     private int depth1;
     private int depth2;
     private int depth3;
@@ -167,7 +167,7 @@ public class ViewDetail extends AppCompatActivity {
             cate = intent.getExtras().getString("cate");
             country = intent.getExtras().getString("country");
             registrationNum = intent.getExtras().getString("registrationNum");
-            designMainClassification = intent.getExtras().getString("designMainClassification");
+//            registrationNum_jap = intent.getExtras().getString("registrationNum_jap");
             depth1 = Integer.parseInt(intent.getExtras().getString("depth1"));
             depth2 = Integer.parseInt(intent.getExtras().getString("depth2"));
             depth3 = Integer.parseInt(intent.getExtras().getString("depth3"));
@@ -563,6 +563,7 @@ public class ViewDetail extends AppCompatActivity {
                     }
                     break;
                 case SEARCH_MODE_JAP:
+                    System.out.println("일본특허청 검색");
                     try {
                         String result;
                         apiServerEndpoint = new URL("http://plus.kipris.or.kr/openapi/rest/ForeignDesignBibliographicService/searchAllInfo?literatureNumber=" + registrationNum + "&CountryCode=JP&accessKey=MycjEOwwAfMDHrTT1DIYF=Z4/8MIZY7ofDy4IzoWF14=");
@@ -670,7 +671,7 @@ public class ViewDetail extends AppCompatActivity {
                             status = 0;
                             // Error handling code goes here
                         }
-                        fullTextFilePath = "http://abdg.kipris.or.kr/abdg/remoteFile.do?method=fullText&publ_key=JP," + registrationNum + ",J01&cntry=JP&dsImgTpcd=jpn";
+                        fullTextFilePath = "http://abdg.kipris.or.kr/abdg/remoteFile.do?method=fullText&publ_key=JP," + registrationNum_jap + ",J01&cntry=JP&dsImgTpcd=jpn";
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
