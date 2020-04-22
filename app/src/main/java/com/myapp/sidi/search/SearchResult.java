@@ -147,6 +147,7 @@ public class SearchResult extends AppCompatActivity {
             @Override
             public void onItemClick(View v, int position) {
                 Intent intent1 = new Intent(SearchResult.this,ViewDetail.class);
+                intent1.putExtra("cate",furnitureChoiceResult);
                 intent1.putExtra("country",re_arrayList.get(position).getCountry());
                 intent1.putExtra("registrationNum",re_arrayList.get(position).getDesignNum());
                 intent1.putExtra("depth1",re_arrayList.get(position).getDep_1());

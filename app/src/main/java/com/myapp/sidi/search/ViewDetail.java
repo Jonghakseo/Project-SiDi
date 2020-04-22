@@ -18,11 +18,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.myapp.sidi.Adapter.Detail_SimilarDesignList_Adapter;
 import com.myapp.sidi.Adapter.SearchDetail_Adapter;
 import com.myapp.sidi.Adapter.SearchResult_Adapter;
+import com.myapp.sidi.Adapter.SketchListAdapter;
 import com.myapp.sidi.Category.DeskInfo;
+import com.myapp.sidi.DTO.Detail_SimilarDesignRcy_Data;
+import com.myapp.sidi.DTO.Detail_SimilarDesign_Server_Result;
 import com.myapp.sidi.DTO.SimilarImageRcyData;
 import com.myapp.sidi.DTO.SearchResultData;
+import com.myapp.sidi.DTO.SketchListData;
+import com.myapp.sidi.DTO.SketchListResult;
 import com.myapp.sidi.Interface.ServerInterface;
 import com.myapp.sidi.R;
 import com.myapp.sidi.sketch.IdeaSketch;
@@ -35,7 +43,13 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -45,10 +59,16 @@ public class ViewDetail extends AppCompatActivity {
 
     URL apiServerEndpoint;//api 요청 url
     private Intent intent;
+    private String cate;
     private String country; //해당 디자인 출원 국가
     private String registrationNum; //검색 결과로 받은 출원번호
     private String designMainClassification;//일본 검색에 필요한 디자인 분류코드
-    private int depth1, depth2, depth3, depth4, depth5, imagePos;
+    private int depth1;
+    private int depth2;
+    private int depth3;
+    private int depth4;
+    private int depth5;
+    private int imagePos;
     Button btn_fullText, btn_scrap, btn_sketch, btn_moreDescription, btn_basicInfo,detail_btn_sketchList;
     ImageView main_design;
     TextView text_designNum, text_basicInfo, text_description, tagBox1, tagBox2, tagBox3, tagBox4, tagBox5;
@@ -56,7 +76,20 @@ public class ViewDetail extends AppCompatActivity {
     boolean descript = true;//자세한 설명 접혀있는지
     boolean basicInfo = true;//기본 정보 접혀있는지
     private ServerInterface serverInterface;
+    private OkHttpClient client;
+    private Retrofit retrofit;
+    private Gson gson;
+    //다른 사람이 한 스케치 보는 리사이클러뷰 arr, 어뎁터
+    private ArrayList<SketchListData> sketchListArr;
+    private SketchListAdapter sketchListAdapter;
+    private LinearLayoutManager linearLayoutManager_otherSketch;
+    private RecyclerView detail_RV_othersSketch;
 
+    //유사한 형태 보여주는 리사이클러뷰
+    private ArrayList<Detail_SimilarDesignRcy_Data> detail_similarDesignRcy_Arr;
+    private Detail_SimilarDesignList_Adapter detail_similarDesignList_adapter;
+    private LinearLayoutManager linearLayoutManager_similarDesign;
+    private RecyclerView detail_RV_sameDepth;
 
     String articleName = "";//디자인명
     String applicantName = "";//출원인
@@ -102,6 +135,8 @@ public class ViewDetail extends AppCompatActivity {
         rv_otherDesign = findViewById(R.id.detail_RV_otherDesigns);
         rv_sameDepth = findViewById(R.id.detail_RV_sameDepth);
         rv_othersSketch = findViewById(R.id.detail_RV_othersSketch);
+        detail_RV_othersSketch = findViewById(R.id.detail_RV_othersSketch);
+        detail_RV_sameDepth = findViewById(R.id.detail_RV_sameDepth);
 
         tagBox1 = findViewById(R.id.detail_tag1);
         tagBox2 = findViewById(R.id.detail_tag2);
@@ -126,7 +161,7 @@ public class ViewDetail extends AppCompatActivity {
         intent = getIntent();
 
         try {
-
+            cate = intent.getExtras().getString("cate");
             country = intent.getExtras().getString("country");
             registrationNum = intent.getExtras().getString("registrationNum");
             designMainClassification = intent.getExtras().getString("designMainClassification");
@@ -141,7 +176,7 @@ public class ViewDetail extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
+        Log.e("cate", cate);
         Log.e("country", country);
         Log.e("registrationNum", registrationNum);
         Log.e("depth1", "" + depth1);
@@ -149,6 +184,19 @@ public class ViewDetail extends AppCompatActivity {
         Log.e("depth3", "" + depth3);
         Log.e("depth4", "" + depth4);
         Log.e("depth5", "" + depth5);
+
+        //TODO 레트로핏 생성
+        gson = new GsonBuilder()
+                .setLenient()
+                .create();
+        client = new OkHttpClient.Builder().addInterceptor(httpLoggingInterceptor()).build();
+        retrofit = new Retrofit.Builder()
+                .baseUrl(ServerInterface.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .client(client)
+                .build();
+        serverInterface = retrofit.create(ServerInterface.class);
+
 
         linearLayoutManager1 = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
         linearLayoutManager2 = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
@@ -266,6 +314,107 @@ public class ViewDetail extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        //TODO 유사한 형태 디자인 리사이클러뷰
+        serverInterface.detail_similarList(cate,
+                String.valueOf(depth1),
+                String.valueOf(depth2),
+                String.valueOf(depth3),
+                String.valueOf(depth4),
+                String.valueOf(depth5)).enqueue(new Callback<Detail_SimilarDesign_Server_Result>() {
+            @Override
+            public void onResponse(Call<Detail_SimilarDesign_Server_Result> call, Response<Detail_SimilarDesign_Server_Result> response) {
+                Detail_SimilarDesign_Server_Result result = response.body();
+                List<Detail_SimilarDesign_Server_Result.Result> list = result.getResult();
+                for(Detail_SimilarDesign_Server_Result.Result value : list){
+                    Detail_SimilarDesignRcy_Data data = new Detail_SimilarDesignRcy_Data("http://"+value.getUrl(),
+                            value.getServerIndex(),
+                            value.getDesignNum(),
+                            value.getRegistrationNum(),
+                            value.getDesignCode(),
+                            value.getCountry(),
+                            value.getDesignName(),
+                            value.getRegisterPerson(),
+                            value.getDateApplication(),
+                            value.getDateRegistration(),
+                            value.getDatePublication(),
+                            value.getDep1(),
+                            value.getDep2(),
+                            value.getDep3(),
+                            value.getDep4(),
+                            value.getDep5()
+                    );
+                    detail_similarDesignRcy_Arr.add(data);
+                    detail_similarDesignList_adapter.notifyDataSetChanged();
+
+
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<Detail_SimilarDesign_Server_Result> call, Throwable t) {
+
+            }
+        });
+
+        linearLayoutManager_similarDesign = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+        detail_RV_sameDepth.setLayoutManager(linearLayoutManager_similarDesign);
+        detail_similarDesignRcy_Arr = new ArrayList<>();
+        detail_similarDesignList_adapter = new Detail_SimilarDesignList_Adapter(detail_similarDesignRcy_Arr,this);
+        detail_RV_sameDepth.setAdapter(detail_similarDesignList_adapter);
+        detail_similarDesignList_adapter.setOnItemClickListener(new Detail_SimilarDesignList_Adapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+
+            }
+        });
+
+
+
+
+        //TODO 다른 사람이 한 스케치 보는 리사이클러뷰
+
+
+
+
+        serverInterface.sketchList(registrationNum)
+                .enqueue(new Callback<SketchListResult>() {
+                    @Override
+                    public void onResponse(Call<SketchListResult> call, Response<SketchListResult> response) {
+                        SketchListResult result = response.body();
+                        List<SketchListResult.Result> list = result.getResult();
+
+                        for (SketchListResult.Result value : list){
+                            Log.e("getUploadUser",value.getUploadUser());
+                            Log.e("getUrl",value.getUrl());
+                            SketchListData sketchListData = new SketchListData(
+                                    value.getUploadUser(),"http://"+value.getUrl());
+                            sketchListArr.add(sketchListData);
+                            sketchListAdapter.notifyDataSetChanged();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<SketchListResult> call, Throwable t) {
+
+                        Log.e("networkError",t.toString());
+                    }
+                });
+
+        linearLayoutManager_otherSketch = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+        detail_RV_othersSketch.setLayoutManager(linearLayoutManager_otherSketch);
+        sketchListArr = new ArrayList<>();
+        sketchListAdapter = new SketchListAdapter(sketchListArr,this);
+        detail_RV_othersSketch.setAdapter(sketchListAdapter);
+        sketchListAdapter.setOnItemClickListener(new SketchListAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+                Log.e("click","ok");
+            }
+        });
+
+
 
     }
 
@@ -576,7 +725,7 @@ public class ViewDetail extends AppCompatActivity {
                     }
                 }
                 //레트로핏으로 서버에 스케치, 동일 디자인 요청
-                Retrofit retrofit = new Retrofit.Builder()
+                retrofit = new Retrofit.Builder()
                         .baseUrl(ServerInterface.BASE_URL)
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
@@ -683,6 +832,18 @@ public class ViewDetail extends AppCompatActivity {
         Glide.with(ViewDetail.this).load(ImagePaths.get(position).getDesign()).into(main_design);
         text_designNum.setText("도면 " + ImagePaths.get(position).getDesignId() + "");
         imagePos = position;
+    }
+
+    private HttpLoggingInterceptor httpLoggingInterceptor(){
+
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+            @Override
+            public void log(String message) {
+                android.util.Log.e("MyGitHubData :", message + "");
+            }
+        });
+
+        return interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
     }
 
 }

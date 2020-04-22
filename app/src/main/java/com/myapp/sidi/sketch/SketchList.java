@@ -75,8 +75,6 @@ public class SketchList extends AppCompatActivity {
         gson = new GsonBuilder()
                 .setLenient()
                 .create();
-
-
         client = new OkHttpClient.Builder().addInterceptor(httpLoggingInterceptor()).build();
         retrofit = new Retrofit.Builder()
                 .baseUrl(ServerInterface.BASE_URL)

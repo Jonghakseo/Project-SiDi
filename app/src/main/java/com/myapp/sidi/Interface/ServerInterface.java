@@ -1,5 +1,6 @@
 package com.myapp.sidi.Interface;
 
+import com.myapp.sidi.DTO.Detail_SimilarDesign_Server_Result;
 import com.myapp.sidi.DTO.MainPageDesignResult;
 import com.myapp.sidi.DTO.SearchingTabDesignResult;
 import com.myapp.sidi.DTO.SimilarImageDetailData;
@@ -41,6 +42,14 @@ public interface ServerInterface {
 
     @GET("/sidi/findOtherSketch.php")
     Call<SketchListResult> sketchList(@Query("registrationNum") String registrationNum);
+
+    @GET("/sidi/sameTag.php")
+    Call<Detail_SimilarDesign_Server_Result> detail_similarList(@Query("cate") String cate,
+                                                                @Query("dep_1") String dep_1,
+                                                                @Query("dep_2") String dep_2,
+                                                                @Query("dep_3") String dep_3,
+                                                                @Query("dep_4") String dep_4,
+                                                                @Query("dep_5") String dep_5);
 
 
 
