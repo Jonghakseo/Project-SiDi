@@ -39,7 +39,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SearchResult extends AppCompatActivity {
 
-    private Button btn_subSearch,btn_searchSketch,btn_reSearch;
+    private Button btn_subSearch,btn_searchSketch,btn_reSearch,btn_report;
     private ArrayList<SearchResultData> re_arrayList;
     private SearchResult_Adapter searchResultAdapter;
     private RecyclerView recyclerView;
@@ -59,6 +59,7 @@ public class SearchResult extends AppCompatActivity {
         btn_subSearch = findViewById(R.id.btn_subSearch);
         btn_searchSketch= findViewById(R.id.btn_searchSketch);
         btn_reSearch = findViewById(R.id.btn_reSearch);
+        btn_report = findViewById(R.id.btn_report);
 
         final Intent intent = getIntent();
 //        furnitureChoiceResult = intent.getExtras().getString("furnitureChoiceResult");
@@ -83,6 +84,16 @@ public class SearchResult extends AppCompatActivity {
             }
         });
 
+
+        btn_report.bringToFront();
+        //TODO 분석 보고서 액티비티로 이동
+        btn_report.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SearchResult.this, ViewReport.class);
+                startActivity(intent);
+            }
+        });
 
 
 //        Button temp = findViewById(R.id.btn_subSearch);

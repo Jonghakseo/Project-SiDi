@@ -9,6 +9,7 @@ import android.icu.text.SimpleDateFormat;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +17,8 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -65,6 +68,8 @@ public class SketchSearch extends AppCompatActivity {
     ArrayList<SimilarImageRcyData> similarImages  = new ArrayList<>();
     ArrayList<SimilarImageDetailData> similarImageDetailArr = new ArrayList<>();
     ArrayList appNumberArr = new ArrayList();
+    private ScrollView scrollView;
+    private TextView textView2;
 
     String uploadFilePath = "";//경로를 모르겠으면, 갤러리 어플리케이션 가서 메뉴->상세 정보
     String uploadFileName = ""; //전송하고자하는 파일 이름
@@ -87,6 +92,9 @@ public class SketchSearch extends AppCompatActivity {
 
         btn_sketchSearch = findViewById(R.id.btn_sketchSearch);
         rv_similarDesign = findViewById(R.id.rv_similarDesign);
+        scrollView = findViewById(R.id.scrollView);
+        textView2 = findViewById(R.id.textView2);
+
 
         gridLayoutManager = new GridLayoutManager(this,2,GridLayoutManager.HORIZONTAL,false);
         rv_similarDesign.setLayoutManager(gridLayoutManager);
@@ -761,6 +769,9 @@ public class SketchSearch extends AppCompatActivity {
                                     appNumberArr.add(value.getDesign());
                                 }
 
+                                scrollToView(textView2,scrollView,0);
+
+
                             }
                             @Override
                             public void onFailure(Call<SimilarImageResult> call, Throwable t) {
@@ -788,6 +799,31 @@ public class SketchSearch extends AppCompatActivity {
 
         return interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
     }
+    public static void scrollToView(View view, final ScrollView scrollView, int count) {
+        if (view != null && view != scrollView) {
+            count += view.getTop();
+            Log.e("count_1", String.valueOf(count));
+            //클릭한 뷰의 getTop 값을 얻고
+            //재귀 함수 호출하여 해당 뷰의 parent() 를 뷰로 넣어주면
+            //view = scrollView 가 된다.
+            //그러면 else if문으로 넘어가게 되고
+            scrollToView((View) view.getParent(), scrollView, count);
+        } else if (scrollView != null) {
+            //마지막으로 클릭한 뷰의 getTop의 값을 count값에 넣어주고
+            //count 값이 즉 Y의 좌표라서 해당 좌표로 smoothScrollTo로 이동한다.
+            final int finalCount = count;
+            Log.e("count_2", String.valueOf(count));
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    scrollView.smoothScrollTo(0, finalCount);
+                    Log.e("count_3", String.valueOf(finalCount));
+                }
+            }, 200);
+        }
+    }
+
 
 
 }
