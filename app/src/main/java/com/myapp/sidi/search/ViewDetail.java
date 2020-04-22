@@ -24,6 +24,7 @@ import com.myapp.sidi.Adapter.Detail_SimilarDesignList_Adapter;
 import com.myapp.sidi.Adapter.SearchDetail_Adapter;
 import com.myapp.sidi.Adapter.SearchResult_Adapter;
 import com.myapp.sidi.Adapter.SketchListAdapter;
+import com.myapp.sidi.Category.CountryInfo;
 import com.myapp.sidi.Category.DeskInfo;
 import com.myapp.sidi.DTO.Detail_SimilarDesignRcy_Data;
 import com.myapp.sidi.DTO.Detail_SimilarDesign_Server_Result;
@@ -85,11 +86,13 @@ public class ViewDetail extends AppCompatActivity {
     private LinearLayoutManager linearLayoutManager_otherSketch;
     private RecyclerView detail_RV_othersSketch;
 
+
     //유사한 형태 보여주는 리사이클러뷰
     private ArrayList<Detail_SimilarDesignRcy_Data> detail_similarDesignRcy_Arr;
     private Detail_SimilarDesignList_Adapter detail_similarDesignList_adapter;
     private LinearLayoutManager linearLayoutManager_similarDesign;
     private RecyclerView detail_RV_sameDepth;
+    private String SIMILAR_DESIGN_RESUME_CODE = "OFF";
 
     String articleName = "";//디자인명
     String applicantName = "";//출원인
@@ -330,8 +333,8 @@ public class ViewDetail extends AppCompatActivity {
                             value.getServerIndex(),
                             value.getDesignNum(),
                             value.getRegistrationNum(),
-                            value.getDesignCode(),
                             value.getCountry(),
+                            value.getDesignCode(),
                             value.getDesignName(),
                             value.getRegisterPerson(),
                             value.getDateApplication(),
@@ -344,6 +347,8 @@ public class ViewDetail extends AppCompatActivity {
                             value.getDep5()
                     );
                     detail_similarDesignRcy_Arr.add(data);
+                    Log.e("now",detail_similarDesignRcy_Arr.get(0).getCountry());
+
                     detail_similarDesignList_adapter.notifyDataSetChanged();
 
 
@@ -366,6 +371,38 @@ public class ViewDetail extends AppCompatActivity {
         detail_similarDesignList_adapter.setOnItemClickListener(new Detail_SimilarDesignList_Adapter.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
+                //TODO 추후 카테고리 값도 가져와서 변경시켜줘야함// 지금은 책상 뿐이라서 괜츈
+                Intent intent = new Intent(ViewDetail.this, ViewDetail.class);
+
+                String tmp_country = detail_similarDesignRcy_Arr.get(position).getCountry();
+                Log.e("tmp_country",tmp_country);
+
+                CountryInfo countryInfo = new CountryInfo();
+                String tmp_registrationNum="";
+
+                if (country.equals(countryInfo.kor)){
+                   tmp_registrationNum =  detail_similarDesignRcy_Arr.get(position).getDesignNum();
+                }else if (country.equals(countryInfo.jap)){
+                   tmp_registrationNum = detail_similarDesignRcy_Arr.get(position).getRegistrationNum();
+                }
+
+                Log.e("tmp_registrationNum",tmp_registrationNum);
+                String tmp_depth1 = detail_similarDesignRcy_Arr.get(position).getDep_1();
+                String tmp_depth2 = detail_similarDesignRcy_Arr.get(position).getDep_2();
+                String tmp_depth3 = detail_similarDesignRcy_Arr.get(position).getDep_3();
+                String tmp_depth4 = detail_similarDesignRcy_Arr.get(position).getDep_4();
+                String tmp_depth5 = detail_similarDesignRcy_Arr.get(position).getDep_5();
+
+                intent.putExtra("cate","desk");
+                intent.putExtra("country",tmp_country);
+                intent.putExtra("registrationNum",tmp_registrationNum);
+                intent.putExtra("depth1",tmp_depth1);
+                intent.putExtra("depth2",tmp_depth2);
+                intent.putExtra("depth3",tmp_depth3);
+                intent.putExtra("depth4",tmp_depth4);
+                intent.putExtra("depth5",tmp_depth5);
+                startActivity(intent);
+                finish();
 
             }
         });
