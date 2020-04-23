@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<LinearLayout
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -22,10 +23,7 @@
 
     <ScrollView
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -233,18 +231,18 @@
     </LinearLayout>
 
 
-    <Button
-        android:id="@+id/btn_FurnitureForm"
-        android:layout_width="200dp"
-        android:layout_height="70dp"
-        android:background="@drawable/blue_round_line"
-        android:text="상세 형대 검색"
-        android:textColor="@android:color/white"
-        android:layout_gravity="center"
-        android:textSize="20dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/Linear_nation" />
+            <Button
+                android:id="@+id/btn_FurnitureForm"
+                android:layout_width="200dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:background="@drawable/blue_round_line"
+                android:text="상세 형태 검색"
+                android:textColor="@android:color/white"
+                android:textSize="20dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/Linear_nation" />
 
     <TextView
         android:id="@+id/tv_FurnitureFormExplain"
