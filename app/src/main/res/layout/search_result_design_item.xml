@@ -38,9 +38,10 @@
         <TextView
             android:id="@+id/designNum"
             android:layout_width="wrap_content"
-
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
             android:layout_height="wrap_content"
-            android:textSize="10sp"
+            android:textSize="13dp"
             android:visibility="visible" />
 
         <TextView
@@ -67,17 +68,19 @@
         <TextView
             android:id="@+id/registerPerson"
             android:layout_width="wrap_content"
-
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
             android:layout_height="wrap_content"
-            android:textSize="10sp"
+            android:textSize="13dp"
             android:visibility="visible" />
 
         <TextView
             android:id="@+id/date_application"
             android:layout_width="wrap_content"
-
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
             android:layout_height="wrap_content"
-            android:textSize="10sp"
+            android:textSize="13dp"
             android:visibility="visible" />
 
         <TextView

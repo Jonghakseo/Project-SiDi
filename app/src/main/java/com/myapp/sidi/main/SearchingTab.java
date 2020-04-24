@@ -5,6 +5,7 @@ import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -329,6 +330,7 @@ public class SearchingTab extends AppCompatActivity {
                         String[] desk_dep1_searchForm = deskInfo.desk_dep1_searchForm.split(",");
                         for (int i =0; i<desk_dep1_searchForm.length; i++){
                             searchFormCheckBox = new CheckBox(getApplicationContext());
+                            searchFormCheckBox.setTypeface(null, Typeface.BOLD);
                             searchFormCheckBox.setText(desk_dep1_searchForm[i]);
                             //체크박스 한번 클릭시 해당 체크박스 중복체크 후 Arr데이터 삽입
                             //두번 클릭시 해당 데이터 삭제
@@ -340,6 +342,7 @@ public class SearchingTab extends AppCompatActivity {
                         for (int i =0; i<desk_dep2_searchForm.length; i++){
                             searchFormCheckBox = new CheckBox(getApplicationContext());
                             searchFormCheckBox.setText(desk_dep2_searchForm[i]);
+                            searchFormCheckBox.setTypeface(null, Typeface.BOLD);
                             //체크박스 한번 클릭시 해당 체크박스 중복체크 후 Arr데이터 삽입
                             //두번 클릭시 해당 데이터 삭제
                             checkBoxDataInputArr(searchFormCheckBox,dep_2_tmpArr,dep_2_ResultArr);
@@ -350,6 +353,7 @@ public class SearchingTab extends AppCompatActivity {
                         for (int i =0; i<desk_dep3_searchForm.length; i++){
                             searchFormCheckBox = new CheckBox(getApplicationContext());
                             searchFormCheckBox.setText(desk_dep3_searchForm[i]);
+                            searchFormCheckBox.setTypeface(null, Typeface.BOLD);
                             //체크박스 한번 클릭시 해당 체크박스 중복체크 후 Arr데이터 삽입
                             //두번 클릭시 해당 데이터 삭제
                             checkBoxDataInputArr(searchFormCheckBox,dep_3_tmpArr,dep_3_ResultArr);
@@ -360,6 +364,7 @@ public class SearchingTab extends AppCompatActivity {
                         for (int i =0; i<desk_dep4_searchForm.length; i++){
                             searchFormCheckBox = new CheckBox(getApplicationContext());
                             searchFormCheckBox.setText(desk_dep4_searchForm[i]);
+                            searchFormCheckBox.setTypeface(null, Typeface.BOLD);
                             //체크박스 한번 클릭시 해당 체크박스 중복체크 후 Arr데이터 삽입
                             //두번 클릭시 해당 데이터 삭제
                             checkBoxDataInputArr(searchFormCheckBox,dep_4_tmpArr,dep_4_ResultArr);
@@ -371,6 +376,7 @@ public class SearchingTab extends AppCompatActivity {
                         for (int i =0; i<desk_dep5_searchForm.length; i++){
                             searchFormCheckBox = new CheckBox(getApplicationContext());
                             searchFormCheckBox.setText(desk_dep5_searchForm[i]);
+                            searchFormCheckBox.setTypeface(null, Typeface.BOLD);
                             //체크박스 한번 클릭시 해당 체크박스 중복체크 후 Arr데이터 삽입
                             //두번 클릭시 해당 데이터 삭제
                             checkBoxDataInputArr(searchFormCheckBox,dep_5_tmpArr,dep_5_ResultArr);
